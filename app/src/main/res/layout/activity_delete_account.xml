@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/Theme.AppCompat.Dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectPostingTutor"
+    android:background="@color/grey">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="5dp"
+                    app:strokeColor="@color/grey">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:background="@color/white"
+                        android:elevation="4dp"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                        app:titleTextColor="@color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="20dp">
+
+                            <Button
+                                android:id="@+id/closeButton"
+                                android:layout_width="58dp"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/white"
+                                android:text="X"
+                                android:textColor="@color/text_grey"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:text="DELETE ACCOUNT"
+                                android:textColor="@color/blue"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </androidx.appcompat.widget.Toolbar>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center">
+                                <TextView
+                                    android:layout_width="300dp"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="Do you really want to delete your account?"
+                                    android:textColor="@color/yellow"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold"/>
+
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="100dp"
+                                android:layout_gravity="center_horizontal">
+
+                                <TextView
+                                    android:layout_width="300dp"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:justificationMode="inter_word"
+                                    android:text="All your account and information will be permanently deleted."
+                                    android:textColor="@color/text_grey"
+                                    android:textSize="12sp" />
+                            </FrameLayout>
+
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="215dp"/>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="150dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_centerHorizontal="true">
+
+                            <Button
+                                android:id="@+id/confirmDeleteButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/red"
+                                android:text="delete account"/>
+                        </FrameLayout>
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </FrameLayout>
+        </FrameLayout>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

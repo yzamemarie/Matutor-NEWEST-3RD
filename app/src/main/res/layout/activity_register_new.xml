@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Notification"
+    android:background="@color/grey">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
+        android:background="@drawable/toolbar_gradient_bg"
+        android:elevation="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/typeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="10dp"
+                android:text="Register"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/yellow"/>
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--FULL NAME FRAME-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:text="full name"
+                        android:textColor="@color/text_grey"
+                        android:textSize="16sp" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="25dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/regFullnameInput"
+                            android:layout_width="320dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@color/white"
+                            android:singleLine="true"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </FrameLayout>
+
+                </FrameLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="78dp"
+                android:layout_marginTop="163dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:text="email"
+                    android:textColor="@color/text_grey"
+                    android:textSize="16sp" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="25dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/regEmailInput"
+                        android:layout_width="320dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </FrameLayout>
+            </FrameLayout>
+
+            <!--PASSWORD FRAME-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="250dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:text="password"
+                    android:textColor="@color/text_grey"
+                    android:textSize="16sp" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="25dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/regPasswordInput"
+                        android:layout_width="320dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </FrameLayout>
+            </FrameLayout>
+
+            <!--BIRTHDATE FRAME-->
+            <FrameLayout
+                android:layout_width="210dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="340dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:text="birthdate"
+                        android:textColor="@color/text_grey"
+                        android:textSize="16sp" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="25dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/regBdateInput"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="30dp"
+                            android:background="@color/white"
+                            android:singleLine="true"
+                            android:inputType="date"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </FrameLayout>
+                </FrameLayout>
+            </FrameLayout>
+
+            <!--AGE FRAME-->
+            <FrameLayout
+                android:layout_width="220dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="340dp"
+                android:layout_marginLeft="200dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <!--age header-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="65dp"
+                        android:text="age"
+                        android:textColor="@color/text_grey"
+                        android:textSize="16sp" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="25dp">
+
+                        <!--age field-->
+                        <Spinner
+                            android:id="@+id/regAgeSpinner"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="30dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:spinnerMode="dropdown"
+                            android:textSize="12sp" />
+                    </FrameLayout>
+
+                </FrameLayout>
+            </FrameLayout>
+
+            <!--ADDRESS FRAME-->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="430dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--user type select header-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="125dp"
+                        android:layout_marginTop="15dp"
+                        android:text="I want to: "
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_grey" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <RadioGroup
+                            android:id="@+id/userTypeButtonGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <RadioButton
+                                android:id="@+id/regLearnerRadioButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="210dp"
+                                android:buttonTint="@color/blue"
+                                android:text="Learn"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/regTutorRadioButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="210dp"
+                                android:buttonTint="@color/blue"
+                                android:text="Tutor"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+                    </FrameLayout>
+                </FrameLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="490dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:text="address"
+                    android:textColor="@color/text_grey"
+                    android:textSize="16sp" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="25dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/regAddressInput"
+                        android:layout_width="320dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                </FrameLayout>
+            </FrameLayout>
+
+            <!--interest onward-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="580dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:text="my interests"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_grey" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="175dp"
+                        android:text="(choose 5)*"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp">
+
+                        <Spinner
+                            android:id="@+id/regTopicSpinner1"
+                            android:layout_width="270dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="72dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:spinnerMode="dropdown"
+                            android:textSize="12sp" />
+
+                        <Spinner
+                            android:id="@+id/regTopicSpinner2"
+                            android:layout_width="270dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="72dp"
+                            android:layout_marginTop="30dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:spinnerMode="dropdown"
+                            android:textSize="12sp" />
+
+                        <Spinner
+                            android:id="@+id/regTopicSpinner3"
+                            android:layout_width="270dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="72dp"
+                            android:layout_marginTop="61dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:spinnerMode="dropdown"
+                            android:textSize="12sp" />
+
+                        <Spinner
+                            android:id="@+id/regTopicSpinner4"
+                            android:layout_width="270dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="72dp"
+                            android:layout_marginTop="91dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:spinnerMode="dropdown"
+                            android:textSize="12sp" />
+
+                        <Spinner
+                            android:id="@+id/regTopicSpinner5"
+                            android:layout_width="270dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="72dp"
+                            android:layout_marginTop="122dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:spinnerMode="dropdown"
+                            android:textSize="12sp" />
+                    </FrameLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="185dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:text="upload a"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_grey" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="147dp"
+                        android:text="valid government or school ID"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp">
+
+                        <Button
+                            android:id="@+id/regIdButton"
+                            android:layout_width="65dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="48dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:text="+" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="120dp"
+                            android:layout_marginTop="9dp"
+                            android:text="choose file..."
+                            android:textColor="@color/text_grey"/>
+                    </FrameLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="266dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:text="upload a"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_grey" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="148dp"
+                        android:text="selfie"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp">
+
+                        <Button
+                            android:id="@+id/regSelfieButton"
+                            android:layout_width="65dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="48dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:text="+" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="120dp"
+                            android:layout_marginTop="9dp"
+                            android:text="choose file..."
+                            android:textColor="@color/text_grey"/>
+                    </FrameLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="360dp"
+                    android:layout_gravity="center_horizontal">
+                    <Button
+                        android:id="@+id/registerButton"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginRight="18dp"
+                        android:backgroundTint="@color/yellow"
+                        android:text="REGISTER"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="70dp"
+                        android:layout_gravity="center_horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="already have an account?"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/loginHereButton"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:backgroundTint="@color/blue"
+                            android:text="Login here!"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+                    </FrameLayout>
+                </FrameLayout>
+
+            </FrameLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/app_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/app_logo_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Matutor"
+        tools:targetApi="31">
+        <activity
+            android:name=".PostingsTutor"
+            android:exported="false" />
+        <activity
+            android:name=".BookingsHistoryTutor"
+            android:exported="false" />
+        <activity
+            android:name=".activity_main"
+            android:exported="false" />
+        <activity
+            android:name=".BookingsHistory"
+            android:exported="false" />
+        <activity
+            android:name=".TutorProfilePreview3"
+            android:exported="false" />
+        <activity
+            android:name=".TutorProfilePreview2"
+            android:exported="false" />
+        <activity
+            android:name=".LearnerProfilePreview"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllLearners"
+            android:exported="false" />
+        <activity
+            android:name=".ScheduleSession"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllTutors"
+            android:exported="false" />
+        <activity
+            android:name=".TutorProfilePreview1"
+            android:exported="false" />
+        <activity
+            android:name=".ViewPremiumStatus"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewTutor"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewLearner"
+            android:exported="false" />
+        <activity
+            android:name=".ViewCreatedPosts"
+            android:exported="false" />
+        <activity
+            android:name=".CreatePosting"
+            android:exported="false" />
+        <activity
+            android:name=".SelectPosting"
+            android:exported="false" />
+        <activity
+            android:name=".SelectPostingTutor"
+            android:exported="false" />
+        <activity
+            android:name=".BookingsTutor"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".DashboardTutor"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationTutor"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteAccount"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileTutor"
+            android:exported="false" />
+        <activity
+            android:name=".PremiumSub"
+            android:exported="false" />
+        <activity
+            android:name=".Bookings"
+            android:exported="false" />
+        <activity
+            android:name=".Content"
+            android:exported="false" />
+        <activity
+            android:name=".Posting"
+            android:exported="false" />
+        <activity
+            android:name=".Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".Notification"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterNew"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

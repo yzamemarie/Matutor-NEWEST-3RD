@@ -10,9 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import java.util.Calendar;
 public class ScheduleSession extends AppCompatActivity {
 
     Button close, schedule;
+    Spinner modeSpinner;
     EditText editDate, editTimeStart, editTimeEnd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +33,16 @@ public class ScheduleSession extends AppCompatActivity {
 
         close = findViewById(R.id.closeButton);
         schedule = findViewById(R.id.scheduleButton);
+        modeSpinner = findViewById(R.id.modeOfTutorSpinner);
         editDate = findViewById(R.id.editDateText);
         editTimeStart = findViewById(R.id.editTimeStartText);
         editTimeEnd = findViewById(R.id.editTimeEndText);
+
+        // Populate the Spinner with an array of items
+        String[] items = {"Face-to-Face (F2F)", "Virtual (via Google Meet, Zoom, etc.)"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        modeSpinner.setAdapter(adapter);
 
         editDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,31 +85,27 @@ public class ScheduleSession extends AppCompatActivity {
 
     }
 
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), TutorProfilePreview1.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+        finish();
+    }
+
     private void showDatePickerDialog() {
         final Calendar c = Calendar.getInstance();
-
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
 
-        // on below line we are creating a variable for date picker dialog.
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                // on below line we are passing context.
-                getApplicationContext(),
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        // on below line we are setting date to our edit text.
-                        editDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                    }
+                this,
+                (view, yearSelected, monthOfYear, dayOfMonth) -> {
+                    String selectedDate = (monthOfYear + 1) + "/" + dayOfMonth + "/" + yearSelected;
+                    editDate.setText(selectedDate);
                 },
-                // on below line we are passing year,
-                // month and day for selected date in our date picker.
                 year, month, day);
-        // at last we are calling show to
-        // display our date picker dialog.
+
         datePickerDialog.show();
     }
 
@@ -161,10 +167,4 @@ public class ScheduleSession extends AppCompatActivity {
         builder.show();
     }
 
-    public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), TutorProfilePreview1.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-        finish();
-    }
 }

@@ -8,14 +8,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegisterNew extends AppCompatActivity {
 
     Button register, returnLogin;
+    Spinner ageSpinner, topic1Spinner, topic2Spinner, topic3Spinner, topic4Spinner, topic5Spinner;
     TextInputEditText regFullname, regEmail, regPassword, regBdate, regAddress;
     String fullname, email, password, bdate, address;
     @Override
@@ -27,6 +33,52 @@ public class RegisterNew extends AppCompatActivity {
 
         register = findViewById(R.id.registerButton);
         returnLogin = findViewById(R.id.loginHereButton);
+        ageSpinner = findViewById(R.id.regAgeSpinner);
+        topic1Spinner = findViewById(R.id.regTopicSpinner1);
+        topic2Spinner = findViewById(R.id.regTopicSpinner2);
+        topic3Spinner = findViewById(R.id.regTopicSpinner3);
+        topic4Spinner = findViewById(R.id.regTopicSpinner4);
+        topic5Spinner = findViewById(R.id.regTopicSpinner5);
+
+        // Populate the Spinner using a loop
+        List<String> items = new ArrayList<>();
+        for (int i = 12; i <= 100; i++) {
+            items.add(String.valueOf(i));
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ageSpinner.setAdapter(adapter);
+
+        // Populate the Spinner for topic 1
+        String[] t1 = {"SELECT TOPIC 1"};
+        ArrayAdapter<String> a1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t1);
+        a1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        topic1Spinner.setAdapter(a1);
+
+        // Populate the Spinner for topic 2
+        String[] t2 = {"SELECT TOPIC 2"};
+        ArrayAdapter<String> a2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t2);
+        a2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        topic2Spinner.setAdapter(a2);
+
+        // Populate the Spinner for topic 3
+        String[] t3 = {"SELECT TOPIC 3"};
+        ArrayAdapter<String> a3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t3);
+        a3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        topic3Spinner.setAdapter(a3);
+
+        // Populate the Spinner for topic 4
+        String[] t4 = {"SELECT TOPIC 4"};
+        ArrayAdapter<String> a4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t4);
+        a4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        topic4Spinner.setAdapter(a4);
+
+        // Populate the Spinner for topic 5
+        String[] t5 = {"SELECT TOPIC 5"};
+        ArrayAdapter<String> a5 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t5);
+        a5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        topic5Spinner.setAdapter(a5);
 
         //click register button to proceed to dashboard
        register.setOnClickListener(new View.OnClickListener() {

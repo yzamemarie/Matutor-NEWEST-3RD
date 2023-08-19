@@ -3,6 +3,7 @@ package com.example.matutor;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,18 +11,21 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class RegisterNew extends AppCompatActivity {
 
     Button register, returnLogin;
     Spinner ageSpinner, topic1Spinner, topic2Spinner, topic3Spinner, topic4Spinner, topic5Spinner;
+    EditText editDate;
     TextInputEditText regFullname, regEmail, regPassword, regBdate, regAddress;
     String fullname, email, password, bdate, address;
     @Override
@@ -34,6 +38,7 @@ public class RegisterNew extends AppCompatActivity {
         register = findViewById(R.id.registerButton);
         returnLogin = findViewById(R.id.loginHereButton);
         ageSpinner = findViewById(R.id.regAgeSpinner);
+        editDate = findViewById(R.id.editDateText);
         topic1Spinner = findViewById(R.id.regTopicSpinner1);
         topic2Spinner = findViewById(R.id.regTopicSpinner2);
         topic3Spinner = findViewById(R.id.regTopicSpinner3);
@@ -49,6 +54,13 @@ public class RegisterNew extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ageSpinner.setAdapter(adapter);
+
+        editDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog();
+            }
+        });
 
         // Populate the Spinner for topic 1
         String[] t1 = {"SELECT TOPIC 1"};
@@ -88,7 +100,7 @@ public class RegisterNew extends AppCompatActivity {
                regFullname = findViewById(R.id.regFullnameInput);
                regEmail = findViewById(R.id.regEmailInput);
                regPassword = findViewById(R.id.regPasswordInput);
-               regBdate = findViewById(R.id.regBdateInput);
+               editDate = findViewById(R.id.editDateText);
                regAddress = findViewById(R.id.regAddressInput);
 
                //get text from text fields
@@ -132,10 +144,6 @@ public class RegisterNew extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        back();
-    }
-
-    private void back() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("[?] Return");
         builder.setMessage("Cancel registration?");
@@ -155,5 +163,22 @@ public class RegisterNew extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    private void showDatePickerDialog() {
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, yearSelected, monthOfYear, dayOfMonth) -> {
+                    String selectedDate = (monthOfYear + 1) + "/" + dayOfMonth + "/" + yearSelected;
+                    editDate.setText(selectedDate);
+                },
+                year, month, day);
+
+        datePickerDialog.show();
     }
 }

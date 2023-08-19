@@ -13,6 +13,24 @@
         android:theme="@style/Theme.Matutor"
         tools:targetApi="31">
         <activity
+            android:name=".SelectPosting2"
+            android:exported="false" />
+        <activity
+            android:name=".Notification"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationTutor"
+            android:exported="false" />
+        <activity
+            android:name=".CreateSessionNote"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewsHistoryTutor"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewsHistory"
+            android:exported="false" />
+        <activity
             android:name=".PostingsTutor"
             android:exported="false" />
         <activity
@@ -76,9 +94,6 @@
             android:name=".DashboardTutor"
             android:exported="false" />
         <activity
-            android:name=".NotificationTutor"
-            android:exported="false" />
-        <activity
             android:name=".DeleteAccount"
             android:exported="false" />
         <activity
@@ -101,9 +116,6 @@
             android:exported="false" />
         <activity
             android:name=".Profile"
-            android:exported="false" />
-        <activity
-            android:name=".Notification"
             android:exported="false" />
         <activity
             android:name=".RegisterNew"

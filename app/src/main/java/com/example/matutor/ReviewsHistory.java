@@ -1,10 +1,8 @@
 package com.example.matutor;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,9 +15,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Bookings extends AppCompatActivity {
+public class ReviewsHistory extends AppCompatActivity {
 
-    Button tutorSwitch, reviewTutor1, reviewTutor2,  cancelSession1, cancelSession2;
+    Button tutorSwitch;
     ExtendedFloatingActionButton menuFabBtn;
     FloatingActionButton viewProfile, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
@@ -29,14 +27,10 @@ public class Bookings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_bookings);
+        setContentView(R.layout.activity_reviews_history);
 
         //assignment
         tutorSwitch = findViewById(R.id.switchButton);
-        reviewTutor1 = findViewById(R.id.reviewTutorButton1);
-        reviewTutor2 = findViewById(R.id.reviewTutorButton2);
-        cancelSession1 = findViewById(R.id.cancelTutorSessionButton1);
-        cancelSession2 = findViewById(R.id.cancelTutorSessionButton2);
         menuFabBtn = findViewById(R.id.menuFab);
         viewProfile = findViewById(R.id.viewProfileFab);
         viewBookings = findViewById(R.id.viewBookingsFab);
@@ -49,6 +43,17 @@ public class Bookings extends AppCompatActivity {
         viewBookings.setVisibility(View.GONE);
         viewBookingsHistory.setVisibility(View.GONE);
         viewReviewsHistory.setVisibility(View.GONE);
+
+        //switch profile type
+        tutorSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReviewsHistoryTutor.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
 
         //set boolean variable as false
         allFabVisible = false;
@@ -93,7 +98,10 @@ public class Bookings extends AppCompatActivity {
         viewBookings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Bookings.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
             }
         });
 
@@ -110,56 +118,7 @@ public class Bookings extends AppCompatActivity {
         viewReviewsHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ReviewsHistory.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        //switch user type
-        tutorSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BookingsTutor.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        //review tutor 1
-        reviewTutor1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ReviewTutor.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        //cancel session 1
-        cancelSession1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancelSessionConfirmation();
-            }
-        });
-
-        //finish session 2 -- disabled
-        reviewTutor2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Incomplete session!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //cancel session 2
-        cancelSession2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancelSessionConfirmation();
+                Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -170,6 +129,8 @@ public class Bookings extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.posting) {
+                    startActivity(new Intent(getApplicationContext(), Posting.class));
+                    overridePendingTransition(0, 0);
                     return true;
                 }
                 else if (itemId == R.id.dashboard) {
@@ -183,9 +144,6 @@ public class Bookings extends AppCompatActivity {
                     return true;
                 }
                 else if (itemId == R.id.profile) {
-
-                    startActivity(new Intent(getApplicationContext(), Profile.class));
-                    overridePendingTransition(0, 0);
                     return true;
                 }
                 else if (itemId == R.id.notif) {
@@ -196,36 +154,14 @@ public class Bookings extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), Profile.class);
+        Intent intent = new Intent(getApplicationContext(), Posting.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
         finish();
-    }
-
-    private void cancelSessionConfirmation() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Cancel");
-        builder.setMessage("Do you really want to cancel this session?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Session cancelled!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), Bookings.class);
-                startActivity(intent);
-                overridePendingTransition( R.anim.slide_out_left, R.anim.slide_in_right);
-                finish();
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.show();
     }
 }

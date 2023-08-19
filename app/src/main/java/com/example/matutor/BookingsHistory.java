@@ -1,9 +1,11 @@
 package com.example.matutor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,7 +19,7 @@ public class BookingsHistory extends AppCompatActivity {
 
     Button tutorSwitch;
     ExtendedFloatingActionButton menuFabBtn;
-    FloatingActionButton viewProfile, viewBookings, viewHistory;
+    FloatingActionButton viewProfile, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
     BottomNavigationView bottomNavigationView;
     @Override
@@ -30,13 +32,15 @@ public class BookingsHistory extends AppCompatActivity {
         menuFabBtn = findViewById(R.id.menuFab);
         viewProfile = findViewById(R.id.viewProfileFab);
         viewBookings = findViewById(R.id.viewBookingsFab);
-        viewHistory = findViewById(R.id.viewHistoryFab);
+        viewBookingsHistory = findViewById(R.id.viewHistoryFab);
+        viewReviewsHistory = findViewById(R.id.viewReviewsFab);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
         viewProfile.setVisibility(View.GONE);
         viewBookings.setVisibility(View.GONE);
-        viewHistory.setVisibility(View.GONE);
+        viewBookingsHistory.setVisibility(View.GONE);
+        viewReviewsHistory.setVisibility(View.GONE);
 
         //set boolean variable as false
         allFabVisible = false;
@@ -51,7 +55,8 @@ public class BookingsHistory extends AppCompatActivity {
                     menuFabBtn.extend();
                     viewProfile.show();
                     viewBookings.show();
-                    viewHistory.show();
+                    viewBookingsHistory.show();
+                    viewReviewsHistory.show();
                     allFabVisible = true;
 
                 } else {
@@ -59,7 +64,8 @@ public class BookingsHistory extends AppCompatActivity {
                     menuFabBtn.shrink();
                     viewProfile.hide();
                     viewBookings.hide();
-                    viewHistory.hide();
+                    viewBookingsHistory.hide();
+                    viewReviewsHistory.hide();
                     allFabVisible = false;
                 }
             }
@@ -86,10 +92,21 @@ public class BookingsHistory extends AppCompatActivity {
             }
         });
 
-        viewHistory.setOnClickListener(new View.OnClickListener() {
+        viewBookingsHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        viewReviewsHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReviewsHistory.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
             }
         });
 
@@ -104,6 +121,38 @@ public class BookingsHistory extends AppCompatActivity {
             }
         });
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.posting) {
+                    return true;
+                }
+                else if (itemId == R.id.dashboard) {
+                    startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                else if (itemId == R.id.content) {
+                    startActivity(new Intent(getApplicationContext(), Content.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                else if (itemId == R.id.profile) {
+
+                    startActivity(new Intent(getApplicationContext(), Profile.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                else if (itemId == R.id.notif) {
+                    startActivity(new Intent(getApplicationContext(), Notification.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override

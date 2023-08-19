@@ -41,7 +41,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Junester Ursora II"
+                                android:text="Zapzaj Batumbakal"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/blue"/>
@@ -60,14 +60,29 @@
                                 android:layout_marginTop="25dp"
                                 android:layout_gravity="center_horizontal">
 
-                                <Button
+                                <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="40dp"
-                                    android:backgroundTint="@color/grey"
-                                    android:text="Aquaponics"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/blue"
-                                    android:textSize="10sp" />
+                                    android:layout_height="wrap_content">
+
+                                    <Button
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:backgroundTint="@color/grey"
+                                        android:text="Polynomials"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/blue"
+                                        android:textSize="10sp" />
+
+                                    <Button
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:backgroundTint="@color/grey"
+                                        android:text="Alegbra"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/blue"
+                                        android:textSize="10sp" />
+                                </LinearLayout>
 
                             </FrameLayout>
                         </FrameLayout>
@@ -81,7 +96,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="HOW TO BUILD SENSOR IOT"
+                                android:text="NEED HELP WITH POLYNOMIALS"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/text_grey"/>

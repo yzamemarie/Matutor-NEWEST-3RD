@@ -21,7 +21,7 @@ public class Profile extends AppCompatActivity {
 
     Button edit, premium, logout, tutorSwitch;
     ExtendedFloatingActionButton menuFabBtn;
-    FloatingActionButton viewProfile, viewBookings, viewHistory;
+    FloatingActionButton viewProfile, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
     BottomNavigationView bottomNavigationView;
 
@@ -39,13 +39,15 @@ public class Profile extends AppCompatActivity {
         menuFabBtn = findViewById(R.id.menuFab);
         viewProfile = findViewById(R.id.viewProfileFab);
         viewBookings = findViewById(R.id.viewBookingsFab);
-        viewHistory = findViewById(R.id.viewHistoryFab);
+        viewBookingsHistory = findViewById(R.id.viewHistoryFab);
+        viewReviewsHistory = findViewById(R.id.viewReviewsFab);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
         viewProfile.setVisibility(View.GONE);
         viewBookings.setVisibility(View.GONE);
-        viewHistory.setVisibility(View.GONE);
+        viewBookingsHistory.setVisibility(View.GONE);
+        viewReviewsHistory.setVisibility(View.GONE);
 
         //set boolean variable as false
         allFabVisible = false;
@@ -60,7 +62,8 @@ public class Profile extends AppCompatActivity {
                     menuFabBtn.extend();
                     viewProfile.show();
                     viewBookings.show();
-                    viewHistory.show();
+                    viewBookingsHistory.show();
+                    viewReviewsHistory.show();
                     allFabVisible = true;
 
                 } else {
@@ -68,7 +71,8 @@ public class Profile extends AppCompatActivity {
                     menuFabBtn.shrink();
                     viewProfile.hide();
                     viewBookings.hide();
-                    viewHistory.hide();
+                    viewBookingsHistory.hide();
+                    viewReviewsHistory.hide();
                     allFabVisible = false;
                 }
             }
@@ -92,10 +96,20 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        viewHistory.setOnClickListener(new View.OnClickListener() {
+        viewBookingsHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BookingsHistory.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
+
+        viewReviewsHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReviewsHistory.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();

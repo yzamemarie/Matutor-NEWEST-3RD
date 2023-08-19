@@ -62,6 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="86dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,7 +71,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/notifCard"
                 android:layout_width="350dp"
-                android:layout_height="170dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
                 app:cardBackgroundColor="@color/white"
@@ -79,7 +80,8 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp">
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -140,12 +142,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="65dp">
                             <TextView
-                                android:id="@+id/viewPostLink"
+                                android:id="@+id/viewPostTextLink"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:text="view post"
-                                android:textSize="12dp"
+                                android:textSize="16dp"
                                 android:textStyle="italic"
                                 android:textColor="@color/blue"/>
                         </FrameLayout>
@@ -153,7 +155,7 @@
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="85dp"
+                            android:layout_marginTop="95dp"
                             android:layout_gravity="center_horizontal">
                             <Button
                                 android:id="@+id/viewTutorProfileButton"

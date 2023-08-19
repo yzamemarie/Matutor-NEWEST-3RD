@@ -21,7 +21,7 @@ public class BookingsTutor extends AppCompatActivity {
 
     Button learnerSwitch, finishSession, cancelSession;
     ExtendedFloatingActionButton menuFabBtn;
-    FloatingActionButton viewProfile, viewBookings, viewHistory;
+    FloatingActionButton viewProfile, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
     BottomNavigationView bottomNavigationView;
 
@@ -38,13 +38,15 @@ public class BookingsTutor extends AppCompatActivity {
         menuFabBtn = findViewById(R.id.menuFab);
         viewProfile = findViewById(R.id.viewProfileFab);
         viewBookings = findViewById(R.id.viewBookingsFab);
-        viewHistory = findViewById(R.id.viewHistoryFab);
+        viewBookingsHistory = findViewById(R.id.viewHistoryFab);
+        viewReviewsHistory = findViewById(R.id.viewReviewsFab);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
         viewProfile.setVisibility(View.GONE);
         viewBookings.setVisibility(View.GONE);
-        viewHistory.setVisibility(View.GONE);
+        viewBookingsHistory.setVisibility(View.GONE);
+        viewReviewsHistory.setVisibility(View.GONE);
 
         //set boolean variable as false
         allFabVisible = false;
@@ -59,7 +61,8 @@ public class BookingsTutor extends AppCompatActivity {
                     menuFabBtn.extend();
                     viewProfile.show();
                     viewBookings.show();
-                    viewHistory.show();
+                    viewBookingsHistory.show();
+                    viewReviewsHistory.show();
                     allFabVisible = true;
 
                 } else {
@@ -67,7 +70,8 @@ public class BookingsTutor extends AppCompatActivity {
                     menuFabBtn.shrink();
                     viewProfile.hide();
                     viewBookings.hide();
-                    viewHistory.hide();
+                    viewBookingsHistory.hide();
+                    viewReviewsHistory.hide();
                     allFabVisible = false;
                 }
             }
@@ -91,10 +95,20 @@ public class BookingsTutor extends AppCompatActivity {
             }
         });
 
-        viewHistory.setOnClickListener(new View.OnClickListener() {
+        viewBookingsHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BookingsHistoryTutor.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
+
+        viewReviewsHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReviewsHistoryTutor.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();
@@ -174,9 +188,9 @@ public class BookingsTutor extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), ReviewLearner.class);
+                Intent intent = new Intent(getApplicationContext(), CreateSessionNote.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
             }
         });

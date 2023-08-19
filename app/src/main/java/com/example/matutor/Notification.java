@@ -5,16 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Notification extends AppCompatActivity {
 
     Button tutorSwitch, viewTutorProfile;
+    TextView viewPostLink;
     BottomNavigationView bottomNavigationView;
 
     @Override
@@ -26,8 +30,28 @@ public class Notification extends AppCompatActivity {
         //Bottom Navigation Code
         tutorSwitch = findViewById(R.id.switchButton);
         viewTutorProfile = findViewById(R.id.viewTutorProfileButton);
+        viewPostLink = findViewById(R.id.viewPostTextLink);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.notif);
+
+        // Create a ClickableSpan to handle the link click
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                // Define the URL or activity you want to redirect to
+                // For example, launching another activity:
+                Intent intent = new Intent(getApplicationContext(), SelectPostingTutor.class);
+                startActivity(intent);
+            }
+        };
+
+        // Set the ClickableSpan to the TextView's text
+        SpannableString spannableString = new SpannableString(viewPostLink.getText());
+        spannableString.setSpan(clickableSpan, 0, viewPostLink.length(), 0);
+
+        // Apply the modified SpannableString to the TextView
+        viewPostLink.setText(spannableString);
+        viewPostLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 
         //switch profile type
         tutorSwitch.setOnClickListener(new View.OnClickListener() {
@@ -91,3 +115,4 @@ public class Notification extends AppCompatActivity {
         finish();
     }
 }
+

@@ -9,14 +9,14 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class SelectPosting extends AppCompatActivity {
+public class SelectPosting2 extends AppCompatActivity {
 
     Button interested, cancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_select_posting);
+        setContentView(R.layout.activity_select_posting2);
 
         interested = findViewById(R.id.interestedButton);
         cancel = findViewById(R.id.cancelButton);

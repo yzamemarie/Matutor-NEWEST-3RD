@@ -101,7 +101,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="115dp"
                                             android:gravity="center"
-                                            android:text="Yumi Therese Cruz"
+                                            android:text="Jennifer Español"
                                             android:textSize="16sp"
                                             android:textStyle="bold"
                                             android:textColor="@color/text_grey"/>

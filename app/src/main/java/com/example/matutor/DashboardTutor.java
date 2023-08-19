@@ -33,17 +33,6 @@ public class DashboardTutor extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.notif);
 
-        //switch profile type
-        learnerSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
         // Create a ClickableSpan to handle the link click
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
@@ -62,6 +51,18 @@ public class DashboardTutor extends AppCompatActivity {
         // Apply the modified SpannableString to the TextView
         viewPostLink.setText(spannableString);
         viewPostLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+
+
+        //switch profile type
+        learnerSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -118,7 +118,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="170dp"
                                 android:layout_marginTop="20dp"
-                                android:text="Jennifer Español"
+                                android:text="Zapzaf Batumbakal"
                                 android:textSize="12sp"
                                 android:textStyle="italic"
                                 android:textColor="@color/blue"/>
@@ -131,7 +131,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="LABOR CODE"
+                                    android:text="LABOR CODE DISCUSSION"
                                     android:textSize="14sp"
                                     android:textStyle="bold"/>
                             </FrameLayout>
@@ -245,7 +245,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="SENSOR BUILDING"
+                                        android:text="HOW TO BUILD SENSOR IOT"
                                         android:textSize="16sp"
                                         android:textStyle="bold"/>
 

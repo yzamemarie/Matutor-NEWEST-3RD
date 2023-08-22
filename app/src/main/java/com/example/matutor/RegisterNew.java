@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -23,15 +25,16 @@ import java.util.List;
 
 public class RegisterNew extends AppCompatActivity {
 
-    Button register, returnLogin;
+    Button register, returnLogin, selectIdImage, selectSelfieImage;
     Spinner ageSpinner, topic1Spinner, topic2Spinner, topic3Spinner, topic4Spinner, topic5Spinner;
-    EditText editDate;
+    EditText editDate; //selectIdPath, selectSelfiePath;
     TextInputEditText regFullname, regEmail, regPassword, regBdate, regAddress;
     String fullname, email, password, bdate, address;
+    Uri imageUri;
+    private static final int PICK_IMAGE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //removes status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_register_new);
 
@@ -39,6 +42,10 @@ public class RegisterNew extends AppCompatActivity {
         returnLogin = findViewById(R.id.loginHereButton);
         ageSpinner = findViewById(R.id.regAgeSpinner);
         editDate = findViewById(R.id.editDateText);
+        selectIdImage = findViewById(R.id.regIdButton);
+        //selectIdPath = findViewById(R.id.idPathTextView);
+        selectSelfieImage = findViewById(R.id.regSelfieButton);
+        //selectSelfiePath = findViewById(R.id.selfiePathTextView);
         topic1Spinner = findViewById(R.id.regTopicSpinner1);
         topic2Spinner = findViewById(R.id.regTopicSpinner2);
         topic3Spinner = findViewById(R.id.regTopicSpinner3);
@@ -92,6 +99,20 @@ public class RegisterNew extends AppCompatActivity {
         a5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         topic5Spinner.setAdapter(a5);
 
+        selectIdImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Select ID image!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        selectSelfieImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Select selfie image!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         //click register button to proceed to dashboard
        register.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -107,22 +128,23 @@ public class RegisterNew extends AppCompatActivity {
                fullname = regFullname.getText().toString().trim();
                email = regEmail.getText().toString().trim();
                password = regPassword.getText().toString().trim();
-               bdate = regBdate.getText().toString().trim();
+               bdate = editDate.getText().toString().trim();
                address = regAddress.getText().toString().trim();
 
                //checks if text fields are empty and displays toast prompt if true
                if (fullname.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "[!] Enter full name", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Enter full name", Toast.LENGTH_SHORT).show();
                } else if (email.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "[!] Enter email", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Enter email", Toast.LENGTH_SHORT).show();
                } else if (password.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "[!] Enter password", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Enter password", Toast.LENGTH_SHORT).show();
                }else if (bdate.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "[!] Enter birthdate", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Enter birthdate", Toast.LENGTH_SHORT).show();
                }else if (address.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "[!] Enter address", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Enter address", Toast.LENGTH_SHORT).show();
                } else {
                    //if all text field is not empty, proceed to dashboard
+                   Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
                    startActivity(new Intent(getApplicationContext(),Dashboard.class));
                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                    finish();

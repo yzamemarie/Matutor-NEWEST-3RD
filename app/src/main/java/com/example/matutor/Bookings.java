@@ -183,7 +183,6 @@ public class Bookings extends AppCompatActivity {
                     return true;
                 }
                 else if (itemId == R.id.profile) {
-
                     startActivity(new Intent(getApplicationContext(), Profile.class));
                     overridePendingTransition(0, 0);
                     return true;

@@ -40,33 +40,120 @@
                 android:textSize="34sp"
                 android:textStyle="bold"
                 android:textColor="@color/yellow"/>
-
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="100dp">
-        <android.widget.SearchView
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            android:layout_width="380dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/white"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search here"
+            android:iconifiedByDefault="false"
+            android:background="@color/white"
+            android:layout_gravity="center_horizontal"/>
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
     </FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
-            <!--cardview-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
+
+                <FrameLayout
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:strokeColor="@color/grey"
+                        app:cardCornerRadius="5dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <WebView
+                                android:id="@+id/videoWebView"
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp"/>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="310dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Algebra Basics: What Are Polynomials? - Math Antics"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/blue"/>
+
+                                <FrameLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="40dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="mathantics"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_grey"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="20dp"
+                                        android:text="October 23, 2015 (7 years ago)"
+                                        android:textSize="14sp"
+                                        android:textStyle="italic"
+                                        android:textColor="@android:color/darker_gray"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_gravity="right"
+                                        android:text="via YouTube"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@android:color/darker_gray"/>
+                                </FrameLayout>
+
+                            </FrameLayout>
+                        </FrameLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </FrameLayout>
+            </FrameLayout>
+
         </RelativeLayout>
 
     </ScrollView>

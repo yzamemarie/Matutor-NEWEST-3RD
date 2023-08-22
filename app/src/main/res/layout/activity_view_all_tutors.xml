@@ -126,9 +126,11 @@
         android:layout_marginTop="100dp">
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            android:layout_width="380dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:queryHint="Search here"
+            android:iconifiedByDefault="false"
+            android:background="@color/white"
             android:layout_gravity="center_horizontal"/>
     </FrameLayout>
 

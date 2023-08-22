@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dropdown_items">
+        <item>First Name (A-Z)</item>
+        <item>Last Name (A-Z)</item>
+        <item>First Name (Z-A)</item>
+        <item>Last Name (Z-A)</item>
+    </string-array>
+</resources>

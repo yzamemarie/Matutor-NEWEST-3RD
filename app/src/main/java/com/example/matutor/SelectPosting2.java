@@ -26,7 +26,7 @@ public class SelectPosting2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Request sent!", Toast.LENGTH_SHORT).show();
-
+                onBackPressed();
             }
         });
 
@@ -34,7 +34,7 @@ public class SelectPosting2 extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), NotificationTutor.class);
+                Intent intent = new Intent(getApplicationContext(), DashboardTutor.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();

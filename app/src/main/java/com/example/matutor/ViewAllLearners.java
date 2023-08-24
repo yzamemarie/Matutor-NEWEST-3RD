@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ViewAllLearners extends AppCompatActivity {
 
-    Button tutorSwitch;
+    Button tutorSwitch, interested;
     SearchView searchBar;
     ExtendedFloatingActionButton menuFabBtn;
     FloatingActionButton viewAllPosts, createPost, viewCreatedPost, viewAllUsers;
@@ -32,6 +32,7 @@ public class ViewAllLearners extends AppCompatActivity {
 
         searchBar = findViewById(R.id.searchView);
         tutorSwitch = findViewById(R.id.switchButton);
+        interested = findViewById(R.id.interestedButton);
         menuFabBtn = findViewById(R.id.menuFab);
         viewAllPosts = findViewById(R.id.viewAllFab);
         createPost = findViewById(R.id.createPostFab);
@@ -49,6 +50,16 @@ public class ViewAllLearners extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ViewAllTutors.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
+
+        interested.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), TutorProfilePreview1.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                 finish();

@@ -30,7 +30,7 @@ public class RegisterNew extends AppCompatActivity {
     EditText editDate; //selectIdPath, selectSelfiePath;
     TextInputEditText regFullname, regEmail, regPassword, regBdate, regAddress;
     String fullname, email, password, bdate, address;
-    Uri imageUri;
+    //Uri imageUri;
     private static final int PICK_IMAGE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

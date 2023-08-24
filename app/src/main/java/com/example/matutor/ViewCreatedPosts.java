@@ -50,28 +50,8 @@ public class ViewCreatedPosts extends AppCompatActivity {
         viewCreatedPost.setVisibility(View.GONE);
         viewAllUsers.setVisibility(View.GONE);
 
-        //search bar
-        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // Handle search query submission
-                performSearch(query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // Handle search query text change
-                performSearch(newText);
-                return true;
-            }
-        });
-
         //set boolean variable as false
         allFabVisible = false;
-
-        //shrink extended fab + click listener
-        menuFabBtn.shrink();
 
         //shrink extended fab + click listener
         menuFabBtn.shrink();
@@ -123,10 +103,7 @@ public class ViewCreatedPosts extends AppCompatActivity {
         viewCreatedPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewCreatedPosts.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
+                Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -189,11 +166,6 @@ public class ViewCreatedPosts extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    private void performSearch(String query) {
-        // Here, you can implement your search logic
-        // Update the UI or perform any actions based on the search query
     }
 
     private void deleteConfirmation() {

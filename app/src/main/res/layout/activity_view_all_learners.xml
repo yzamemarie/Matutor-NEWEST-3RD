@@ -266,7 +266,7 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedLearnerButton1"
+                                        android:id="@+id/interestedButton"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -395,7 +395,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedLearnerButton2"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -523,7 +522,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedLearnerButton3"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -651,7 +649,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedLearnerButton4"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -771,7 +768,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedLearnerButton5"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -900,7 +896,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedLearnerButton6"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"

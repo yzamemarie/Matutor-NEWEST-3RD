@@ -1,5 +1,6 @@
 package com.example.matutor;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
@@ -18,7 +20,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ViewCreatedPostsTutor extends AppCompatActivity {
 
-    Button learnerSwitch;
+    Button learnerSwitch, close;
+    SearchView searchBar;
     ExtendedFloatingActionButton menuFabBtn;
     FloatingActionButton viewAllPosts, createPost, viewCreatedPost, viewAllUsers;
     Boolean allFabVisible; //checks for visibility of sub fabs
@@ -30,7 +33,9 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_view_created_posts_tutor);
 
+        searchBar = findViewById(R.id.searchView);
         learnerSwitch = findViewById(R.id.switchButton);
+        close = findViewById(R.id.closeButton);
         menuFabBtn = findViewById(R.id.menuFab);
         viewAllPosts = findViewById(R.id.viewAllFab);
         createPost = findViewById(R.id.createPostFab);
@@ -77,14 +82,17 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
         viewAllPosts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), PostingsTutor.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
             }
         });
 
         createPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreatePosting.class);
+                Intent intent = new Intent(getApplicationContext(), ViewCreatedPostsTutor.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();
@@ -94,10 +102,7 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
         viewCreatedPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewCreatedPostsTutor.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
+                Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -110,6 +115,15 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
                 finish();
             }
         });
+
+        //close/delete button
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteConfirmation();;
+            }
+        });
+
     bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -119,7 +133,7 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
                 return true;
             }
             else if (itemId == R.id.dashboard) {
-                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                startActivity(new Intent(getApplicationContext(), DashboardTutor.class));
                 overridePendingTransition(0, 0);
                 return true;
             }
@@ -129,24 +143,41 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
                 return true;
             }
             else if (itemId == R.id.profile) {
-                startActivity(new Intent(getApplicationContext(), Profile.class));
+                startActivity(new Intent(getApplicationContext(), ProfileTutor.class));
                 overridePendingTransition(0, 0);
                 return true;
             }
             else if (itemId == R.id.notif) {
-                startActivity(new Intent(getApplicationContext(), Notification.class));
+                startActivity(new Intent(getApplicationContext(), NotificationTutor.class));
                 overridePendingTransition(0, 0);
                 return true;
             }
             return false;
         }
     });
-}
-    private void performSearch(String query) {
-        // Here, you can implement your search logic
-        // Update the UI or perform any actions based on the search query
     }
 
+    private void deleteConfirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("[?] Confirm");
+        builder.setMessage("Remove post?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(), Posting.class);
+                startActivity(intent);
+                overridePendingTransition( R.anim.slide_out_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), PostingsTutor.class);

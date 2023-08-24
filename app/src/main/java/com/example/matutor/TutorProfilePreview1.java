@@ -75,7 +75,7 @@ public class TutorProfilePreview1 extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), Notification.class);
+        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
         finish();

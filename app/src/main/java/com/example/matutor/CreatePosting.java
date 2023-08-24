@@ -8,12 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class CreatePosting extends AppCompatActivity {
 
     Button close, post;
+    Spinner tagSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,13 @@ public class CreatePosting extends AppCompatActivity {
         //assignment
         close = findViewById(R.id.closeButton);
         post = findViewById(R.id.postButton);
+        tagSpinner = findViewById(R.id.topicTagSpinner);
+
+        // Populate the Spinner for topic 1
+        String[] t1 = {"SELECT TOPIC 1"};
+        ArrayAdapter<String> a1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t1);
+        a1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tagSpinner.setAdapter(a1);
 
         //close and return to postings
         close.setOnClickListener(new View.OnClickListener() {

@@ -26,6 +26,7 @@ public class SelectPostingTutor extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Request sent!", Toast.LENGTH_SHORT).show();
+                onBackPressed();
             }
         });
 

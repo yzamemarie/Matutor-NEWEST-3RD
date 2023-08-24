@@ -43,7 +43,7 @@ public class LearnerProfilePreview extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), NotificationTutor.class);
+                Intent intent = new Intent(getApplicationContext(), DashboardTutor.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();
@@ -75,7 +75,7 @@ public class LearnerProfilePreview extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), NotificationTutor.class);
+        Intent intent = new Intent(getApplicationContext(), DashboardTutor.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
         finish();

@@ -127,6 +127,8 @@ public class BookingsHistory extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.posting) {
+                    startActivity(new Intent(getApplicationContext(), Posting.class));
+                    overridePendingTransition(0, 0);
                     return true;
                 }
                 else if (itemId == R.id.dashboard) {
@@ -140,9 +142,6 @@ public class BookingsHistory extends AppCompatActivity {
                     return true;
                 }
                 else if (itemId == R.id.profile) {
-
-                    startActivity(new Intent(getApplicationContext(), Profile.class));
-                    overridePendingTransition(0, 0);
                     return true;
                 }
                 else if (itemId == R.id.notif) {

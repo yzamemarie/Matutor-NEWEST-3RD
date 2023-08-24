@@ -281,7 +281,7 @@
                                     android:layout_marginTop="200dp">
 
                                     <Button
-                                        android:id="@+id/interestedTutorButton1"
+                                        android:id="@+id/interestedButton"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -410,7 +410,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedTutorButton2"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -538,7 +537,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedTutorButton3"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -666,7 +664,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedTutorButton4"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -786,7 +783,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedTutorButton5"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -906,7 +902,6 @@
                                     android:layout_marginTop="160dp">
 
                                     <Button
-                                        android:id="@+id/interestedTutorButton6"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"
@@ -1050,7 +1045,6 @@
                                     android:layout_marginTop="200dp">
 
                                     <Button
-                                        android:id="@+id/interestedTutorButton7"
                                         android:layout_width="170dp"
                                         android:layout_height="38dp"
                                         android:backgroundTint="@color/blue"

@@ -18,9 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ViewAllTutors extends AppCompatActivity {
 
-    Button learnerSwitch;
+    Button learnerSwitch, interested;
     SearchView searchBar;
-
     ExtendedFloatingActionButton menuFabBtn;
     FloatingActionButton viewAllPosts, createPost, viewCreatedPost, viewAllUsers;
     Boolean allFabVisible; //checks for visibility of sub fabs
@@ -33,6 +32,7 @@ public class ViewAllTutors extends AppCompatActivity {
 
         searchBar = findViewById(R.id.searchView);
         learnerSwitch = findViewById(R.id.switchButton);
+        interested = findViewById(R.id.interestedButton);
         menuFabBtn = findViewById(R.id.menuFab);
         viewAllPosts = findViewById(R.id.viewAllFab);
         createPost = findViewById(R.id.createPostFab);
@@ -50,6 +50,16 @@ public class ViewAllTutors extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ViewAllLearners.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
+
+        interested.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), LearnerProfilePreview.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                 finish();

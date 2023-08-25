@@ -40,7 +40,7 @@ public class ViewCreatedPosts extends AppCompatActivity {
         menuFabBtn = findViewById(R.id.menuFab);
         viewAllPosts = findViewById(R.id.viewAllFab);
         createPost = findViewById(R.id.createPostFab);
-        viewCreatedPost =findViewById(R.id.viewCreatedPostFab);
+        viewCreatedPost = findViewById(R.id.viewCreatedPostFab);
         viewAllUsers = findViewById(R.id.viewAllUsersFab);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.posting);
@@ -132,7 +132,7 @@ public class ViewCreatedPosts extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteConfirmation();;
+                deleteConfirmation();
             }
         });
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -142,23 +142,19 @@ public class ViewCreatedPosts extends AppCompatActivity {
 
                 if (itemId == R.id.posting) {
                     return true;
-                }
-                else if (itemId == R.id.dashboard) {
+                } else if (itemId == R.id.dashboard) {
                     startActivity(new Intent(getApplicationContext(), Dashboard.class));
                     overridePendingTransition(0, 0);
                     return true;
-                }
-                else if (itemId == R.id.content) {
+                } else if (itemId == R.id.content) {
                     startActivity(new Intent(getApplicationContext(), Content.class));
                     overridePendingTransition(0, 0);
                     return true;
-                }
-                else if (itemId == R.id.profile) {
+                } else if (itemId == R.id.profile) {
                     startActivity(new Intent(getApplicationContext(), Profile.class));
                     overridePendingTransition(0, 0);
                     return true;
-                }
-                else if (itemId == R.id.notif) {
+                } else if (itemId == R.id.notif) {
                     startActivity(new Intent(getApplicationContext(), Notification.class));
                     overridePendingTransition(0, 0);
                     return true;
@@ -177,7 +173,7 @@ public class ViewCreatedPosts extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(getApplicationContext(), Posting.class);
                 startActivity(intent);
-                overridePendingTransition( R.anim.slide_out_left, R.anim.slide_in_right);
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                 finish();
             }
         });

@@ -24,7 +24,7 @@ public class ScheduleSession extends AppCompatActivity {
 
     Button close, schedule;
     Spinner modeSpinner;
-    EditText editDate, editTimeStart, editTimeEnd;
+    EditText editDate, editSessionRate, editTimeStart, editTimeEnd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

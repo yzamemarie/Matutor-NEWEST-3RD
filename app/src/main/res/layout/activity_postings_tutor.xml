@@ -287,7 +287,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="JM PLanteras"
+                                    android:text="Jennifer Español"
                                     android:textSize="14sp"
                                     android:textStyle="bold"
                                     android:textColor="@color/blue"/>
@@ -295,7 +295,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="94dp"
+                                    android:layout_marginLeft="108dp"
                                     android:text="is looking for a learner"
                                     android:textSize="14sp"
                                     android:textColor="@color/text_grey"/>
@@ -341,7 +341,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="TRUST ME BRO"
+                                    android:text="BASIC PROGRAMMING"
                                     android:textSize="20sp"
                                     android:textStyle="bold"/>
 
@@ -412,7 +412,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Angelo Telamo"
+                                    android:text="Rosely Cordova"
                                     android:textSize="14sp"
                                     android:textStyle="bold"
                                     android:textColor="@color/blue"/>
@@ -455,7 +455,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="MASTER OF MASTERS"
+                                    android:text="FUNDAMENTAL ACCOUNTING"
                                     android:textSize="20sp"
                                     android:textStyle="bold"/>
 

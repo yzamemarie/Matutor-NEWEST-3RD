@@ -39,7 +39,7 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
         menuFabBtn = findViewById(R.id.menuFab);
         viewAllPosts = findViewById(R.id.viewAllFab);
         createPost = findViewById(R.id.createPostFab);
-        viewCreatedPost =findViewById(R.id.viewCreatedPostFab);
+        viewCreatedPost = findViewById(R.id.viewCreatedPostFab);
         viewAllUsers = findViewById(R.id.viewAllUsersFab);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.posting);
@@ -49,10 +49,8 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
         viewCreatedPost.setVisibility(View.GONE);
         viewAllUsers.setVisibility(View.GONE);
 
-        //set boolean variable as false
         allFabVisible = false;
 
-        //shrink extended fab + click listener
         menuFabBtn.shrink();
         menuFabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +90,7 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
         createPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewCreatedPostsTutor.class);
+                Intent intent = new Intent(getApplicationContext(), CreatePosting.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();
@@ -116,45 +114,56 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
             }
         });
 
-        //close/delete button
-        close.setOnClickListener(new View.OnClickListener() {
+        //switch user type
+        learnerSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteConfirmation();;
+                Intent intent = new Intent(getApplicationContext(), ViewCreatedPosts.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
             }
         });
 
-    bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            int itemId = item.getItemId();
+        //close button
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteConfirmation();
+            }
+        });
 
-            if (itemId == R.id.posting) {
-                return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.posting) {
+                    return true;
+                }
+                else if (itemId == R.id.dashboard) {
+                    startActivity(new Intent(getApplicationContext(), DashboardTutor.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                else if (itemId == R.id.content) {
+                    startActivity(new Intent(getApplicationContext(), Content.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                else if (itemId == R.id.profile) {
+                    startActivity(new Intent(getApplicationContext(), ProfileTutor.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                else if (itemId == R.id.notif) {
+                    startActivity(new Intent(getApplicationContext(), NotificationTutor.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
             }
-            else if (itemId == R.id.dashboard) {
-                startActivity(new Intent(getApplicationContext(), DashboardTutor.class));
-                overridePendingTransition(0, 0);
-                return true;
-            }
-            else if (itemId == R.id.content) {
-                startActivity(new Intent(getApplicationContext(), Content.class));
-                overridePendingTransition(0, 0);
-                return true;
-            }
-            else if (itemId == R.id.profile) {
-                startActivity(new Intent(getApplicationContext(), ProfileTutor.class));
-                overridePendingTransition(0, 0);
-                return true;
-            }
-            else if (itemId == R.id.notif) {
-                startActivity(new Intent(getApplicationContext(), NotificationTutor.class));
-                overridePendingTransition(0, 0);
-                return true;
-            }
-            return false;
-        }
-    });
+        });
     }
 
     private void deleteConfirmation() {
@@ -164,7 +173,7 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), Posting.class);
+                Intent intent = new Intent(getApplicationContext(), PostingsTutor.class);
                 startActivity(intent);
                 overridePendingTransition( R.anim.slide_out_left, R.anim.slide_in_right);
                 finish();
@@ -178,6 +187,7 @@ public class ViewCreatedPostsTutor extends AppCompatActivity {
         });
         builder.show();
     }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), PostingsTutor.class);

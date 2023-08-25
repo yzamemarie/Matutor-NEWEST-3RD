@@ -325,7 +325,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="IDK MATH SEND HELP"
+                                    android:text="HELP WITH BASIC ALGEBRA"
                                     android:textSize="20sp"
                                     android:textStyle="bold"/>
 
@@ -440,7 +440,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="MAJOR REXAM"
+                                    android:text="NEED TUTORING FOR EXAM SOON"
                                     android:textSize="20sp"
                                     android:textStyle="bold"/>
 

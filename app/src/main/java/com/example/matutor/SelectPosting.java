@@ -34,7 +34,7 @@ public class SelectPosting extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DashboardTutor.class);
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();

@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ViewAllLearners extends AppCompatActivity {
 
-    Button tutorSwitch, interested;
+    Button tutorSwitch, interested, nameFilter, titleFilter, topicFilter, locationFilter;
     SearchView searchBar;
     ExtendedFloatingActionButton menuFabBtn;
     FloatingActionButton viewAllPosts, createPost, viewCreatedPost, viewAllUsers;
@@ -28,11 +28,15 @@ public class ViewAllLearners extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_view_all_tutors);
+        setContentView(R.layout.activity_view_all_learners);
 
         searchBar = findViewById(R.id.searchView);
         tutorSwitch = findViewById(R.id.switchButton);
         interested = findViewById(R.id.interestedButton);
+        nameFilter = findViewById(R.id.nameFilterButton);
+        titleFilter = findViewById(R.id.titleFilterButton);
+        topicFilter = findViewById(R.id.topicFilterButton);
+        locationFilter = findViewById(R.id.locationFilterButton);
         menuFabBtn = findViewById(R.id.menuFab);
         viewAllPosts = findViewById(R.id.viewAllFab);
         createPost = findViewById(R.id.createPostFab);
@@ -80,6 +84,35 @@ public class ViewAllLearners extends AppCompatActivity {
                 // Handle search query text change
                 performSearch(newText);
                 return true;
+            }
+        });
+
+        //filter buttons testing
+        nameFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by user's name", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        titleFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by posting's title", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        topicFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by posting's topic", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        locationFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by posting's location", Toast.LENGTH_SHORT).show();
             }
         });
 

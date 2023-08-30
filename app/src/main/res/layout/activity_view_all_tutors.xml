@@ -134,25 +134,77 @@
             android:layout_gravity="center_horizontal"/>
     </FrameLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/nameFilterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:backgroundTint="@color/white"
+                android:text="NAME"
+                android:textStyle="italic"
+                android:textColor="@color/text_grey"
+                android:textSize="12sp"/>
+
+            <Button
+                android:id="@+id/topicFilterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="@color/white"
+                android:text="TOPIC"
+                android:textStyle="italic"
+                android:textColor="@color/text_grey"
+                android:textSize="12sp"/>
+
+            <Button
+                android:id="@+id/locationFilterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="@color/white"
+                android:text="LOCATION"
+                android:textStyle="italic"
+                android:textColor="@color/text_grey"
+                android:textSize="12sp"/>
+
+            <Button
+                android:id="@+id/tutoringCenterFilterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="@color/white"
+                android:text="CENTER"
+                android:textStyle="italic"
+                android:textColor="@color/text_grey"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </FrameLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="190dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/searchView">
+            android:layout_height="wrap_content">
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp">
+                android:layout_height="wrap_content">
 
                 <FrameLayout
                     android:layout_width="370dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
                     android:layout_gravity="center_horizontal">
 
                     <com.google.android.material.card.MaterialCardView
@@ -1062,7 +1114,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="350dp"
                         android:layout_height="190dp"
-                        android:layout_marginTop="2450dp"
+                        android:layout_marginTop="1700dp"
                         app:strokeColor="@color/grey"
                         android:backgroundTint="@color/grey">
 

@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ViewAllTutors extends AppCompatActivity {
 
-    Button learnerSwitch, interested;
+    Button learnerSwitch, interested, nameFilter, locationFilter, topicFilter, tutoringCenterFilter;;
     SearchView searchBar;
     ExtendedFloatingActionButton menuFabBtn;
     FloatingActionButton viewAllPosts, createPost, viewCreatedPost, viewAllUsers;
@@ -28,11 +28,15 @@ public class ViewAllTutors extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_view_all_learners);
+        setContentView(R.layout.activity_view_all_tutors);
 
         searchBar = findViewById(R.id.searchView);
         learnerSwitch = findViewById(R.id.switchButton);
         interested = findViewById(R.id.interestedButton);
+        nameFilter = findViewById(R.id.nameFilterButton);
+        locationFilter = findViewById(R.id.locationFilterButton);
+        topicFilter = findViewById(R.id.topicFilterButton);
+        tutoringCenterFilter = findViewById(R.id.tutoringCenterFilterButton);
         menuFabBtn = findViewById(R.id.menuFab);
         viewAllPosts = findViewById(R.id.viewAllFab);
         createPost = findViewById(R.id.createPostFab);
@@ -80,6 +84,35 @@ public class ViewAllTutors extends AppCompatActivity {
                 // Handle search query text change
                 performSearch(newText);
                 return true;
+            }
+        });
+
+        //filter buttons testing
+        nameFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by tutor's name", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        locationFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by tutor's location", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        topicFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by tutor's topic", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tutoringCenterFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by tutor's tutoring center", Toast.LENGTH_SHORT).show();
             }
         });
 

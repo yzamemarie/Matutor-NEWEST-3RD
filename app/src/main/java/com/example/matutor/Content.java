@@ -10,13 +10,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,8 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Content extends AppCompatActivity {
+    Button titleFilter, topicFilter, sourceFilter;
     SearchView searchBar;
-    RecyclerView recyclerView;
+    //RecyclerView recyclerView;
     WebView videoWebView;
     BottomNavigationView bottomNavigationView;
 
@@ -36,9 +40,12 @@ public class Content extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
         setContentView(R.layout.activity_content);
 
+        titleFilter = findViewById(R.id.titleFilterButton);
+        topicFilter = findViewById(R.id.topicFilterButton);
+        sourceFilter = findViewById(R.id.sourceFilterButton);
         videoWebView = findViewById(R.id.videoWebView);
         searchBar = findViewById(R.id.searchView);
-        recyclerView = findViewById(R.id.recyclerView);
+        //recyclerView = findViewById(R.id.recyclerView);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.content);
 
@@ -53,6 +60,28 @@ public class Content extends AppCompatActivity {
         videoWebView.getSettings().setJavaScriptEnabled(true);
         //set webchromeclient to handle javascript events in app by webview
         videoWebView.setWebChromeClient(new WebChromeClient());
+
+        //filter buttons testing
+        titleFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by content's title", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        topicFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by content's topic", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        sourceFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Search by content's source", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

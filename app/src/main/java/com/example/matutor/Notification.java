@@ -40,7 +40,7 @@ public class Notification extends AppCompatActivity {
             public void onClick(View widget) {
                 // Define the URL or activity you want to redirect to
                 // For example, launching another activity:
-                Intent intent = new Intent(getApplicationContext(), SelectPostingTutor.class);
+                Intent intent = new Intent(getApplicationContext(), SelectPostingTutor2.class);
                 startActivity(intent);
             }
         };

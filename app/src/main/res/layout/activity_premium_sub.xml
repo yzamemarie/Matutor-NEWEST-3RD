@@ -112,7 +112,7 @@
                                 android:layout_marginTop="80dp"
                                 android:layout_gravity="center_horizontal"
                                 android:justificationMode="inter_word"
-                                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae bibendum urna."
+                                android:text="* No more weekly limit to postings"
                                 android:textColor="@color/yellow"
                                 android:textSize="16sp"/>
 

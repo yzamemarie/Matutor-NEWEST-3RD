@@ -451,7 +451,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="850dp">
+                    android:layout_marginTop="950dp">
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -173,12 +173,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="195dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="195dp">
+            android:layout_height="wrap_content">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -474,7 +473,46 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="440dp">
+                android:layout_marginTop="425dp">
+
+                <TextView
+                    android:id="@+id/guardianContactHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:text="parent/guardian contact"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_grey"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="22sp">
+
+                    <TextView
+                        android:id="@+id/guardianNameDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mrs. Kyla Amadio"
+                        android:textSize="14sp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/guardianEmailDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:text="mrs.fatjoe@gmail.com"
+                        android:textSize="14sp"
+                        android:gravity="center"/>
+                </FrameLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="510dp">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -506,13 +544,12 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="510dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="650dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
                     android:text="   "/>
             </FrameLayout>
 

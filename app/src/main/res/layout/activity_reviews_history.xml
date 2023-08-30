@@ -32,6 +32,7 @@
         android:backgroundTint="@color/blue"
         android:src="@drawable/fab_view_user_profile_btn"
         android:tint="@color/yellow"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/viewReportsFab"
         android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
         android:layout_alignRight="@id/menuFab"
         android:layout_alignParentBottom="true"
         android:backgroundTint="@color/blue"
-        android:src="@drawable/fab_review_history_btn"
+        android:src="@drawable/fab_progress_report"
         android:tint="@color/yellow"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

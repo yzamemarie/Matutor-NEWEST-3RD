@@ -19,7 +19,7 @@ public class ReviewsHistoryTutor extends AppCompatActivity {
 
     Button learnerSwitch;
     ExtendedFloatingActionButton menuFabBtn;
-    FloatingActionButton viewProfile, viewBookings, viewBookingsHistory, viewReviewsHistory;
+    FloatingActionButton viewProfile, viewProgressReport, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
     BottomNavigationView bottomNavigationView;
 
@@ -33,6 +33,7 @@ public class ReviewsHistoryTutor extends AppCompatActivity {
         learnerSwitch = findViewById(R.id.switchButton);
         menuFabBtn = findViewById(R.id.menuFab);
         viewProfile = findViewById(R.id.viewProfileFab);
+        viewProgressReport = findViewById(R.id.viewReportsFab);
         viewBookings = findViewById(R.id.viewBookingsFab);
         viewBookingsHistory = findViewById(R.id.viewHistoryFab);
         viewReviewsHistory = findViewById(R.id.viewReviewsFab);
@@ -40,6 +41,7 @@ public class ReviewsHistoryTutor extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
         viewProfile.setVisibility(View.GONE);
+        viewProgressReport.setVisibility(View.GONE);
         viewBookings.setVisibility(View.GONE);
         viewBookingsHistory.setVisibility(View.GONE);
         viewReviewsHistory.setVisibility(View.GONE);
@@ -89,6 +91,16 @@ public class ReviewsHistoryTutor extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ProfileTutor.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
+
+        viewProgressReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ViewProgressReportTutor.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();

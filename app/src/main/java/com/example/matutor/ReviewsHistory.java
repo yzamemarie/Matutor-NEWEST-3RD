@@ -19,7 +19,7 @@ public class ReviewsHistory extends AppCompatActivity {
 
     Button tutorSwitch;
     ExtendedFloatingActionButton menuFabBtn;
-    FloatingActionButton viewProfile, viewBookings, viewBookingsHistory, viewReviewsHistory;
+    FloatingActionButton viewProfile, viewProgressReport, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
     BottomNavigationView bottomNavigationView;
 
@@ -33,6 +33,7 @@ public class ReviewsHistory extends AppCompatActivity {
         tutorSwitch = findViewById(R.id.switchButton);
         menuFabBtn = findViewById(R.id.menuFab);
         viewProfile = findViewById(R.id.viewProfileFab);
+        viewProgressReport = findViewById(R.id.viewReportsFab);
         viewBookings = findViewById(R.id.viewBookingsFab);
         viewBookingsHistory = findViewById(R.id.viewHistoryFab);
         viewReviewsHistory = findViewById(R.id.viewReviewsFab);
@@ -40,6 +41,7 @@ public class ReviewsHistory extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
         viewProfile.setVisibility(View.GONE);
+        viewProgressReport.setVisibility(View.GONE);
         viewBookings.setVisibility(View.GONE);
         viewBookingsHistory.setVisibility(View.GONE);
         viewReviewsHistory.setVisibility(View.GONE);
@@ -67,6 +69,7 @@ public class ReviewsHistory extends AppCompatActivity {
                     //extend extended fab and set sub fab as visible
                     menuFabBtn.extend();
                     viewProfile.show();
+                    viewProgressReport.show();
                     viewBookings.show();
                     viewBookingsHistory.show();
                     viewReviewsHistory.show();
@@ -76,6 +79,7 @@ public class ReviewsHistory extends AppCompatActivity {
                     //hid sub fabs
                     menuFabBtn.shrink();
                     viewProfile.hide();
+                    viewProgressReport.hide();
                     viewBookings.hide();
                     viewBookingsHistory.hide();
                     viewReviewsHistory.hide();
@@ -89,6 +93,16 @@ public class ReviewsHistory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
+
+        viewProgressReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ViewProgressReportsLearner.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();

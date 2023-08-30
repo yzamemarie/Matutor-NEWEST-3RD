@@ -15,20 +15,22 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class BookingsHistory extends AppCompatActivity {
+public class ViewProgressReportTutor extends AppCompatActivity {
 
-    Button tutorSwitch;
+    Button learnerSwitch;
     ExtendedFloatingActionButton menuFabBtn;
     FloatingActionButton viewProfile, viewProgressReport, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
     BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_bookings_history);
+        setContentView(R.layout.activity_view_progress_report_tutor);
 
-        tutorSwitch = findViewById(R.id.switchButton);
+        //assignment
+        learnerSwitch = findViewById(R.id.switchButton);
         menuFabBtn = findViewById(R.id.menuFab);
         viewProfile = findViewById(R.id.viewProfileFab);
         viewProgressReport = findViewById(R.id.viewReportsFab);
@@ -43,6 +45,20 @@ public class BookingsHistory extends AppCompatActivity {
         viewBookings.setVisibility(View.GONE);
         viewBookingsHistory.setVisibility(View.GONE);
         viewReviewsHistory.setVisibility(View.GONE);
+
+
+        //switch profile type
+        learnerSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ViewProgressReportsLearner.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
+
+
         //set boolean variable as false
         allFabVisible = false;
 
@@ -78,7 +94,7 @@ public class BookingsHistory extends AppCompatActivity {
         viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileTutor.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();
@@ -88,17 +104,14 @@ public class BookingsHistory extends AppCompatActivity {
         viewProgressReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewProgressReportsLearner.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
+                Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
             }
         });
 
         viewBookings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Bookings.class);
+                Intent intent = new Intent(getApplicationContext(), BookingsTutor.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();
@@ -108,25 +121,6 @@ public class BookingsHistory extends AppCompatActivity {
         viewBookingsHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        viewReviewsHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ReviewsHistory.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        //switch user type
-        tutorSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BookingsHistoryTutor.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
@@ -134,18 +128,29 @@ public class BookingsHistory extends AppCompatActivity {
             }
         });
 
+        viewReviewsHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReviewsHistoryTutor.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
+
+        //navbar navigation
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.posting) {
-                    startActivity(new Intent(getApplicationContext(), Posting.class));
+                    startActivity(new Intent(getApplicationContext(), PostingsTutor.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }
                 else if (itemId == R.id.dashboard) {
-                    startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                    startActivity(new Intent(getApplicationContext(), DashboardTutor.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }
@@ -158,20 +163,21 @@ public class BookingsHistory extends AppCompatActivity {
                     return true;
                 }
                 else if (itemId == R.id.notif) {
-                    startActivity(new Intent(getApplicationContext(), Notification.class));
+                    startActivity(new Intent(getApplicationContext(), NotificationTutor.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }
                 return false;
             }
         });
+
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), Profile.class);
+        Intent intent = new Intent(getApplicationContext(), PostingsTutor.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
         finish();
     }
 }

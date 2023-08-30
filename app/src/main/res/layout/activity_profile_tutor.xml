@@ -22,22 +22,10 @@
         android:textColor="@color/yellow"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/viewReviewsFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
-        android:layout_above="@id/menuFab"
-        android:layout_alignRight="@id/menuFab"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/blue"
-        android:src="@drawable/fab_review_history_btn"
-        android:tint="@color/yellow"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/viewProfileFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="146dp"
         android:layout_above="@id/menuFab"
         android:layout_alignRight="@id/menuFab"
         android:layout_alignParentBottom="true"
@@ -46,10 +34,34 @@
         android:tint="@color/yellow"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/viewBookingsFab"
+        android:id="@+id/viewReportsFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="207dp"
+        android:layout_above="@id/menuFab"
+        android:layout_alignRight="@id/menuFab"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/blue"
+        android:src="@drawable/fab_review_history_btn"
+        android:tint="@color/yellow"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/viewReviewsFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="268dp"
+        android:layout_above="@id/menuFab"
+        android:layout_alignRight="@id/menuFab"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/blue"
+        android:src="@drawable/fab_review_history_btn"
+        android:tint="@color/yellow"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/viewBookingsFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="330dp"
         android:layout_above="@id/menuFab"
         android:layout_alignRight="@id/menuFab"
         android:layout_alignParentBottom="true"
@@ -61,7 +73,7 @@
         android:id="@+id/viewHistoryFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="330dp"
+        android:layout_marginBottom="391dp"
         android:layout_above="@id/menuFab"
         android:layout_alignRight="@id/menuFab"
         android:layout_alignParentBottom="true"

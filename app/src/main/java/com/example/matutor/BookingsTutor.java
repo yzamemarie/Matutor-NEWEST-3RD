@@ -21,7 +21,7 @@ public class BookingsTutor extends AppCompatActivity {
 
     Button learnerSwitch, finishSession, cancelSession;
     ExtendedFloatingActionButton menuFabBtn;
-    FloatingActionButton viewProfile, viewBookings, viewBookingsHistory, viewReviewsHistory;
+    FloatingActionButton viewProfile, viewProgressReport, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
     BottomNavigationView bottomNavigationView;
 
@@ -37,6 +37,7 @@ public class BookingsTutor extends AppCompatActivity {
         cancelSession = findViewById(R.id.cancelLearnerSessionButton);
         menuFabBtn = findViewById(R.id.menuFab);
         viewProfile = findViewById(R.id.viewProfileFab);
+        viewProgressReport = findViewById(R.id.viewReportsFab);
         viewBookings = findViewById(R.id.viewBookingsFab);
         viewBookingsHistory = findViewById(R.id.viewHistoryFab);
         viewReviewsHistory = findViewById(R.id.viewReviewsFab);
@@ -44,6 +45,7 @@ public class BookingsTutor extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
         viewProfile.setVisibility(View.GONE);
+        viewProgressReport.setVisibility(View.GONE);
         viewBookings.setVisibility(View.GONE);
         viewBookingsHistory.setVisibility(View.GONE);
         viewReviewsHistory.setVisibility(View.GONE);
@@ -82,6 +84,16 @@ public class BookingsTutor extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ProfileTutor.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
+
+        viewProgressReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ViewProgressReportTutor.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();
@@ -149,9 +161,11 @@ public class BookingsTutor extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.posting) {
+                    startActivity(new Intent(getApplicationContext(), PostingsTutor.class));
+                    overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.dashboard) {
-                    startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                    startActivity(new Intent(getApplicationContext(), DashboardTutor.class));
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.content) {
@@ -159,12 +173,9 @@ public class BookingsTutor extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.profile) {
-
-                    startActivity(new Intent(getApplicationContext(), Profile.class));
-                    overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.notif) {
-                    startActivity(new Intent(getApplicationContext(), Notification.class));
+                    startActivity(new Intent(getApplicationContext(), NotificationTutor.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }
@@ -188,7 +199,7 @@ public class BookingsTutor extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), CreateSessionNote.class);
+                Intent intent = new Intent(getApplicationContext(), CreateProgressReport.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();

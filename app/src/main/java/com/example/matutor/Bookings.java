@@ -21,7 +21,7 @@ public class Bookings extends AppCompatActivity {
 
     Button tutorSwitch, reviewTutor1, reviewTutor2,  cancelSession1, cancelSession2;
     ExtendedFloatingActionButton menuFabBtn;
-    FloatingActionButton viewProfile, viewBookings, viewBookingsHistory, viewReviewsHistory;
+    FloatingActionButton viewProfile, viewProgressReport, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
     BottomNavigationView bottomNavigationView;
 
@@ -39,6 +39,7 @@ public class Bookings extends AppCompatActivity {
         cancelSession2 = findViewById(R.id.cancelTutorSessionButton2);
         menuFabBtn = findViewById(R.id.menuFab);
         viewProfile = findViewById(R.id.viewProfileFab);
+        viewProgressReport = findViewById(R.id.viewReportsFab);
         viewBookings = findViewById(R.id.viewBookingsFab);
         viewBookingsHistory = findViewById(R.id.viewHistoryFab);
         viewReviewsHistory = findViewById(R.id.viewReviewsFab);
@@ -46,6 +47,7 @@ public class Bookings extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
         viewProfile.setVisibility(View.GONE);
+        viewProgressReport.setVisibility(View.GONE);
         viewBookings.setVisibility(View.GONE);
         viewBookingsHistory.setVisibility(View.GONE);
         viewReviewsHistory.setVisibility(View.GONE);
@@ -62,6 +64,7 @@ public class Bookings extends AppCompatActivity {
                     //extend extended fab and set sub fab as visible
                     menuFabBtn.extend();
                     viewProfile.show();
+                    viewProgressReport.show();
                     viewBookings.show();
                     viewBookingsHistory.show();
                     viewReviewsHistory.show();
@@ -71,6 +74,7 @@ public class Bookings extends AppCompatActivity {
                     //hid sub fabs
                     menuFabBtn.shrink();
                     viewProfile.hide();
+                    viewProgressReport.hide();
                     viewBookings.hide();
                     viewBookingsHistory.hide();
                     viewReviewsHistory.hide();
@@ -84,6 +88,16 @@ public class Bookings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
+
+        viewProgressReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ViewProgressReportsLearner.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();
@@ -170,6 +184,9 @@ public class Bookings extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.posting) {
+                    startActivity(new Intent(getApplicationContext(), Posting.class));
+                    overridePendingTransition(0, 0);
+
                     return true;
                 }
                 else if (itemId == R.id.dashboard) {
@@ -183,8 +200,6 @@ public class Bookings extends AppCompatActivity {
                     return true;
                 }
                 else if (itemId == R.id.profile) {
-                    startActivity(new Intent(getApplicationContext(), Profile.class));
-                    overridePendingTransition(0, 0);
                     return true;
                 }
                 else if (itemId == R.id.notif) {

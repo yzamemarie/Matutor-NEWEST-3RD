@@ -137,6 +137,13 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="113dp"
+                    android:layout_marginLeft="255dp"
+                    android:src="@drawable/lightbulb" />
             </FrameLayout>
 
             <TextView
@@ -309,9 +316,10 @@
                         android:id="@+id/ageDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="22"
+                        android:text="20"
                         android:textSize="12dp"
                         android:gravity="center"/>
+
                 </FrameLayout>
             </FrameLayout>
 
@@ -471,16 +479,15 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/premiumButton"
+                        android:id="@+id/viewPremiumButton"
                         android:layout_width="145dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="155dp"
                         android:backgroundTint="@color/yellow"
-                        android:text="get PREMIUM"
+                        android:text="view PREMIUM"
                         android:textColor="@color/blue"
                         android:textSize="12sp"
                         android:textStyle="bold" />
-
 
                 </FrameLayout>
             </FrameLayout>

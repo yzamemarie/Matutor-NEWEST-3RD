@@ -19,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Profile extends AppCompatActivity {
 
-    Button edit, premium, logout, tutorSwitch;
+    Button edit, viewPremium, logout, tutorSwitch;
     ExtendedFloatingActionButton menuFabBtn;
     FloatingActionButton viewProfile, viewBookings, viewBookingsHistory, viewReviewsHistory;
     Boolean allFabVisible; //checks for visibility of sub fabs
@@ -33,7 +33,7 @@ public class Profile extends AppCompatActivity {
 
         //assignment
         edit = findViewById(R.id.editProfileButton);
-        premium = findViewById(R.id.premiumButton);
+        viewPremium = findViewById(R.id.viewPremiumButton);
         tutorSwitch = findViewById(R.id.switchButton);
         logout = findViewById(R.id.logoutButton);
         menuFabBtn = findViewById(R.id.menuFab);
@@ -147,10 +147,10 @@ public class Profile extends AppCompatActivity {
         });
 
         //click to go to premium subscription page
-        premium.setOnClickListener(new View.OnClickListener() {
+        viewPremium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), PremiumSub.class);
+                Intent intent = new Intent(getApplicationContext(), ViewPremiumStatus.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();

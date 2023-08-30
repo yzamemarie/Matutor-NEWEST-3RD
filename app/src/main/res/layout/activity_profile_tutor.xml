@@ -138,12 +138,6 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"/>
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="113dp"
-                    android:layout_marginLeft="255dp"
-                    android:src="@drawable/lightbulb" />
             </FrameLayout>
 
             <TextView
@@ -190,7 +184,7 @@
                         android:id="@+id/aboutMeDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="I am a BS PSYCH student from the USJR."
+                        android:text="I have been a professional tutor for the past 5 years."
                         android:textSize="14sp"
                         android:gravity="center"/>
                 </FrameLayout>
@@ -205,7 +199,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal"
-                    android:text="education"
+                    android:text="tutoring center"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="@color/text_grey"/>
@@ -218,7 +212,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="4th Year"
+                        android:text="Best Tutors Inc."
                         android:textSize="14sp"
                         android:gravity="center"/>
 
@@ -226,7 +220,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="University of San Jose - Recoletos"
+                        android:text="Apas, Cebu City"
                         android:textSize="14sp"
                         android:gravity="center"/>
                 </FrameLayout>
@@ -316,7 +310,7 @@
                         android:id="@+id/ageDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="23"
+                        android:text="29"
                         android:textSize="12dp"
                         android:gravity="center"/>
                 </FrameLayout>
@@ -435,7 +429,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="65dp">
+                        android:layout_marginTop="65dp"
+                        android:layout_gravity="center_horizontal">
 
                         <Button
                             android:layout_width="100dp"
@@ -477,15 +472,16 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/viewPremiumButton"
+                        android:id="@+id/premiumButton"
                         android:layout_width="145dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="155dp"
                         android:backgroundTint="@color/yellow"
-                        android:text="view PREMIUM"
+                        android:text="get PREMIUM"
                         android:textColor="@color/blue"
                         android:textSize="12sp"
                         android:textStyle="bold" />
+
                 </FrameLayout>
             </FrameLayout>
 

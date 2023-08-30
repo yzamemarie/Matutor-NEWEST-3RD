@@ -30,7 +30,7 @@ public class ViewPremiumStatus extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Pog! You renewed your subscription!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), ProfileTutor.class);
+                Intent intent = new Intent(getApplicationContext(), Profile.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish();
@@ -62,11 +62,11 @@ public class ViewPremiumStatus extends AppCompatActivity {
     private void cancelConfirmation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm");
-        builder.setMessage("Do you really want to cancel your subscription?" + "\nYou will no longer be able to access additional features.");
+        builder.setMessage("Do you really want to cancel your subscription? You will no longer be able to access additional features.");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), DashboardTutor.class);
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                 finish();
@@ -79,11 +79,6 @@ public class ViewPremiumStatus extends AppCompatActivity {
             }
         });
         builder.show();
-    }
-
-    private void performSearch(String query) {
-        // Here, you can implement your search logic
-        // Update the UI or perform any actions based on the search query
     }
 
     public void onBackPressed() {

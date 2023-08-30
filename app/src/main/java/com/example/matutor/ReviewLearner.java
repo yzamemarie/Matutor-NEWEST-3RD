@@ -47,7 +47,7 @@ public class ReviewLearner extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), CreateSessionNote.class);
+        Intent intent = new Intent(getApplicationContext(), CreateProgressReport.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();

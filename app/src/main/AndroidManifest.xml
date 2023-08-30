@@ -24,7 +24,7 @@
             android:name=".NotificationTutor"
             android:exported="false" />
         <activity
-            android:name=".CreateSessionNote"
+            android:name=".CreateProgressReport"
             android:exported="false" />
         <activity
             android:name=".ReviewsHistoryTutor"

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class EditProfile extends AppCompatActivity {
 
-    Button saveChanges, deleteAccount;
+    Button saveChanges, deleteAccount, addTag, tag1, tag2, tag3, selectProfileImg;
     Spinner ageSpinner, topic1Spinner, topic2Spinner, topic3Spinner, topic4Spinner, topic5Spinner;
     EditText editDate;
     BottomNavigationView bottomNavigationView;
@@ -38,13 +39,13 @@ public class EditProfile extends AppCompatActivity {
         //assignment
         saveChanges = findViewById(R.id.saveChangesButton);
         deleteAccount = findViewById(R.id.deleteAccountButton);
+        addTag = findViewById(R.id.addTagButton);
+        tag1 = findViewById(R.id.tag1Button);
+        tag2 = findViewById(R.id.tag2Button);
+        tag3 = findViewById(R.id.tag3Button);
+        selectProfileImg = findViewById(R.id.editProfileImgButton);
         ageSpinner = findViewById(R.id.editAgeSpinner);
         editDate = findViewById(R.id.editDateText);
-        topic1Spinner = findViewById(R.id.editTopicSpinner1);
-        topic2Spinner = findViewById(R.id.editTopicSpinner2);
-        topic3Spinner = findViewById(R.id.editTopicSpinner3);
-        topic4Spinner = findViewById(R.id.editTopicSpinner4);
-        topic5Spinner = findViewById(R.id.editTopicSpinner5);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
@@ -65,35 +66,40 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-        // Populate the Spinner for topic 1
-        String[] t1 = {"SELECT TOPIC 1"};
-        ArrayAdapter<String> a1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t1);
-        a1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic1Spinner.setAdapter(a1);
+        addTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Topic added!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        // Populate the Spinner for topic 2
-        String[] t2 = {"SELECT TOPIC 2"};
-        ArrayAdapter<String> a2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t2);
-        a2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic2Spinner.setAdapter(a2);
+        tag1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Topic removed!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        // Populate the Spinner for topic 3
-        String[] t3 = {"SELECT TOPIC 3"};
-        ArrayAdapter<String> a3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t3);
-        a3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic3Spinner.setAdapter(a3);
+        tag2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Topic removed!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        // Populate the Spinner for topic 4
-        String[] t4 = {"SELECT TOPIC 4"};
-        ArrayAdapter<String> a4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t4);
-        a4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic4Spinner.setAdapter(a4);
+        tag3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Topic removed!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        // Populate the Spinner for topic 5
-        String[] t5 = {"SELECT TOPIC 5"};
-        ArrayAdapter<String> a5 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t5);
-        a5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic5Spinner.setAdapter(a5);
+        selectProfileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Select profile image!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //save changes button
         saveChanges.setOnClickListener(new View.OnClickListener() {

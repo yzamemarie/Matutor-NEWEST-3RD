@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:layout_marginLeft="10dp"
-                android:text="Register"
+                android:text="Learner Registration"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="@color/yellow"/>
@@ -42,21 +42,58 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--FULL NAME FRAME-->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp">
 
+                <!--FULL NAME FRAME-->
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="80dp"
+                            android:text="full name"
+                            android:textColor="@color/text_grey"
+                            android:textSize="16sp" />
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="25dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/regFullnameInput"
+                                android:layout_width="320dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:background="@color/white"
+                                android:singleLine="true"
+                                android:textColor="@color/text_grey"
+                                android:textSize="12sp" />
+                        </FrameLayout>
+
+                    </FrameLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:layout_marginTop="83dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="80dp"
-                        android:text="full name"
+                        android:text="email"
                         android:textColor="@color/text_grey"
                         android:textSize="16sp" />
 
@@ -67,7 +104,7 @@
                         android:layout_marginTop="25dp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/regFullnameInput"
+                            android:id="@+id/regEmailInput"
                             android:layout_width="320dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
@@ -75,134 +112,21 @@
                             android:singleLine="true"
                             android:textColor="@color/text_grey"
                             android:textSize="12sp" />
+
                     </FrameLayout>
-
                 </FrameLayout>
-            </FrameLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="78dp"
-                android:layout_marginTop="163dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text="email"
-                    android:textColor="@color/text_grey"
-                    android:textSize="16sp" />
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="25dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/regEmailInput"
-                        android:layout_width="320dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:background="@color/white"
-                        android:singleLine="true"
-                        android:textColor="@color/text_grey"
-                        android:textSize="12sp" />
-
-                </FrameLayout>
-            </FrameLayout>
-
-            <!--PASSWORD FRAME-->
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="250dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text="password"
-                    android:textColor="@color/text_grey"
-                    android:textSize="16sp" />
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="25dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/regPasswordInput"
-                        android:layout_width="320dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:background="@color/white"
-                        android:singleLine="true"
-                        android:textColor="@color/text_grey"
-                        android:textSize="12sp" />
-
-                </FrameLayout>
-            </FrameLayout>
-
-            <!--BIRTHDATE FRAME-->
-            <FrameLayout
-                android:layout_width="210dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="340dp">
-
+                <!--PASSWORD FRAME-->
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="80dp"
+                    android:layout_marginTop="168dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="80dp"
-                        android:text="birthdate"
-                        android:textColor="@color/text_grey"
-                        android:textSize="16sp" />
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="15dp">
-
-                        <EditText
-                            android:id="@+id/editDateText"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:clickable="false"
-                            android:cursorVisible="false"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:hint="birthdate"
-                            android:textColor="@color/text_grey"
-                            android:textColorHint="@android:color/darker_gray" />
-                    </FrameLayout>
-                </FrameLayout>
-            </FrameLayout>
-
-            <!--AGE FRAME-->
-            <FrameLayout
-                android:layout_width="220dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="340dp"
-                android:layout_marginLeft="200dp">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp">
-
-                    <!--age header-->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="65dp"
-                        android:text="age"
+                        android:text="password"
                         android:textColor="@color/text_grey"
                         android:textSize="16sp" />
 
@@ -212,102 +136,194 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="25dp">
 
-                        <!--age field-->
-                        <Spinner
-                            android:id="@+id/regAgeSpinner"
-                            android:layout_width="150dp"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/regPasswordInput"
+                            android:layout_width="320dp"
                             android:layout_height="50dp"
-                            android:layout_marginRight="30dp"
-                            android:backgroundTint="@android:color/darker_gray"
-                            android:spinnerMode="dropdown"
+                            android:layout_gravity="center"
+                            android:background="@color/white"
+                            android:singleLine="true"
+                            android:textColor="@color/text_grey"
                             android:textSize="12sp" />
+
                     </FrameLayout>
-
                 </FrameLayout>
-            </FrameLayout>
 
-            <!--ADDRESS FRAME-->
+                <!--BIRTHDATE FRAME-->
+                <FrameLayout
+                    android:layout_width="210dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="258dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="430dp">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="80dp"
+                            android:text="birthdate"
+                            android:textColor="@color/text_grey"
+                            android:textSize="16sp" />
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginLeft="15dp">
+
+                            <EditText
+                                android:id="@+id/editDateText"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:clickable="false"
+                                android:cursorVisible="false"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:hint="MM/DD/YYYY"
+                                android:textColor="@color/text_grey"
+                                android:textColorHint="@android:color/darker_gray" />
+                        </FrameLayout>
+                    </FrameLayout>
+                </FrameLayout>
+
+                <!--AGE FRAME-->
+                <FrameLayout
+                    android:layout_width="220dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="258dp"
+                    android:layout_marginLeft="200dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+
+                        <!--age header-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="65dp"
+                            android:text="age"
+                            android:textColor="@color/text_grey"
+                            android:textSize="16sp" />
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="25dp">
+
+                            <!--age field-->
+                            <Spinner
+                                android:id="@+id/regAgeSpinner"
+                                android:layout_width="150dp"
+                                android:layout_height="50dp"
+                                android:layout_marginRight="30dp"
+                                android:backgroundTint="@android:color/darker_gray"
+                                android:spinnerMode="dropdown"
+                                android:textSize="12sp" />
+                        </FrameLayout>
+
+                    </FrameLayout>
+                </FrameLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="80dp"
+                    android:layout_marginTop="348dp">
 
-                    <!--user type select header-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="125dp"
-                        android:layout_marginTop="15dp"
-                        android:text="I want to: "
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_grey" />
+                        android:layout_marginLeft="80dp"
+                        android:text="address"
+                        android:textColor="@color/text_grey"
+                        android:textSize="16sp" />
 
                     <FrameLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <RadioGroup
-                            android:id="@+id/userTypeButtonGroup"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="25dp">
 
-                            <RadioButton
-                                android:id="@+id/regLearnerRadioButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="25dp"
-                                android:layout_marginLeft="210dp"
-                                android:buttonTint="@color/blue"
-                                android:text="Learn"
-                                android:textSize="12sp" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/regAddressInput"
+                            android:layout_width="320dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@color/white"
+                            android:singleLine="true"
+                            android:textColor="@color/text_grey"
+                            android:textSize="12sp" />
 
-                            <RadioButton
-                                android:id="@+id/regTutorRadioButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="25dp"
-                                android:layout_marginLeft="210dp"
-                                android:buttonTint="@color/blue"
-                                android:text="Tutor"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
                     </FrameLayout>
                 </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="490dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text="address"
-                    android:textColor="@color/text_grey"
-                    android:textSize="16sp" />
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="25dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="438dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/regAddressInput"
-                        android:layout_width="320dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:background="@color/white"
-                        android:singleLine="true"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:text="parent's/guardian's name"
                         android:textColor="@color/text_grey"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
 
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="25dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/regGuardianNameInput"
+                            android:layout_width="320dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@color/white"
+                            android:singleLine="true"
+                            android:textColor="@color/text_grey"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:layout_marginTop="527dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:text="parent's/guardian's email"
+                        android:textColor="@color/text_grey"
+                        android:textSize="16sp" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="25dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/regGuardianEmailInput"
+                            android:layout_width="320dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@color/white"
+                            android:singleLine="true"
+                            android:textColor="@color/text_grey"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
                 </FrameLayout>
             </FrameLayout>
 
@@ -315,7 +331,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="580dp">
+                android:layout_marginTop="695dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -339,63 +355,76 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="28dp">
+                        android:layout_marginTop="26dp">
 
-                        <Spinner
-                            android:id="@+id/regTopicSpinner1"
-                            android:layout_width="270dp"
+                        <FrameLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="72dp"
-                            android:backgroundTint="@android:color/darker_gray"
-                            android:spinnerMode="dropdown"
-                            android:textSize="12sp" />
+                            android:layout_gravity="center_horizontal">
 
-                        <Spinner
-                            android:id="@+id/regTopicSpinner2"
-                            android:layout_width="270dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="72dp"
-                            android:layout_marginTop="30dp"
-                            android:backgroundTint="@android:color/darker_gray"
-                            android:spinnerMode="dropdown"
-                            android:textSize="12sp" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal">
 
-                        <Spinner
-                            android:id="@+id/regTopicSpinner3"
-                            android:layout_width="270dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="72dp"
-                            android:layout_marginTop="61dp"
-                            android:backgroundTint="@android:color/darker_gray"
-                            android:spinnerMode="dropdown"
-                            android:textSize="12sp" />
+                                <Button
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:text="TOPIC 1"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="10sp"
+                                    android:backgroundTint="@color/white"/>
 
-                        <Spinner
-                            android:id="@+id/regTopicSpinner4"
-                            android:layout_width="270dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="72dp"
-                            android:layout_marginTop="91dp"
-                            android:backgroundTint="@android:color/darker_gray"
-                            android:spinnerMode="dropdown"
-                            android:textSize="12sp" />
+                                <Button
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="TOPIC 2"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="10sp"
+                                    android:backgroundTint="@color/white"/>
 
-                        <Spinner
-                            android:id="@+id/regTopicSpinner5"
-                            android:layout_width="270dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="72dp"
-                            android:layout_marginTop="122dp"
-                            android:backgroundTint="@android:color/darker_gray"
-                            android:spinnerMode="dropdown"
-                            android:textSize="12sp" />
+                                <Button
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="TOPIC 3"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="10sp"
+                                    android:backgroundTint="@color/white"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="45dp">
+
+                                <EditText
+                                    android:id="@+id/editTagText"
+                                    android:layout_width="220dp"
+                                    android:layout_height="wrap_content"
+                                    android:hint="enter tag"
+                                    android:textColor="@color/text_grey"
+                                    android:textColorHint="@android:color/darker_gray"
+                                    android:inputType="text"/>
+
+                                <Button
+                                    android:id="@+id/addTagButton"
+                                    android:layout_width="65dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:backgroundTint="@android:color/darker_gray"
+                                    android:text="+" />
+                            </LinearLayout>
+                        </FrameLayout>
+
                     </FrameLayout>
                 </FrameLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="190dp">
+                    android:layout_marginTop="125dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -438,7 +467,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="273dp">
+                    android:layout_marginTop="210dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -458,7 +487,7 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="22dp">
+                        android:layout_marginTop="25dp">
 
                         <Button
                             android:id="@+id/regSelfieButton"
@@ -481,7 +510,7 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="360dp"
+                    android:layout_marginTop="300dp"
                     android:layout_marginBottom="10dp"
                     android:layout_gravity="center_horizontal">
                     <Button

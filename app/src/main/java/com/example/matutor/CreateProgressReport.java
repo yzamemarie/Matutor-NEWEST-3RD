@@ -11,17 +11,17 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class CreateSessionNote extends AppCompatActivity {
+public class CreateProgressReport extends AppCompatActivity {
 
-    Button close, post;
+    Button close, send;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_create_session_note);
+        setContentView(R.layout.activity_create_progress_report);
 
         close = findViewById(R.id.closeButton);
-        post = findViewById(R.id. postButton);
+        send = findViewById(R.id.sendReportButton);
 
         //close review page
         close.setOnClickListener(new View.OnClickListener() {
@@ -31,10 +31,10 @@ public class CreateSessionNote extends AppCompatActivity {
             }
         });
 
-        post.setOnClickListener(new View.OnClickListener() {
+        send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Post-session note sent!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Progress report sent!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), ReviewLearner.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

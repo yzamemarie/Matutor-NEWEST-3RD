@@ -25,11 +25,11 @@ import java.util.List;
 
 public class RegisterNew extends AppCompatActivity {
 
-    Button register, returnLogin, selectIdImage, selectSelfieImage;
-    Spinner ageSpinner, topic1Spinner, topic2Spinner, topic3Spinner, topic4Spinner, topic5Spinner;
-    EditText editDate; //selectIdPath, selectSelfiePath;
-    TextInputEditText regFullname, regEmail, regPassword, regBdate, regAddress;
-    String fullname, email, password, bdate, address;
+    Button register, returnLogin, addTag, selectIdImage, selectSelfieImage;
+    Spinner ageSpinner;
+    EditText editDate, editTag;
+    TextInputEditText regFullname, regEmail, regPassword, regAddress, regGuardianName, regGuardianEmail;
+    String fullname, email, password, bdate, address, guardianName, guardianEmail;
     //Uri imageUri;
     private static final int PICK_IMAGE = 100;
     @Override
@@ -40,21 +40,17 @@ public class RegisterNew extends AppCompatActivity {
 
         register = findViewById(R.id.registerButton);
         returnLogin = findViewById(R.id.loginHereButton);
+        selectIdImage = findViewById(R.id.regIdButton);
+        selectSelfieImage = findViewById(R.id.regSelfieButton);
+        addTag = findViewById(R.id.addTagButton);
         ageSpinner = findViewById(R.id.regAgeSpinner);
         editDate = findViewById(R.id.editDateText);
-        selectIdImage = findViewById(R.id.regIdButton);
-        //selectIdPath = findViewById(R.id.idPathTextView);
-        selectSelfieImage = findViewById(R.id.regSelfieButton);
-        //selectSelfiePath = findViewById(R.id.selfiePathTextView);
-        topic1Spinner = findViewById(R.id.regTopicSpinner1);
-        topic2Spinner = findViewById(R.id.regTopicSpinner2);
-        topic3Spinner = findViewById(R.id.regTopicSpinner3);
-        topic4Spinner = findViewById(R.id.regTopicSpinner4);
-        topic5Spinner = findViewById(R.id.regTopicSpinner5);
+        editTag = findViewById(R.id.editTagText);
+
 
         // Populate the Spinner using a loop
         List<String> items = new ArrayList<>();
-        for (int i = 12; i <= 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             items.add(String.valueOf(i));
         }
 
@@ -69,47 +65,24 @@ public class RegisterNew extends AppCompatActivity {
             }
         });
 
-        // Populate the Spinner for topic 1
-        String[] t1 = {"SELECT TOPIC 1"};
-        ArrayAdapter<String> a1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t1);
-        a1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic1Spinner.setAdapter(a1);
-
-        // Populate the Spinner for topic 2
-        String[] t2 = {"SELECT TOPIC 2"};
-        ArrayAdapter<String> a2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t2);
-        a2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic2Spinner.setAdapter(a2);
-
-        // Populate the Spinner for topic 3
-        String[] t3 = {"SELECT TOPIC 3"};
-        ArrayAdapter<String> a3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t3);
-        a3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic3Spinner.setAdapter(a3);
-
-        // Populate the Spinner for topic 4
-        String[] t4 = {"SELECT TOPIC 4"};
-        ArrayAdapter<String> a4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t4);
-        a4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic4Spinner.setAdapter(a4);
-
-        // Populate the Spinner for topic 5
-        String[] t5 = {"SELECT TOPIC 5"};
-        ArrayAdapter<String> a5 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, t5);
-        a5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        topic5Spinner.setAdapter(a5);
+        addTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Topic added.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         selectIdImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Select ID image!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Select ID image.", Toast.LENGTH_SHORT).show();
             }
         });
 
         selectSelfieImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Select selfie image!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Select selfie image.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -123,6 +96,8 @@ public class RegisterNew extends AppCompatActivity {
                regPassword = findViewById(R.id.regPasswordInput);
                editDate = findViewById(R.id.editDateText);
                regAddress = findViewById(R.id.regAddressInput);
+               regGuardianName = findViewById(R.id.regGuardianNameInput);
+               regGuardianEmail = findViewById(R.id.regGuardianEmailInput);
 
                //get text from text fields
                fullname = regFullname.getText().toString().trim();
@@ -130,18 +105,24 @@ public class RegisterNew extends AppCompatActivity {
                password = regPassword.getText().toString().trim();
                bdate = editDate.getText().toString().trim();
                address = regAddress.getText().toString().trim();
+               guardianName = regGuardianName.getText().toString().trim();
+               guardianEmail = regGuardianEmail.getText().toString().trim();
 
                //checks if text fields are empty and displays toast prompt if true
                if (fullname.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "Enter full name", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Enter full name.", Toast.LENGTH_SHORT).show();
                } else if (email.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "Enter email", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Enter email.", Toast.LENGTH_SHORT).show();
                } else if (password.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "Enter password", Toast.LENGTH_SHORT).show();
-               }else if (bdate.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "Enter birthdate", Toast.LENGTH_SHORT).show();
-               }else if (address.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "Enter address", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Enter password.", Toast.LENGTH_SHORT).show();
+               } else if (bdate.isEmpty()) {
+                   Toast.makeText(getApplicationContext(), "Enter birthdate.", Toast.LENGTH_SHORT).show();
+               } else if (address.isEmpty()) {
+                   Toast.makeText(getApplicationContext(), "Enter address.", Toast.LENGTH_SHORT).show();
+               } else if (guardianName.isEmpty()) {
+                   Toast.makeText(getApplicationContext(), "Enter parent's or guardian's name.", Toast.LENGTH_SHORT).show();
+               } else if (guardianEmail.isEmpty()) {
+                   Toast.makeText(getApplicationContext(), "Enter parent's or guardian's email.", Toast.LENGTH_SHORT).show();
                } else {
                    //if all text field is not empty, proceed to dashboard
                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();

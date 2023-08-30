@@ -57,7 +57,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="40dp"
-                                android:text="POST-SESSION NOTES"
+                                android:text="PROGRESS REPORT"
                                 android:textColor="@color/blue"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -82,7 +82,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="note title"
+                                    android:text="progress report on"
                                     android:textColor="@color/text_grey"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
@@ -91,17 +91,15 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:layout_marginTop="25dp">
+                                    android:layout_marginTop="26dp">
 
-                                    <com.google.android.material.textfield.TextInputEditText
-                                        android:id="@+id/postTitleInput"
-                                        android:layout_width="300dp"
-                                        android:layout_height="50dp"
-                                        android:layout_gravity="center"
-                                        android:background="@color/white"
-                                        android:singleLine="true"
-                                        android:textColor="@color/white"
-                                        android:textSize="14sp" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Zapzaf Batumbakal"
+                                        android:textColor="@color/text_grey"
+                                        android:textSize="24sp"
+                                        android:textStyle="italic"/>
                                 </FrameLayout>
 
                             </FrameLayout>
@@ -110,12 +108,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="90dp">
+                                android:layout_marginTop="70dp">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="note description"
+                                    android:text="report content"
                                     android:textColor="@color/text_grey"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
@@ -129,7 +127,7 @@
                                     <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/postDescInput"
                                         android:layout_width="300dp"
-                                        android:layout_height="250dp"
+                                        android:layout_height="300dp"
                                         android:layout_gravity="center"
                                         android:background="@color/white"
                                         android:textColor="@color/white"
@@ -141,13 +139,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="375dp">
+                                android:layout_marginTop="410dp">
                                 <Button
-                                    android:id="@+id/postButton"
+                                    android:id="@+id/sendReportButton"
                                     android:layout_width="wrap_content"
                                     android:layout_height="50dp"
                                     android:backgroundTint="@color/blue"
-                                    android:text="post"
+                                    android:text="send report"
                                     android:textColor="@color/white"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />

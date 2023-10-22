@@ -44,7 +44,7 @@ public class Bookings extends AppCompatActivity {
         viewBookingsHistory = findViewById(R.id.viewHistoryFab);
         viewReviewsHistory = findViewById(R.id.viewReviewsFab);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.profile);
+        bottomNavigationView.setSelectedItemId(R.id.booking);
 
         viewProfile.setVisibility(View.GONE);
         viewProgressReport.setVisibility(View.GONE);

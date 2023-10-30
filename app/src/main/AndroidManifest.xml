@@ -50,9 +50,10 @@
         <activity
             android:name=".BookingsHistoryTutor"
             android:exported="false" />
+        <!--
         <activity
             android:name=".activity_main"
-            android:exported="false" />
+            android:exported="false" /> -->
         <activity
             android:name=".BookingsHistory"
             android:exported="false" />
@@ -143,7 +144,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

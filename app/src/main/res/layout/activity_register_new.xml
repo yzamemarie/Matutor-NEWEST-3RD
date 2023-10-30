@@ -59,7 +59,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="80dp"
+                            android:layout_marginLeft="70dp"
                             android:text="full name"
                             android:textColor="@color/text_grey"
                             android:textSize="16sp" />
@@ -78,7 +78,7 @@
                                 android:background="@color/white"
                                 android:singleLine="true"
                                 android:textColor="@color/text_grey"
-                                android:textSize="12sp" />
+                                android:textSize="18sp" />
                         </FrameLayout>
 
                     </FrameLayout>
@@ -92,7 +92,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="80dp"
+                        android:layout_marginLeft="70dp"
                         android:text="email"
                         android:textColor="@color/text_grey"
                         android:textSize="16sp" />
@@ -111,7 +111,7 @@
                             android:background="@color/white"
                             android:singleLine="true"
                             android:textColor="@color/text_grey"
-                            android:textSize="12sp" />
+                            android:textSize="18sp" />
 
                     </FrameLayout>
                 </FrameLayout>
@@ -125,35 +125,79 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="80dp"
+                        android:layout_marginLeft="70dp"
                         android:text="password"
                         android:textColor="@color/text_grey"
                         android:textSize="16sp" />
 
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="25dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="30dp"
+                        android:textColorHint="@android:color/darker_gray"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:passwordToggleEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/regPasswordInput"
                             android:layout_width="320dp"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:background="@color/white"
-                            android:singleLine="true"
-                            android:textColor="@color/text_grey"
-                            android:textSize="12sp" />
+                            android:background="#FFFF"
+                            android:drawablePadding="8dp"
+                            android:inputType="textPassword"
+                            android:singleLine="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    </FrameLayout>
                 </FrameLayout>
+
+                <!--CONFIRM PASSWORD-->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="255dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="70dp"
+                        android:text="confirm password"
+                        android:textColor="@color/text_grey"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="30dp"
+                        android:textColorHint="@android:color/darker_gray"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/regConfirmPasswordInput"
+                            android:layout_width="320dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="#FFFF"
+                            android:drawablePadding="8dp"
+                            android:inputType="textPassword"
+                            android:singleLine="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </FrameLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="425dp">
 
                 <!--BIRTHDATE FRAME-->
                 <FrameLayout
-                    android:layout_width="210dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="80dp"
-                    android:layout_marginTop="258dp">
+                    android:layout_marginLeft="45dp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -162,40 +206,32 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="80dp"
+                            android:layout_marginLeft="30dp"
                             android:text="birthdate"
                             android:textColor="@color/text_grey"
                             android:textSize="16sp" />
 
-                        <FrameLayout
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/regEditDate"
+                            android:layout_width="170dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginLeft="15dp">
+                            android:layout_marginTop="30dp"
+                            android:clickable="false"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="MM/DD/YYYY"
+                            android:textColor="@color/text_grey"
+                            android:textColorHint="@android:color/darker_gray" />
 
-                            <EditText
-                                android:id="@+id/editDateText"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="30dp"
-                                android:clickable="false"
-                                android:cursorVisible="false"
-                                android:focusable="false"
-                                android:focusableInTouchMode="false"
-                                android:hint="MM/DD/YYYY"
-                                android:textColor="@color/text_grey"
-                                android:textColorHint="@android:color/darker_gray" />
-                        </FrameLayout>
                     </FrameLayout>
                 </FrameLayout>
 
                 <!--AGE FRAME-->
                 <FrameLayout
-                    android:layout_width="220dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="80dp"
-                    android:layout_marginTop="258dp"
-                    android:layout_marginLeft="200dp">
+                    android:layout_marginLeft="220dp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -210,22 +246,14 @@
                             android:textColor="@color/text_grey"
                             android:textSize="16sp" />
 
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="25dp">
-
-                            <!--age field-->
-                            <Spinner
-                                android:id="@+id/regAgeSpinner"
-                                android:layout_width="150dp"
-                                android:layout_height="50dp"
-                                android:layout_marginRight="30dp"
-                                android:backgroundTint="@android:color/darker_gray"
-                                android:spinnerMode="dropdown"
-                                android:textSize="12sp" />
-                        </FrameLayout>
+                        <Spinner
+                            android:id="@+id/regAgeSpinner"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="30dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:spinnerMode="dropdown"
+                            android:textSize="12sp" />
 
                     </FrameLayout>
                 </FrameLayout>
@@ -233,7 +261,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_marginTop="348dp">
+                    android:layout_marginTop="90dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -257,7 +285,7 @@
                             android:background="@color/white"
                             android:singleLine="true"
                             android:textColor="@color/text_grey"
-                            android:textSize="12sp" />
+                            android:textSize="18sp" />
 
                     </FrameLayout>
                 </FrameLayout>
@@ -265,7 +293,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_marginTop="438dp">
+                    android:layout_marginTop="180dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -289,7 +317,7 @@
                             android:background="@color/white"
                             android:singleLine="true"
                             android:textColor="@color/text_grey"
-                            android:textSize="12sp" />
+                            android:textSize="18sp" />
 
                     </FrameLayout>
                 </FrameLayout>
@@ -297,7 +325,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="78dp"
-                    android:layout_marginTop="527dp">
+                    android:layout_marginTop="270dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -321,17 +349,18 @@
                             android:background="@color/white"
                             android:singleLine="true"
                             android:textColor="@color/text_grey"
-                            android:textSize="12sp" />
+                            android:textSize="18sp" />
 
                     </FrameLayout>
                 </FrameLayout>
+
             </FrameLayout>
 
             <!--interest onward-->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="695dp">
+                android:layout_marginTop="782dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -455,7 +484,7 @@
                             android:text="+" />
                         <EditText
                             android:id="@+id/idPathTextView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="240dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="120dp"
                             android:text="choose file..."
@@ -498,7 +527,7 @@
                             android:text="+" />
                         <EditText
                             android:id="@+id/selfiePathTextView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="240dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="120dp"
                             android:text="choose file..."

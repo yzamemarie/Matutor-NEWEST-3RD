@@ -10,6 +10,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.matutor.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
 
     private static int SPLASH_SCREEN = 2500; //milliseconds
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Animations
         anim = AnimationUtils.loadAnimation(this, R.anim.slide_top);
-
 
         // Hooks
         logo = findViewById(R.id.matutor_logo);

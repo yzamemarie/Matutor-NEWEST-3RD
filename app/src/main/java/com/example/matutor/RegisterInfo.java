@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.example.matutor.databinding.ActivityRegisterNewBinding;
+import com.example.matutor.databinding.ActivityRegisterInfoBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,20 +29,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RegisterNew extends AppCompatActivity {
+public class RegisterInfo extends AppCompatActivity {
 
-    ActivityRegisterNewBinding binding;
-    FirebaseAuth auth;
-    FirebaseFirestore fire;
+    ActivityRegisterInfoBinding binding;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseFirestore fire = FirebaseFirestore.getInstance();
 
     private static final int PICK_IMAGE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        binding = ActivityRegisterNewBinding.inflate(getLayoutInflater());
+        binding = ActivityRegisterInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Get text from Intent
+        Intent intent = getIntent();
+        String getEmail = intent.getStringExtra("Email");
+        String getPassword = intent.getStringExtra("Password");
+        String getConfirm = intent.getStringExtra("Confirm Password");
+
+        //Set Text
+        binding.regEmailInput.setText(getEmail);
+        binding.regPasswordInput.setText(getPassword);
+        binding.regConfirmPasswordInput.setText(getConfirm);
 
         // Populate the Spinner using a loop
         List<String> items = new ArrayList<>();
@@ -87,7 +97,8 @@ public class RegisterNew extends AppCompatActivity {
            @Override
            public void onClick(View view) {
                //get text from text fields
-               String learnerFullName = binding.regFullnameInput.getText().toString().trim();
+               String learnerFirstname = binding.regFirstnameInput.getText().toString().trim();
+               String learnerLastname = binding.regLastnameInput.getText().toString().trim();
                String learnerEmail = binding.regEmailInput.getText().toString().trim();
                String learnerPassword = binding.regPasswordInput.getText().toString().trim();
                String confirmPass = binding.regConfirmPasswordInput.getText().toString().trim();
@@ -97,8 +108,10 @@ public class RegisterNew extends AppCompatActivity {
                String learnerGuardianEmail = binding.regGuardianEmailInput.getText().toString().trim();
 
                //checks if text fields are empty and displays toast prompt if true
-               if (learnerFullName.isEmpty()) {
-                   Toast.makeText(getApplicationContext(), "Please enter your full name.", Toast.LENGTH_SHORT).show();
+               if (learnerFirstname.isEmpty()) {
+                   Toast.makeText(getApplicationContext(), "Please enter your first name.", Toast.LENGTH_SHORT).show();
+               } else if (learnerLastname.isEmpty()) {
+                   Toast.makeText(getApplicationContext(), "Please enter your last name.", Toast.LENGTH_SHORT).show();
                } else if (learnerEmail.isEmpty()) {
                    Toast.makeText(getApplicationContext(), "Please enter your email.", Toast.LENGTH_SHORT).show();
                } else if (learnerPassword.isEmpty()) {
@@ -113,7 +126,7 @@ public class RegisterNew extends AppCompatActivity {
                    Toast.makeText(getApplicationContext(), "Please enter your parent's or guardian's name.", Toast.LENGTH_SHORT).show();
                } else if (learnerGuardianEmail.isEmpty()) {
                    Toast.makeText(getApplicationContext(), "Please enter your parent's or guardian's email.", Toast.LENGTH_SHORT).show();
-               } else if (confirmPass != learnerPassword) {
+               } else if (!confirmPass.equals(learnerPassword)) {
                    Toast.makeText(getApplicationContext(), "Passwords do not match. Please enter again.", Toast.LENGTH_SHORT).show();
                } else {
                    auth.createUserWithEmailAndPassword(learnerEmail, learnerPassword)
@@ -127,7 +140,8 @@ public class RegisterNew extends AppCompatActivity {
 
                                        //create user document in firestore
                                        Map<String, Object> learnerMap = new HashMap<>();
-                                       learnerMap.put("learnerFullName", learnerFullName);
+                                       learnerMap.put("learnerFirstame", learnerFirstname);
+                                       learnerMap.put("learnerLastname", learnerLastname);
                                        learnerMap.put("learnerEmail", learnerEmail);
                                        learnerMap.put("learnerPassword", learnerPassword);
                                        learnerMap.put("learnerBdate", learnerBdate);
@@ -137,25 +151,25 @@ public class RegisterNew extends AppCompatActivity {
 
                                        //checks if uid is not empty
                                        if (uid != null) {
-                                           fire.collection("matutorLearners")
+                                           fire.collection("userLearner")
                                                    .document(uid)
                                                    .set(learnerMap)
                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                        @Override
                                                        public void onSuccess(Void unused) {
-                                                           Toast.makeText(RegisterNew.this, "Learner has successfully registered!", Toast.LENGTH_SHORT).show();
+                                                           Toast.makeText(RegisterInfo.this, "Learner has successfully registered!", Toast.LENGTH_SHORT).show();
                                                            clearAll();
                                                        }
                                                    })
                                                    .addOnFailureListener(new OnFailureListener() {
                                                        @Override
                                                        public void onFailure(@NonNull Exception e) {
-                                                           Toast.makeText(RegisterNew.this, "Registration failed! Please recheck your information.", Toast.LENGTH_SHORT).show();
+                                                           Toast.makeText(RegisterInfo.this, "Registration failed! Please recheck your information.", Toast.LENGTH_SHORT).show();
                                                        }
                                                    });
                                            }
                                    } else {
-                                       Toast.makeText(RegisterNew.this, "Registration failed! Please recheck your information.", Toast.LENGTH_SHORT).show();
+                                       Toast.makeText(RegisterInfo.this, "Registration failed! Please recheck your information.", Toast.LENGTH_SHORT).show();
                                    }
                                }
                            });
@@ -183,12 +197,11 @@ public class RegisterNew extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Cancel");
-        builder.setMessage("Cancel registration?");
+        builder.setMessage("Go back?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getApplicationContext(), Login.class));
+                startActivity(new Intent(getApplicationContext(), RegisterEmailPass.class));
                 overridePendingTransition(0, 0);
                 finishAffinity();
                 System.exit(0);
@@ -204,7 +217,8 @@ public class RegisterNew extends AppCompatActivity {
     }
 
     private void clearAll() {
-        binding.regFullnameInput.getText().clear();
+        binding.regFirstnameInput.getText().clear();
+        binding.regLastnameInput.getText().clear();
         binding.regEmailInput.getText().clear();
         binding.regPasswordInput.getText().clear();
         binding.regConfirmPasswordInput.getText().clear();

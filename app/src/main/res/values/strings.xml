@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Matutor</string>
+    <string name="drawer_open">Opens Drawer</string>
+    <string name="drawer_close">Closes Drawer</string>
 </resources>

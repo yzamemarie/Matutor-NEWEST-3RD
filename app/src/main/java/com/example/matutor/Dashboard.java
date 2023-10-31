@@ -1,6 +1,7 @@
 package com.example.matutor;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,26 +12,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 
+import com.example.matutor.databinding.ActivityDashboardBinding;
+import com.example.matutor.databinding.ActivityLoginBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
 
-public class Dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button tutorSwitch, seeMore1, seeMore2;
-    BottomNavigationView bottomNavigationView;
+    ActivityDashboardBinding binding;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_dashboard);
+        binding = ActivityDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        tutorSwitch = findViewById(R.id.switchButton);
-        seeMore1 = findViewById(R.id.seeMoreButtonDash1);
-        seeMore2 = findViewById(R.id.seeMoreButtonDash2);
-        bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.dashboard);
+        binding.bottomNavigator.setSelectedItemId(R.id.dashboard);
 
+        /*
         //switch profile type
         tutorSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,9 +46,18 @@ public class Dashboard extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                 finish();
             }
-        });
+        }); */
 
-        seeMore1.setOnClickListener(new View.OnClickListener() {
+        //FOR DRAWER SIDE MENU
+        setSupportActionBar(binding.toolbar);
+        //NAV MENU
+        binding.navView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.drawer_open, R.string.drawer_close);
+        binding.drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        binding.navView.setNavigationItemSelectedListener(this);
+
+        binding.seeMoreButtonDash1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TutorProfilePreview3.class);
@@ -52,7 +67,7 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        seeMore2.setOnClickListener(new View.OnClickListener() {
+        binding.seeMoreButtonDash2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TutorProfilePreview2.class);
@@ -62,7 +77,8 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        binding.bottomNavigator.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
@@ -80,8 +96,8 @@ public class Dashboard extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     return true;
                 }
-                else if (itemId == R.id.profile) {
-                    startActivity(new Intent(getApplicationContext(), Profile.class));
+                else if (itemId == R.id.create) {
+                    startActivity(new Intent(getApplicationContext(), CreatePosting.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }
@@ -94,11 +110,74 @@ public class Dashboard extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.side_dashboard) {
+            return true;
+        }
+        else if (itemId == R.id.side_profile) {
+            startActivity(new Intent(getApplicationContext(), Profile.class));
+            return true;
+        }
+        else if (itemId == R.id.side_progReports) {
+            //startActivity(new Intent(getApplicationContext(), Content.class));
+            //overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (itemId == R.id.side_yourPostings) {
+            startActivity(new Intent(getApplicationContext(), CreatePosting.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourBookings) {
+            startActivity(new Intent(getApplicationContext(), Bookings.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourReviews) {
+            startActivity(new Intent(getApplicationContext(), ReviewsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourHistory) {
+            startActivity(new Intent(getApplicationContext(), BookingsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_help) {
+            //create help smth
+            return true;
+        }
+        else if (itemId == R.id.side_logout) {
+            logoutConfirmation();
+            return true;
+        }
+        return false;
+    }
+
+    private void logoutConfirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout Session");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            auth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+        builder.setNegativeButton("No", null);
+        builder.show();
+    }
 
     //Exit Message Prompt Validation
     @Override
     public void onBackPressed() {
-        showExitConfirmation();
+        //to avoid closing the application on back press
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            showExitConfirmation();
+        }
+
     }
 
     private void showExitConfirmation() {
@@ -122,4 +201,5 @@ public class Dashboard extends AppCompatActivity {
         });
         builder.show();
     }
+
 }

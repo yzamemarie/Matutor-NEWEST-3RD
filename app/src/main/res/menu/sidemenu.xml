@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/side_dashboard"
+        android:title="Dashboard"
+        android:icon="@drawable/home"/>
+
+    <item android:title="User">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                android:id="@+id/side_profile"
+                android:title="Profile"
+                android:icon="@drawable/user"/>
+                <item
+                    android:id="@+id/side_progReports"
+                    android:title="Progress Reports"
+                    android:icon="@drawable/progress_report_icon"/>
+            </group>
+        </menu>
+    </item>
+
+
+    <item android:title="Activities">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/side_yourPostings"
+                    android:title="Your Postings"
+                    android:icon="@drawable/fab_view_created_btn"/>
+
+                <item
+                    android:id="@+id/side_yourBookings"
+                    android:title="Your Bookings"
+                    android:icon="@drawable/fab_view_bookings_btn"/>
+
+                <item
+                    android:id="@+id/side_yourReviews"
+                    android:title="Your Reviews"
+                    android:icon="@drawable/fab_review_history_btn"/>
+
+                <item
+                    android:id="@+id/side_yourHistory"
+                    android:title="Your History"
+                    android:icon="@drawable/fab_view_history_btn"/>
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Others">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/side_logout"
+                    android:title="Logout"/>
+                <item
+                    android:id="@+id/side_help"
+                    android:title="Help"/>
+            </group>
+        </menu>
+    </item>
+
+</menu>

@@ -13,6 +13,11 @@
         android:icon="@drawable/booking"/>
 
     <item
+        android:id="@+id/create"
+        android:title="Posting"
+        android:icon="@drawable/create"/>
+
+    <item
         android:id="@+id/content"
         android:title="Content"
         android:icon="@drawable/video"/>
@@ -22,9 +27,10 @@
         android:title="Notification"
         android:icon="@drawable/notif"/>
 
+    <!--
     <item
-        android:id="@+id/more"
-        android:title="More"
-        android:icon="@drawable/more_icon"/>
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/user"/> -->
 
 </menu>

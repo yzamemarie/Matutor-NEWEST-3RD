@@ -1,7 +1,10 @@
 package com.example.matutor;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,29 +13,34 @@ import android.text.style.ClickableSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
 
+import com.example.matutor.databinding.ActivityNotificationBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class Notification extends AppCompatActivity {
+public class Notification extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button tutorSwitch, viewTutorProfile;
-    TextView viewPostLink;
-    BottomNavigationView bottomNavigationView;
+    ActivityNotificationBinding binding;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_notification);
+        binding = ActivityNotificationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        //Bottom Navigation Code
-        tutorSwitch = findViewById(R.id.switchButton);
-        viewTutorProfile = findViewById(R.id.viewTutorProfileButton);
-        viewPostLink = findViewById(R.id.viewPostTextLink);
-        bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.notif);
+        binding.bottomNavigator.setSelectedItemId(R.id.notif);
+
+        //FOR DRAWER SIDE MENU
+        setSupportActionBar(binding.toolbar);
+        //NAV MENU
+        binding.navView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.drawer_open, R.string.drawer_close);
+        binding.drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        binding.navView.setNavigationItemSelectedListener(this);
 
         // Create a ClickableSpan to handle the link click
         ClickableSpan clickableSpan = new ClickableSpan() {
@@ -46,15 +54,14 @@ public class Notification extends AppCompatActivity {
         };
 
         // Set the ClickableSpan to the TextView's text
-        SpannableString spannableString = new SpannableString(viewPostLink.getText());
-        spannableString.setSpan(clickableSpan, 0, viewPostLink.length(), 0);
+        SpannableString spannableString = new SpannableString(binding.viewPostTextLink.getText());
+        spannableString.setSpan(clickableSpan, 0, binding.viewPostTextLink.length(), 0);
 
         // Apply the modified SpannableString to the TextView
-        viewPostLink.setText(spannableString);
-        viewPostLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+        binding.viewPostTextLink.setText(spannableString);
+        binding.viewPostTextLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 
-        //switch profile type
-        tutorSwitch.setOnClickListener(new View.OnClickListener() {
+        binding.switchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), NotificationTutor.class);
@@ -64,7 +71,7 @@ public class Notification extends AppCompatActivity {
             }
         });
 
-        viewTutorProfile.setOnClickListener(new View.OnClickListener() {
+        binding.viewTutorProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TutorProfilePreview1.class);
@@ -74,7 +81,7 @@ public class Notification extends AppCompatActivity {
             }
         });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        binding.bottomNavigator.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
@@ -94,8 +101,8 @@ public class Notification extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     return true;
                 }
-                else if (itemId == R.id.profile) {
-                    startActivity(new Intent(getApplicationContext(), Profile.class));
+                else if (itemId == R.id.create) {
+                    startActivity(new Intent(getApplicationContext(), CreatePosting.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }
@@ -106,13 +113,76 @@ public class Notification extends AppCompatActivity {
             }
         });
     }
+    //sidemenu
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
 
+        if (itemId == R.id.side_dashboard) {
+            startActivity(new Intent(getApplicationContext(), Dashboard.class));
+            return true;
+        }
+        else if (itemId == R.id.side_profile) {
+            startActivity(new Intent(getApplicationContext(), Profile.class));
+            return true;
+        }
+        else if (itemId == R.id.side_progReports) {
+            startActivity(new Intent(getApplicationContext(), ViewProgressReportsLearner.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourPostings) {
+            startActivity(new Intent(getApplicationContext(), ViewCreatedPosts.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourBookings) {
+            startActivity(new Intent(getApplicationContext(), Bookings.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourReviews) {
+            startActivity(new Intent(getApplicationContext(), ReviewsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourHistory) {
+            startActivity(new Intent(getApplicationContext(), BookingsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_help) {
+            //create help smth
+            return true;
+        }
+        else if (itemId == R.id.side_logout) {
+            logoutConfirmation();
+            return true;
+        }
+        return false;
+    }
+
+    private void logoutConfirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout Session");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            auth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+        builder.setNegativeButton("No", null);
+        builder.show();
+    }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        finish();
+        //to avoid closing the application on back press
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            finish();
+        }
+
     }
 }
 

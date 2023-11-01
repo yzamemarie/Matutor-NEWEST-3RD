@@ -1,9 +1,11 @@
 package com.example.matutor;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.GravityCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,111 +16,38 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.matutor.databinding.ActivityDashboardBinding;
+import com.example.matutor.databinding.ActivityViewCreatedPostsBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class ViewCreatedPosts extends AppCompatActivity {
+public class ViewCreatedPosts extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button tutorSwitch, close;
-    SearchView searchBar;
-    ExtendedFloatingActionButton menuFabBtn;
-    FloatingActionButton viewAllPosts, createPost, viewCreatedPost, viewAllUsers;
-    Boolean allFabVisible; //checks for visibility of sub fabs
-    BottomNavigationView bottomNavigationView;
-
+    ActivityViewCreatedPostsBinding binding;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_view_created_posts);
+        binding = ActivityViewCreatedPostsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        //assignment
-        searchBar = findViewById(R.id.searchView);
-        tutorSwitch = findViewById(R.id.switchButton);
-        close = findViewById(R.id.closeButton);
-        menuFabBtn = findViewById(R.id.menuFab);
-        viewAllPosts = findViewById(R.id.viewAllFab);
-        createPost = findViewById(R.id.createPostFab);
-        viewCreatedPost = findViewById(R.id.viewCreatedPostFab);
-        viewAllUsers = findViewById(R.id.viewAllUsersFab);
-        bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.posting);
+        binding.bottomNavigator.setSelectedItemId(R.id.dashboard);
 
-        viewAllPosts.setVisibility(View.GONE);
-        createPost.setVisibility(View.GONE);
-        viewCreatedPost.setVisibility(View.GONE);
-        viewAllUsers.setVisibility(View.GONE);
-
-        //set boolean variable as false
-        allFabVisible = false;
-
-        //shrink extended fab + click listener
-        menuFabBtn.shrink();
-        menuFabBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!allFabVisible) {
-                    //extend extended fab and set sub fab as visible
-                    menuFabBtn.extend();
-                    viewAllPosts.show();
-                    createPost.show();
-                    viewCreatedPost.show();
-                    viewAllUsers.show();
-                    allFabVisible = true;
-
-                } else {
-                    //hid sub fabs
-                    menuFabBtn.shrink();
-                    viewAllPosts.hide();
-                    createPost.hide();
-                    viewCreatedPost.hide();
-                    viewAllUsers.hide();
-                    allFabVisible = false;
-                }
-            }
-        });
-
-        //sub fab click listeners
-        viewAllPosts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Posting.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        createPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreatePosting.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        viewCreatedPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        viewAllUsers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewAllTutors.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
+        //FOR DRAWER SIDE MENU
+        setSupportActionBar(binding.toolbar);
+        //NAV MENU
+        binding.navView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.drawer_open, R.string.drawer_close);
+        binding.drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        binding.navView.setNavigationItemSelectedListener(this);
 
         //switch user type
-        tutorSwitch.setOnClickListener(new View.OnClickListener() {
+        binding.switchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ViewCreatedPostsTutor.class);
@@ -128,33 +57,38 @@ public class ViewCreatedPosts extends AppCompatActivity {
             }
         });
 
-        //close/delete button
-        close.setOnClickListener(new View.OnClickListener() {
+        //remove button
+        binding.removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deleteConfirmation();
             }
         });
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        binding.bottomNavigator.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.posting) {
-                    return true;
-                } else if (itemId == R.id.dashboard) {
-                    startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                    startActivity(new Intent(getApplicationContext(), Posting.class));
                     overridePendingTransition(0, 0);
                     return true;
-                } else if (itemId == R.id.content) {
+                }
+                else if (itemId == R.id.dashboard) {
+                    return true;
+                }
+                else if (itemId == R.id.content) {
                     startActivity(new Intent(getApplicationContext(), Content.class));
                     overridePendingTransition(0, 0);
                     return true;
-                } else if (itemId == R.id.create) {
-                    startActivity(new Intent(getApplicationContext(), Profile.class));
+                }
+                else if (itemId == R.id.create) {
+                    startActivity(new Intent(getApplicationContext(), CreatePosting.class));
                     overridePendingTransition(0, 0);
                     return true;
-                } else if (itemId == R.id.notif) {
+                }
+                else if (itemId == R.id.notif) {
                     startActivity(new Intent(getApplicationContext(), Notification.class));
                     overridePendingTransition(0, 0);
                     return true;
@@ -166,7 +100,7 @@ public class ViewCreatedPosts extends AppCompatActivity {
 
     private void deleteConfirmation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("[?] Confirm");
+        builder.setTitle("Remove");
         builder.setMessage("Remove post?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
@@ -188,10 +122,71 @@ public class ViewCreatedPosts extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), Posting.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-        finish();
+        //to avoid closing the application on back press
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            finish();
+        }
+    }
+    //sidemenu
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.side_dashboard) {
+            startActivity(new Intent(getApplicationContext(), Dashboard.class));
+            return true;
+        }
+        else if (itemId == R.id.side_profile) {
+            startActivity(new Intent(getApplicationContext(), Profile.class));
+            return true;
+        }
+        else if (itemId == R.id.side_progReports) {
+            startActivity(new Intent(getApplicationContext(), ViewProgressReportsLearner.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourPostings) {
+            return true;
+        }
+        else if (itemId == R.id.side_yourBookings) {
+            startActivity(new Intent(getApplicationContext(), Bookings.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourReviews) {
+            startActivity(new Intent(getApplicationContext(), ReviewsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourHistory) {
+            startActivity(new Intent(getApplicationContext(), BookingsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_help) {
+            //create help smth
+            return true;
+        }
+        else if (itemId == R.id.side_logout) {
+            logoutConfirmation();
+            return true;
+        }
+        return false;
     }
 
+    private void logoutConfirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout Session");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            auth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+        builder.setNegativeButton("No", null);
+        builder.show();
+    }
 }

@@ -1,8 +1,11 @@
 package com.example.matutor;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,32 +25,37 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.example.matutor.databinding.ActivityContentBinding;
+import com.example.matutor.databinding.ActivityDashboardBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Content extends AppCompatActivity {
-    Button titleFilter, topicFilter, sourceFilter;
-    SearchView searchBar;
-    //RecyclerView recyclerView;
-    WebView videoWebView;
-    BottomNavigationView bottomNavigationView;
+public class Content extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    ActivityContentBinding binding;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_content);
+        binding = ActivityContentBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        titleFilter = findViewById(R.id.titleFilterButton);
-        topicFilter = findViewById(R.id.topicFilterButton);
-        sourceFilter = findViewById(R.id.sourceFilterButton);
-        videoWebView = findViewById(R.id.videoWebView);
-        searchBar = findViewById(R.id.searchView);
-        //recyclerView = findViewById(R.id.recyclerView);
-        bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.content);
+        binding.bottomNavigator.setSelectedItemId(R.id.content);
+
+        //FOR DRAWER SIDE MENU
+        setSupportActionBar(binding.toolbar);
+        //NAV MENU
+        binding.navView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.drawer_open, R.string.drawer_close);
+        binding.drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        binding.navView.setNavigationItemSelectedListener(this);
 
         //searchbar
 
@@ -55,35 +63,35 @@ public class Content extends AppCompatActivity {
         //width and height replaced as 100% to fit into webview dimensions
         String link = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/ffLLmV4mZwU\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
         //loads iframe int webview by calling loaddata function and passing mimetype and encoding
-        videoWebView.loadData(link, "text/html", "utf-8");
+        binding.videoWebView.loadData(link, "text/html", "utf-8");
         //enable javascript in webview to play video
-        videoWebView.getSettings().setJavaScriptEnabled(true);
+        binding.videoWebView.getSettings().setJavaScriptEnabled(true);
         //set webchromeclient to handle javascript events in app by webview
-        videoWebView.setWebChromeClient(new WebChromeClient());
+        binding.videoWebView.setWebChromeClient(new WebChromeClient());
 
         //filter buttons testing
-        titleFilter.setOnClickListener(new View.OnClickListener() {
+        binding.titleFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Search by content's title", Toast.LENGTH_SHORT).show();
             }
         });
 
-        topicFilter.setOnClickListener(new View.OnClickListener() {
+        binding.topicFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Search by content's topic", Toast.LENGTH_SHORT).show();
             }
         });
 
-        sourceFilter.setOnClickListener(new View.OnClickListener() {
+        binding.sourceFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Search by content's source", Toast.LENGTH_SHORT).show();
             }
         });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        binding.bottomNavigator.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
@@ -101,8 +109,8 @@ public class Content extends AppCompatActivity {
                 else if (itemId == R.id.content) {
                     return true;
                 }
-                else if (itemId == R.id.profile) {
-                    startActivity(new Intent(getApplicationContext(), Profile.class));
+                else if (itemId == R.id.create) {
+                    startActivity(new Intent(getApplicationContext(), CreatePosting.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }
@@ -118,9 +126,72 @@ public class Content extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        finish();
+        //to avoid closing the application on back press
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            finish();
+        }
+
+    }
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.side_dashboard) {
+            startActivity(new Intent(getApplicationContext(), Dashboard.class));
+            return true;
+        }
+        else if (itemId == R.id.side_profile) {
+            startActivity(new Intent(getApplicationContext(), Profile.class));
+            return true;
+        }
+        else if (itemId == R.id.side_progReports) {
+            startActivity(new Intent(getApplicationContext(), ViewProgressReportsLearner.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourPostings) {
+            startActivity(new Intent(getApplicationContext(), ViewCreatedPosts.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourBookings) {
+            startActivity(new Intent(getApplicationContext(), Bookings.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourReviews) {
+            startActivity(new Intent(getApplicationContext(), ReviewsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourHistory) {
+            startActivity(new Intent(getApplicationContext(), BookingsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_help) {
+            //create help smth
+            return true;
+        }
+        else if (itemId == R.id.side_logout) {
+            logoutConfirmation();
+            return true;
+        }
+        return false;
+    }
+
+    private void logoutConfirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout Session");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            auth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+        builder.setNegativeButton("No", null);
+        builder.show();
     }
 }

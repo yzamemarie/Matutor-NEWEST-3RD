@@ -1,560 +1,457 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
     tools:context=".Notification"
     android:background="@color/grey">
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/menuFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="85dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:backgroundTint="@color/blue"
-        app:icon="@drawable/fab_menu_btn"
-        app:iconTint="@color/yellow"
-        android:text="Menu"
-        android:textColor="@color/yellow"/>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="330dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/activity_sidebar"
+        app:menu="@menu/sidemenu"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/viewProfileFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="146dp"
-        android:layout_above="@id/menuFab"
-        android:layout_alignRight="@id/menuFab"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/blue"
-        android:src="@drawable/fab_view_user_profile_btn"
-        android:tint="@color/yellow"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/viewReportsFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="207dp"
-        android:layout_above="@id/menuFab"
-        android:layout_alignRight="@id/menuFab"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/blue"
-        android:src="@drawable/fab_progress_report"
-        android:tint="@color/yellow"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/viewReviewsFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="268dp"
-        android:layout_above="@id/menuFab"
-        android:layout_alignRight="@id/menuFab"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/blue"
-        android:src="@drawable/fab_review_history_btn"
-        android:tint="@color/yellow"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/viewBookingsFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="330dp"
-        android:layout_above="@id/menuFab"
-        android:layout_alignRight="@id/menuFab"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/blue"
-        android:src="@drawable/fab_view_bookings_btn"
-        android:tint="@color/yellow"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/viewHistoryFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="391dp"
-        android:layout_above="@id/menuFab"
-        android:layout_alignRight="@id/menuFab"
-        android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/blue"
-        android:src="@drawable/fab_view_history_btn"
-        android:tint="@color/yellow"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottom_navigator"
-        app:itemTextColor="@drawable/selector"
-        app:itemIconTint="@drawable/selector"
-        app:menu="@menu/menu"
-        app:labelVisibilityMode="unlabeled"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:background="@drawable/toolbar_gradient_bg"
-        android:elevation="4dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@color/white">
-
-        <RelativeLayout
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="18dp">
+            android:id="@+id/bottom_navigator"
+            app:itemTextColor="@drawable/selector"
+            app:itemIconTint="@drawable/selector"
+            app:menu="@menu/menu"
+            app:labelVisibilityMode="unlabeled"
+            android:layout_alignParentBottom="true"/>
 
-            <Button
-                android:id="@+id/switchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="110dp"
-                android:backgroundTint="@color/white"
-                android:text="SWITCH"
-                android:textStyle="bold"
-                android:textColor="@color/blue"
-                android:textSize="10sp" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:background="@drawable/toolbar_gradient_bg"
+            android:elevation="4dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@color/white">
 
-            <Button
-                android:id="@+id/logoutButton"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:layout_marginLeft="270dp"
-                android:backgroundTint="@color/red"
-                android:text="LOGOUT"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                android:textStyle="bold"  />
-
-            <ImageView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/user_pp"/>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/nameTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="115dp"
-                    android:gravity="center"
-                    android:text="Kyle Keiran Amadio"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"/>
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="113dp"
-                    android:layout_marginLeft="255dp"
-                    android:src="@drawable/lightbulb" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/typeTextView"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="138dp"
-                android:gravity="center"
-                android:text="LEARNER"
-                android:textSize="16sp"
-                android:textColor="@color/white"/>
-        </RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
+                android:layout_marginRight="18dp">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="195dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/aboutMeHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="about me"
-                    android:textSize="16sp"
+                <Button
+                    android:id="@+id/switchButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="110dp"
+                    android:backgroundTint="@color/white"
+                    android:text="SWITCH"
                     android:textStyle="bold"
-                    android:textColor="@color/text_grey"/>
+                    android:textColor="@color/blue"
+                    android:textSize="10sp" />
+
+                <ImageView
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/user_pp"/>
 
                 <FrameLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/nameTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="115dp"
+                        android:gravity="center"
+                        android:text="Kyle Keiran Amadio"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="113dp"
+                        android:layout_marginLeft="255dp"
+                        android:src="@drawable/lightbulb" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/typeTextView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="22sp">
+                    android:layout_marginTop="138dp"
+                    android:gravity="center"
+                    android:text="LEARNER"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"/>
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="195dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/aboutMeHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="about me"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_grey"/>
 
                     <TextView
                         android:id="@+id/aboutMeDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:text="I am a BSIT student from the University of Cebu - Banilad."
                         android:textSize="14sp"
                         android:gravity="center"/>
-                </FrameLayout>
-            </FrameLayout>
+                </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp">
-                <TextView
-                    android:id="@+id/educationHeader"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="education"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_grey"/>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="22sp">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/educationHeader"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="2nd Year"
-                        android:textSize="14sp"
-                        android:gravity="center"/>
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="education"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_grey"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="2nd Year"
+                            android:textSize="14sp"
+                            android:textStyle="italic"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="University of Cebu - Banilad"
+                            android:textSize="14sp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/emailHeader"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="University of Cebu - Banilad"
-                        android:textSize="14sp"
-                        android:gravity="center"/>
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="120dp">
-
-                <TextView
-                    android:id="@+id/emailHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="email"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_grey"/>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="22sp">
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="email"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_grey"/>
 
                     <TextView
                         android:id="@+id/emailDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:text="fatjoe@gmail.com"
                         android:textSize="14sp"
                         android:gravity="center"/>
-                </FrameLayout>
-            </FrameLayout>
+                </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="170dp"
-                android:layout_marginLeft="115dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
 
-                <TextView
-                    android:id="@+id/birthdateHeader"
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginRight="5dp">
+
+                        <TextView
+                            android:id="@+id/birthdateHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:text="birthdate"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_grey"/>
+
+                        <TextView
+                            android:id="@+id/birthdateDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="01/01/2001"
+                            android:textSize="14sp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="5dp">
+
+                        <TextView
+                            android:id="@+id/ageHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal"
+                            android:text="age"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_grey"/>
+
+                        <TextView
+                            android:id="@+id/ageDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="20"
+                            android:textSize="14dp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="birthdate"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_grey"/>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="22sp">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/birthdateDetails"
+                        android:id="@+id/addressHeader"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="01/01/2001"
-                        android:textSize="12sp"
-                        android:gravity="center"/>
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="170dp"
-                android:layout_marginLeft="200dp">
-
-                <TextView
-                    android:id="@+id/ageHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="age"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_grey"/>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="22sp">
-
-                    <TextView
-                        android:id="@+id/ageDetails"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="20"
-                        android:textSize="12dp"
-                        android:gravity="center"/>
-
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="216dp">
-
-                <TextView
-                    android:id="@+id/addressHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="address"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_grey"/>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="24dp">
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="address"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_grey"/>
 
                     <TextView
                         android:id="@+id/addressDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:text="123 Sesame St., Sambag 2, Cebu City"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:gravity="center"/>
-                </FrameLayout>
-            </FrameLayout>
+                </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="264dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/mobileHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="mobile no."
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_grey"/>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="24sp">
+                    <TextView
+                        android:id="@+id/mobileHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="mobile no."
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_grey"/>
 
                     <TextView
                         android:id="@+id/mobileDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:text="09911234567"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:gravity="center"/>
-                </FrameLayout>
-            </FrameLayout>
+                </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="312dp">
-
-                <TextView
-                    android:id="@+id/interestsHeader"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="my interests"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_grey"/>
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal">
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/interestsHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="my interests"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_grey"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="22dp">
+                        android:layout_marginTop="3dp"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                        <Button
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:text="Computer System Servicing"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="10sp"
-                            android:backgroundTint="@color/white"/>
+                            android:layout_height="wrap_content">
 
-                        <Button
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:text="Computer System Servicing"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="10sp"
+                                android:backgroundTint="@color/white"/>
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:text="Java Programming"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="10sp"
+                                android:backgroundTint="@color/white"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="Java Programming"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="10sp"
-                            android:backgroundTint="@color/white"/>
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_gravity="center_horizontal">
 
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:text="World Literature"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="10sp"
+                                android:backgroundTint="@color/white"/>
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:text="UI/UX"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="10sp"
+                                android:backgroundTint="@color/white"/>
+
+
+                        </LinearLayout>
                     </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/guardianContactHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="guardian's information"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_grey"/>
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/guardianNameDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Kyla Amadio"
+                            android:textSize="14sp"
+                            android:textStyle="italic"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/guardianEmailDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="mrs.fatjoe@gmail.com"
+                            android:textSize="14sp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/editProfileButton"
+                    android:layout_width="145dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/blue"
+                    android:text="edit information"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="75dp"
+                    android:orientation="vertical">
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="65dp">
+                        android:text="   "/>
+                </LinearLayout>
+            </LinearLayout>
 
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:text="World Literature"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="10sp"
-                            android:backgroundTint="@color/white"/>
+        </ScrollView>
+    </RelativeLayout>
 
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="UI/UX"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="10sp"
-                            android:backgroundTint="@color/white"/>
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="5dp"
-                            android:text="TOPIC 5"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="10sp"
-                            android:backgroundTint="@color/white"/>
-                    </LinearLayout>
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="425dp">
-
-                <TextView
-                    android:id="@+id/guardianContactHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:text="parent/guardian contact"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_grey"/>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="22sp">
-
-                    <TextView
-                        android:id="@+id/guardianNameDetail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Mrs. Kyla Amadio"
-                        android:textSize="14sp"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:id="@+id/guardianEmailDetails"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22dp"
-                        android:text="mrs.fatjoe@gmail.com"
-                        android:textSize="14sp"
-                        android:gravity="center"/>
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="492dp">
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal">
-
-                    <Button
-                        android:id="@+id/editProfileButton"
-                        android:layout_width="145dp"
-                        android:layout_height="45dp"
-                        android:backgroundTint="@color/blue"
-                        android:text="edit information"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:id="@+id/viewPremiumButton"
-                        android:layout_width="145dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="155dp"
-                        android:backgroundTint="@color/yellow"
-                        android:text="view PREMIUM"
-                        android:textColor="@color/blue"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="650dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="   "/>
-            </FrameLayout>
-
-        </RelativeLayout>
-
-    </ScrollView>
-
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

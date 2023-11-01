@@ -11,21 +11,17 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 
 import com.example.matutor.databinding.ActivityDashboardBinding;
-import com.example.matutor.databinding.ActivityLoginBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthEmailException;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     ActivityDashboardBinding binding;
-    FirebaseAuth auth;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +32,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         binding.bottomNavigator.setSelectedItemId(R.id.dashboard);
 
-        /*
-        //switch profile type
-        tutorSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DashboardTutor.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                finish();
-            }
-        }); */
-
         //FOR DRAWER SIDE MENU
         setSupportActionBar(binding.toolbar);
         //NAV MENU
@@ -56,6 +40,17 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         binding.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         binding.navView.setNavigationItemSelectedListener(this);
+
+        //switch profile type
+        binding.switchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DashboardTutor.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
 
         binding.seeMoreButtonDash1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +105,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
     }
+    //sidemenu
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
@@ -122,12 +118,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             return true;
         }
         else if (itemId == R.id.side_progReports) {
-            //startActivity(new Intent(getApplicationContext(), Content.class));
-            //overridePendingTransition(0, 0);
+            startActivity(new Intent(getApplicationContext(), ViewProgressReportsLearner.class));
             return true;
         }
         else if (itemId == R.id.side_yourPostings) {
-            startActivity(new Intent(getApplicationContext(), CreatePosting.class));
+            startActivity(new Intent(getApplicationContext(), ViewCreatedPosts.class));
             return true;
         }
         else if (itemId == R.id.side_yourBookings) {
@@ -182,7 +177,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     private void showExitConfirmation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("[?] Return");
+        builder.setTitle("Return");
         builder.setMessage("Return to login?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override

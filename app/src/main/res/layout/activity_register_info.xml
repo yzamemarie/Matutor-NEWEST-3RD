@@ -340,7 +340,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="80dp"
-                        android:text="parent's/guardian's name"
+                        android:text="guardian's name"
                         android:textColor="@color/text_grey"
                         android:textSize="16sp" />
 
@@ -372,7 +372,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="80dp"
-                        android:text="parent's/guardian's email"
+                        android:text="guardian's email"
                         android:textColor="@color/text_grey"
                         android:textSize="16sp" />
 

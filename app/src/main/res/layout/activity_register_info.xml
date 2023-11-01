@@ -35,19 +35,20 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp">
+                android:layout_height="wrap_content">
 
-                <!--FULL NAME FRAME-->
+                <!--NAME FRAME-->
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -60,7 +61,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="70dp"
-                            android:text="full name"
+                            android:text="first name"
                             android:textColor="@color/text_grey"
                             android:textSize="16sp" />
 
@@ -71,7 +72,39 @@
                             android:layout_marginTop="25dp">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/regFullnameInput"
+                                android:id="@+id/regFirstnameInput"
+                                android:layout_width="320dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:background="@color/white"
+                                android:singleLine="true"
+                                android:textColor="@color/text_grey"
+                                android:textSize="18sp" />
+                        </FrameLayout>
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="82dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="70dp"
+                            android:text="last name"
+                            android:textColor="@color/text_grey"
+                            android:textSize="16sp" />
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="25dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/regLastnameInput"
                                 android:layout_width="320dp"
                                 android:layout_height="50dp"
                                 android:layout_gravity="center"
@@ -87,7 +120,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="78dp"
-                    android:layout_marginTop="83dp">
+                    android:layout_marginTop="163dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -111,7 +144,8 @@
                             android:background="@color/white"
                             android:singleLine="true"
                             android:textColor="@color/text_grey"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:enabled="false"/>
 
                     </FrameLayout>
                 </FrameLayout>
@@ -120,7 +154,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_marginTop="168dp">
+                    android:layout_marginTop="248dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -132,9 +166,10 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_margin="30dp"
+                        android:layout_gravity="center_horizontal"
                         android:textColorHint="@android:color/darker_gray"
                         app:boxStrokeWidthFocused="2dp"
                         app:passwordToggleEnabled="true">
@@ -147,7 +182,8 @@
                             android:background="#FFFF"
                             android:drawablePadding="8dp"
                             android:inputType="textPassword"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:enabled="false"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </FrameLayout>
@@ -156,7 +192,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_marginTop="255dp">
+                    android:layout_marginTop="334dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -168,9 +204,10 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_margin="30dp"
+                        android:layout_gravity="center_horizontal"
                         android:textColorHint="@android:color/darker_gray"
                         app:boxStrokeWidthFocused="2dp"
                         app:passwordToggleEnabled="true">
@@ -183,7 +220,8 @@
                             android:background="#FFFF"
                             android:drawablePadding="8dp"
                             android:inputType="textPassword"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:enabled="false"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </FrameLayout>
             </FrameLayout>
@@ -191,16 +229,16 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="425dp">
+                android:layout_marginTop="10dp">
 
                 <!--BIRTHDATE FRAME-->
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="45dp">
+                    android:layout_gravity="center_horizontal">
 
                     <FrameLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="80dp">
 
                         <TextView
@@ -213,7 +251,7 @@
 
                         <EditText
                             android:id="@+id/regEditDate"
-                            android:layout_width="170dp"
+                            android:layout_width="192dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
                             android:clickable="false"
@@ -225,17 +263,11 @@
                             android:textColorHint="@android:color/darker_gray" />
 
                     </FrameLayout>
-                </FrameLayout>
-
-                <!--AGE FRAME-->
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="220dp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="80dp">
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="6dp">
 
                         <!--age header-->
                         <TextView
@@ -248,7 +280,7 @@
 
                         <Spinner
                             android:id="@+id/regAgeSpinner"
-                            android:layout_width="150dp"
+                            android:layout_width="120dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="30dp"
                             android:backgroundTint="@android:color/darker_gray"
@@ -256,6 +288,15 @@
                             android:textSize="12sp" />
 
                     </FrameLayout>
+                </LinearLayout>
+
+                <!--AGE FRAME-->
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="220dp">
+
+
                 </FrameLayout>
 
                 <FrameLayout
@@ -360,7 +401,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="782dp">
+                android:layout_marginTop="10dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -579,6 +620,6 @@
 
             </FrameLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>

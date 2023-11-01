@@ -38,7 +38,7 @@ public class ViewProgressReportsLearner extends AppCompatActivity {
         viewBookingsHistory = findViewById(R.id.viewHistoryFab);
         viewReviewsHistory = findViewById(R.id.viewReviewsFab);
         bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.profile);
+        bottomNavigationView.setSelectedItemId(R.id.dashboard); //profile
 
         viewProfile.setVisibility(View.GONE);
         viewProgressReport.setVisibility(View.GONE);
@@ -158,7 +158,7 @@ public class ViewProgressReportsLearner extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     return true;
                 }
-                else if (itemId == R.id.profile) {
+                else if (itemId == R.id.create) {
                     return true;
                 }
                 else if (itemId == R.id.notif) {

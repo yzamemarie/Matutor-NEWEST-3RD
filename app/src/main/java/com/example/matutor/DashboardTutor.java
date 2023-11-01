@@ -82,8 +82,8 @@ public class DashboardTutor extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     return true;
                 }
-                else if (itemId == R.id.profile) {
-                    startActivity(new Intent(getApplicationContext(), ProfileTutor.class));
+                else if (itemId == R.id.create) {
+                    startActivity(new Intent(getApplicationContext(), CreatePosting.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }

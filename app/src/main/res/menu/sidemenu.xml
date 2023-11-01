@@ -35,14 +35,14 @@
                     android:icon="@drawable/fab_view_bookings_btn"/>
 
                 <item
+                    android:id="@+id/side_yourHistory"
+                    android:title="Your Bookings History"
+                    android:icon="@drawable/fab_view_history_btn"/>
+
+                <item
                     android:id="@+id/side_yourReviews"
                     android:title="Your Reviews"
                     android:icon="@drawable/fab_review_history_btn"/>
-
-                <item
-                    android:id="@+id/side_yourHistory"
-                    android:title="Your History"
-                    android:icon="@drawable/fab_view_history_btn"/>
             </group>
         </menu>
     </item>

@@ -200,7 +200,7 @@ public class ViewAllTutors extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     return true;
                 }
-                else if (itemId == R.id.profile) {
+                else if (itemId == R.id.create) {
                     startActivity(new Intent(getApplicationContext(), Profile.class));
                     overridePendingTransition(0, 0);
                     return true;

@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="95dp"
         android:layout_height="95dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/user_pp"/>
 
@@ -20,7 +20,7 @@
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginBottom="15dp"
         android:layout_gravity="center_vertical"
         android:text="Kyle Keiran Amadio"

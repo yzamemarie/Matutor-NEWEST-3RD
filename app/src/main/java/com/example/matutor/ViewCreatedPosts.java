@@ -150,7 +150,7 @@ public class ViewCreatedPosts extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), Content.class));
                     overridePendingTransition(0, 0);
                     return true;
-                } else if (itemId == R.id.profile) {
+                } else if (itemId == R.id.create) {
                     startActivity(new Intent(getApplicationContext(), Profile.class));
                     overridePendingTransition(0, 0);
                     return true;

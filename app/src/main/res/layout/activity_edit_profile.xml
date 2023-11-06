@@ -4,55 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
     tools:context=".Notification"
     android:background="@color/grey">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottom_navigator"
-        app:itemTextColor="@drawable/selector"
-        app:itemIconTint="@drawable/selector"
-        app:menu="@menu/menu"
-        app:labelVisibilityMode="unlabeled"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:background="@color/grey"
-        android:elevation="4dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-        <RelativeLayout
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="18dp">
+            android:id="@+id/bottom_navigator"
+            app:itemTextColor="@drawable/selector"
+            app:itemIconTint="@drawable/selector"
+            app:menu="@menu/menu"
+            app:labelVisibilityMode="unlabeled"
+            android:layout_alignParentBottom="true"/>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/grey"
+            android:elevation="4dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
             <ImageView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:layout_centerHorizontal="true"
+                android:layout_width="115dp"
+                android:layout_height="115dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/user_pp"/>
 
-            <FrameLayout
-                android:layout_width="wrap_content"
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/toolbar"
+            android:layout_above="@+id/bottom_navigator">
+
+            <LinearLayout
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="111dp"
-                android:layout_centerHorizontal="true">
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center">
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.Material3.TextInputLayout.FilledBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="full name"
+                    android:hint="first name"
                     android:textColorHint="@android:color/darker_gray"
                     app:boxStrokeWidthFocused="2dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editAboutInput"
+                        android:id="@+id/editFirstnameInput"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -61,374 +71,347 @@
                         android:drawablePadding="8dp"
                         android:singleLine="true"/>
                 </com.google.android.material.textfield.TextInputLayout>
-            </FrameLayout>
 
-        </RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="last name"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeWidthFocused="2dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="205dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editLastnameInput"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#FFFF"
+                        android:textSize="12sp"
+                        android:drawablePadding="8dp"
+                        android:singleLine="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="about me"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeWidthFocused="2dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editAboutMeInput"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#FFFF"
+                        android:textSize="12sp"
+                        android:drawablePadding="8dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <FrameLayout
+                <!-- <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="education"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeWidthFocused="2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editEducationInput"
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="#FFFF"
+                        android:drawablePadding="8dp"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout> -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="email"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeWidthFocused="2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editEmailInput"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#FFFF"
+                        android:textSize="12sp"
+                        android:drawablePadding="8dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <EditText
+                        android:id="@+id/editDateText"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="birthdate"
+                        android:textColorHint="@android:color/darker_gray"/>
+
+                    <Spinner
+                        android:id="@+id/editAgeSpinner"
+                        android:layout_width="140dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@android:color/darker_gray"
+                        android:spinnerMode="dropdown"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="address"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeWidthFocused="2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editAddressInput"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#FFFF"
+                        android:textSize="12sp"
+                        android:drawablePadding="8dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="guardian's name"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeWidthFocused="2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editGuardianNameInput"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#FFFF"
+                        android:textSize="12sp"
+                        android:drawablePadding="8dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="guardian's email"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeWidthFocused="2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editGuardianEmailInput"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#FFFF"
+                        android:textSize="12sp"
+                        android:drawablePadding="8dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Change Passwords"
+                        android:textSize="14sp"
+                        android:textStyle="italic"
+                        android:textColor="@color/text_grey"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:hint="password"
+                        android:textColorHint="@android:color/darker_gray"
+                        app:boxStrokeWidthFocused="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editPasswordInput"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="#FFFF"
+                            android:textSize="12sp"
+                            android:inputType="textPassword"
+                            android:drawablePadding="8dp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:hint="confirm password"
+                        android:textColorHint="@android:color/darker_gray"
+                        app:boxStrokeWidthFocused="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editConfirmPasswordInput"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="#FFFF"
+                            android:textSize="12sp"
+                            android:inputType="textPassword"
+                            android:drawablePadding="8dp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                    <FrameLayout
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="about me"
-                            android:textColorHint="@android:color/darker_gray"
-                            app:boxStrokeWidthFocused="2dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/editNameInput"
-                                android:layout_width="300dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="#FFFF"
-                                android:textSize="12sp"
-                                android:drawablePadding="8dp"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <FrameLayout
+                            android:text="my interests"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray" />
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="65dp">
+                            android:layout_marginLeft="5dp"
+                            android:text="(choose 5)*"
+                            android:textSize="14sp"
+                            android:textColor="@color/blue"/>
+                    </LinearLayout>
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="education"
-                                android:textColorHint="@android:color/darker_gray"
-                                app:boxStrokeWidthFocused="2dp">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center_horizontal">
 
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editEducationInput"
-                                    android:layout_width="300dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="#FFFF"
-                                    android:textSize="12sp"
-                                    android:drawablePadding="8dp"/>
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </FrameLayout>
-
-                        <FrameLayout
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="130dp">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="email"
-                                android:textColorHint="@android:color/darker_gray"
-                                app:boxStrokeWidthFocused="2dp">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editEmailInput"
-                                    android:layout_width="300dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="#FFFF"
-                                    android:textSize="12sp"
-                                    android:drawablePadding="8dp"/>
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="195dp">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="password"
-                                android:textColorHint="@android:color/darker_gray"
-                                app:boxStrokeWidthFocused="2dp">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editPasswordInput"
-                                    android:layout_width="300dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="#FFFF"
-                                    android:textSize="12sp"
-                                    android:inputType="textPassword"
-                                    android:drawablePadding="8dp"/>
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="260dp">
-                            <EditText
-                                android:id="@+id/editDateText"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content"
-                                android:clickable="false"
-                                android:cursorVisible="false"
-                                android:focusable="false"
-                                android:focusableInTouchMode="false"
-                                android:hint="birthdate"
-                                android:textColorHint="@android:color/darker_gray" />
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="260dp"
-                            android:layout_marginLeft="160dp">
-
-                            <Spinner
-                                android:id="@+id/editAgeSpinner"
-                                android:layout_width="140dp"
-                                android:layout_height="50dp"
-                                android:backgroundTint="@android:color/darker_gray"
-                                android:spinnerMode="dropdown"
-                                android:textSize="12sp" />
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="315dp">
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="address"
-                                android:textColorHint="@android:color/darker_gray"
-                                app:boxStrokeWidthFocused="2dp">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editAddressInput"
-                                    android:layout_width="300dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="#FFFF"
-                                    android:textSize="12sp"
-                                    android:drawablePadding="8dp"/>
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="380dp">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="parent's/guardian's name"
-                                android:textColorHint="@android:color/darker_gray"
-                                app:boxStrokeWidthFocused="2dp">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editGuardianNameInput"
-                                    android:layout_width="300dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="#FFFF"
-                                    android:textSize="12sp"
-                                    android:drawablePadding="8dp"/>
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="445dp">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="parent's/guardian's email"
-                                android:textColorHint="@android:color/darker_gray"
-                                app:boxStrokeWidthFocused="2dp">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/editGuardianEmailInput"
-                                    android:layout_width="300dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="#FFFF"
-                                    android:textSize="12sp"
-                                    android:drawablePadding="8dp"/>
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="510dp"
                             android:layout_gravity="center_horizontal">
 
-                            <LinearLayout
+                            <Button
+                                android:id="@+id/tagButton"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal">
+                                android:layout_height="40dp"
+                                android:text="TOPIC 1"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="10sp"
+                                android:backgroundTint="@color/white"/>
+                        </LinearLayout>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="my interests"
-                                    android:textSize="14sp"
-                                    android:textColor="@android:color/darker_gray" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="5dp"
-                                    android:text="(choose 5)*"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/blue"/>
-                            </LinearLayout>
-
-                            <FrameLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="28dp">
-
-                                <FrameLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal">
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_horizontal">
-
-                                        <Button
-                                            android:id="@+id/tag1Button"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="40dp"
-                                            android:text="TOPIC 1"
-                                            android:textColor="@android:color/darker_gray"
-                                            android:textSize="10sp"
-                                            android:backgroundTint="@color/white"/>
-
-                                        <Button
-                                            android:id="@+id/tag2Button"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="40dp"
-                                            android:layout_marginLeft="5dp"
-                                            android:text="TOPIC 2"
-                                            android:textColor="@android:color/darker_gray"
-                                            android:textSize="10sp"
-                                            android:backgroundTint="@color/white"/>
-
-                                        <Button
-                                            android:id="@+id/tag3Button"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="40dp"
-                                            android:layout_marginLeft="5dp"
-                                            android:text="TOPIC 3"
-                                            android:textColor="@android:color/darker_gray"
-                                            android:textSize="10sp"
-                                            android:backgroundTint="@color/white"/>
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="45dp">
-
-                                        <EditText
-                                            android:id="@+id/editTagText"
-                                            android:layout_width="220dp"
-                                            android:layout_height="wrap_content"
-                                            android:hint="enter tag"
-                                            android:textColor="@color/text_grey"
-                                            android:textColorHint="@android:color/darker_gray"
-                                            android:inputType="text"/>
-
-                                        <Button
-                                            android:id="@+id/addTagButton"
-                                            android:layout_width="65dp"
-                                            android:layout_height="40dp"
-                                            android:layout_marginLeft="5dp"
-                                            android:backgroundTint="@android:color/darker_gray"
-                                            android:text="+" />
-                                    </LinearLayout>
-                                </FrameLayout>
-
-                            </FrameLayout>
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="638dp">
+                            android:layout_marginTop="45dp"
+                            android:layout_gravity="center_horizontal">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
+                            <EditText
+                                android:id="@+id/editTagText"
+                                android:layout_width="220dp"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal">
+                                android:hint="enter tag"
+                                android:textColor="@color/text_grey"
+                                android:textColorHint="@android:color/darker_gray"
+                                android:inputType="text"/>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="upload profile picture"
-                                    android:textSize="16sp"
-                                    android:textColor="@color/text_grey" />
-                            </LinearLayout>
-
-                            <FrameLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="30dp">
-
-                                <Button
-                                    android:id="@+id/editProfileImgButton"
-                                    android:layout_width="65dp"
-                                    android:layout_height="40dp"
-                                    android:backgroundTint="@android:color/darker_gray"
-                                    android:text="+" />
-                                <EditText
-                                    android:id="@+id/idPathTextView"
-                                    android:layout_width="220dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="70dp"
-                                    android:text="choose file..."
-                                    android:textColor="@color/text_grey"
-                                    android:editable="false"/>
-                            </FrameLayout>
-                        </FrameLayout>
+                            <Button
+                                android:id="@+id/addTagButton"
+                                android:layout_width="65dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="5dp"
+                                android:backgroundTint="@android:color/darker_gray"
+                                android:text="+" />
+                        </LinearLayout>
 
                     </FrameLayout>
-                </FrameLayout>
+                </LinearLayout>
 
-                <FrameLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="upload profile picture"
+                        android:textSize="16sp"
+                        android:textStyle="italic"
+                        android:textColor="@color/text_grey" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center_horizontal">
+
+                        <Button
+                            android:id="@+id/editProfileImgButton"
+                            android:layout_width="65dp"
+                            android:layout_height="40dp"
+                            android:backgroundTint="@android:color/darker_gray"
+                            android:text="+"/>
+
+                        <EditText
+                            android:id="@+id/idPathTextView"
+                            android:layout_width="220dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="choose file..."
+                            android:textColor="@color/text_grey"
+                            android:editable="false"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="735dp"
+                    android:layout_marginTop="25dp"
                     android:layout_centerHorizontal="true">
+
                     <Button
-                        android:id="@+id/saveChangesButton"
+                        android:id="@+id/editSaveChangesButton"
                         android:layout_width="145dp"
                         android:layout_height="45dp"
                         android:backgroundTint="@color/blue"
@@ -437,31 +420,19 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/deleteAccountButton"
+                        android:id="@+id/editDeleteAccountButton"
                         android:layout_width="145dp"
                         android:layout_height="45dp"
-                        android:layout_marginTop="45dp"
+                        android:layout_marginTop="5dp"
                         android:backgroundTint="@color/red"
                         android:text="delete account"
                         android:textColor="@color/white"
                         android:textSize="12sp"
                         android:textStyle="bold" />
-                </FrameLayout>
+                </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="950dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="     "/>
-                </FrameLayout>
-
-            </RelativeLayout>
+            </LinearLayout>
         </ScrollView>
     </RelativeLayout>
-
 
 </RelativeLayout>

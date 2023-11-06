@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -33,7 +34,7 @@ public class RegisterInfo extends AppCompatActivity {
 
     ActivityRegisterInfoBinding binding;
     FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseFirestore fire = FirebaseFirestore.getInstance();
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     private static final int PICK_IMAGE = 100;
     @Override
@@ -134,13 +135,12 @@ public class RegisterInfo extends AppCompatActivity {
                                @Override
                                public void onComplete(@NonNull Task<AuthResult> task) {
                                    if (task.isSuccessful()) {
-                                       //registration is successful
                                        FirebaseUser user = auth.getCurrentUser();
                                        String uid = user.getUid();
 
-                                       //create user document in firestore
+                                       //create user document for firestore
                                        Map<String, Object> learnerMap = new HashMap<>();
-                                       learnerMap.put("learnerFirstame", learnerFirstname);
+                                       learnerMap.put("learnerFirstname", learnerFirstname);
                                        learnerMap.put("learnerLastname", learnerLastname);
                                        learnerMap.put("learnerEmail", learnerEmail);
                                        learnerMap.put("learnerPassword", learnerPassword);
@@ -149,35 +149,34 @@ public class RegisterInfo extends AppCompatActivity {
                                        learnerMap.put("learnerGuardianName", learnerGuardianName);
                                        learnerMap.put("learnerGuardianEmail", learnerGuardianEmail);
 
-                                       //checks if uid is not empty
+                                       //checkd if uid is not empty
                                        if (uid != null) {
-                                           fire.collection("userLearner")
+                                           firestore.collection("userLearner")
                                                    .document(uid)
                                                    .set(learnerMap)
                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                        @Override
                                                        public void onSuccess(Void unused) {
-                                                           Toast.makeText(RegisterInfo.this, "Learner has successfully registered!", Toast.LENGTH_SHORT).show();
+                                                           Toast.makeText(getApplicationContext(), "Learner has successfully registered!", Toast.LENGTH_SHORT).show();
                                                            clearAll();
+
+                                                           startActivity(new Intent(getApplicationContext(), Login.class));
+                                                           overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                                           finish();
                                                        }
                                                    })
                                                    .addOnFailureListener(new OnFailureListener() {
                                                        @Override
                                                        public void onFailure(@NonNull Exception e) {
-                                                           Toast.makeText(RegisterInfo.this, "Registration failed! Please recheck your information.", Toast.LENGTH_SHORT).show();
+                                                           Log.e("RegistrationError", "Registration failed", e);
+                                                           Toast.makeText(getApplicationContext(), "Registration failed! Please recheck your information." + e, Toast.LENGTH_SHORT).show();
                                                        }
                                                    });
-                                           }
-                                   } else {
-                                       Toast.makeText(RegisterInfo.this, "Registration failed! Please recheck your information.", Toast.LENGTH_SHORT).show();
+                                       }
                                    }
                                }
                            });
 
-                   //if all text field is not empty, proceed to dashboard
-                   startActivity(new Intent(getApplicationContext(),Login.class));
-                   overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                   finish();
                }
            }
        });

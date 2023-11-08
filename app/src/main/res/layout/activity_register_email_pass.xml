@@ -41,9 +41,10 @@
         android:orientation="vertical">
 
         <!--EMAIL FRAME-->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="78dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -53,30 +54,25 @@
                 android:textColor="@color/text_grey"
                 android:textSize="16sp" />
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="25dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/regEmailInput"
-                    android:layout_width="320dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:singleLine="true"
-                    android:textColor="@color/text_grey"
-                    android:textSize="18sp" />
-
-            </FrameLayout>
-        </FrameLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/regEmailInput"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/white"
+                android:singleLine="true"
+                android:textColor="@color/text_grey"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <!--PASSWORD FRAME-->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="6dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,33 +82,27 @@
                 android:textColor="@color/text_grey"
                 android:textSize="16sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/regPasswordInput"
+                android:layout_width="320dp"
                 android:layout_height="50dp"
-                android:layout_margin="30dp"
-                android:textColorHint="@android:color/darker_gray"
-                app:boxStrokeWidthFocused="2dp"
-                app:passwordToggleEnabled="true">
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/white"
+                android:singleLine="true"
+                android:textColor="@color/text_grey"
+                android:textSize="18sp"
+                android:inputType="textPassword"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/regPasswordInput"
-                    android:layout_width="320dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="#FFFF"
-                    android:drawablePadding="8dp"
-                    android:inputType="textPassword"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </FrameLayout>
+        </LinearLayout>
 
         <!--CONFIRM PASSWORD-->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="6dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -122,33 +112,27 @@
                 android:textColor="@color/text_grey"
                 android:textSize="16sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/regConfirmPasswordInput"
+                android:layout_width="320dp"
                 android:layout_height="50dp"
-                android:layout_margin="30dp"
-                android:textColorHint="@android:color/darker_gray"
-                app:boxStrokeWidthFocused="2dp"
-                app:passwordToggleEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/regConfirmPasswordInput"
-                    android:layout_width="320dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="#FFFF"
-                    android:drawablePadding="8dp"
-                    android:inputType="textPassword"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </FrameLayout>
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/white"
+                android:singleLine="true"
+                android:textColor="@color/text_grey"
+                android:textSize="18sp"
+                android:inputType="textPassword"/>
+        </LinearLayout>
 
         <!--BUTTONS-->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="10dp"
+            android:orientation="vertical"
             android:layout_gravity="center_horizontal">
             <Button
                 android:id="@+id/nextButton"
@@ -161,28 +145,24 @@
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
-            <FrameLayout
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:layout_gravity="center_horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="already have an account?"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="14sp" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:text="already have an account?"
+                android:layout_gravity="center_horizontal"
+                android:textSize="14sp" />
 
-                <Button
-                    android:id="@+id/loginHereButton"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:backgroundTint="@color/blue"
-                    android:text="Back to Login"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-            </FrameLayout>
-        </FrameLayout>
+            <Button
+                android:id="@+id/loginHereButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/blue"
+                android:text="Back to Login"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

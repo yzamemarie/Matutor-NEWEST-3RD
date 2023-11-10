@@ -14,16 +14,19 @@ import android.widget.Toast;
 
 import com.example.matutor.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Login extends AppCompatActivity {
 
     ActivityLoginBinding binding;
-    FirebaseAuth auth;
-
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     @Override
     public void onStart() {
         super.onStart();
@@ -53,22 +56,34 @@ public class Login extends AppCompatActivity {
 
                 if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     if (!password.isEmpty()) {
-                        // Sign in the user using Firebase Authentication
-                        auth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                        firestore.collection("learner")
+                                .whereEqualTo("learnerEmail", email)
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<AuthResult> authTask) {
-                                        if (authTask.isSuccessful()) {
-                                            // User successfully logged in
-                                            Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                                            startActivity(intent);
-                                            finish();
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        if (!queryDocumentSnapshots.isEmpty()) {
+                                            auth.signInWithEmailAndPassword(email, password)
+                                                    .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> authTask) {
+                                                            if (authTask.isSuccessful()) {
+                                                                Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
+                                                                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                                                                startActivity(intent);
+                                                                finish();
+                                                            } else {
+                                                                Toast.makeText(getApplicationContext(), "Login Failed!", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
                                         } else {
-                                            // If sign-in fails, display a message to the user.
-                                            Toast.makeText(getApplicationContext(), "Login Failed.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "User not found!", Toast.LENGTH_SHORT).show();
                                         }
                                     }
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 });
                     } else {
                         binding.passwordInput.setError("Please enter your password");
@@ -78,21 +93,9 @@ public class Login extends AppCompatActivity {
                 } else {
                     binding.emailInput.setError("Please enter a valid email address.");
                 }
+
             }
 
-                /*
-                //checks if text fields are empty and displays toast prompt if true
-                if (email.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "[!] Enter email address.", Toast.LENGTH_SHORT).show();
-                } else if (password.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "[!] Enter password.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        //if all text field is not empty, proceed to dashboard
-                        startActivity(new Intent(getApplicationContext(),Dashboard.class));
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        finish();
-                }
-                */
         });
 
         //register here button
@@ -110,10 +113,6 @@ public class Login extends AppCompatActivity {
     //Exit Message Prompt Validation
     @Override
     public void onBackPressed() {
-        back();
-    }
-
-    private void back() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Exit");
         builder.setMessage("Exit application?");
@@ -132,4 +131,5 @@ public class Login extends AppCompatActivity {
         });
         builder.show();
     }
+
 }

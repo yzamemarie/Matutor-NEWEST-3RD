@@ -31,6 +31,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
             <ImageView
+                android:id="@+id/userProfilePic"
                 android:layout_width="115dp"
                 android:layout_height="115dp"
                 android:layout_gravity="center"
@@ -64,7 +65,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editFirstnameInput"
                         android:layout_width="300dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="#FFFF"
                         android:textSize="12sp"
@@ -84,7 +85,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editLastnameInput"
                         android:layout_width="300dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="#FFFF"
                         android:textSize="12sp"
@@ -104,7 +105,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editAboutMeInput"
                         android:layout_width="300dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="#FFFF"
                         android:textSize="12sp"
@@ -142,7 +143,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editEmailInput"
                         android:layout_width="300dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="#FFFF"
                         android:textSize="12sp"
@@ -189,11 +190,30 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editAddressInput"
                         android:layout_width="300dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:layout_gravity="center"
                         android:background="#FFFF"
-                        android:textSize="12sp"
-                        android:drawablePadding="8dp"/>
+                        android:drawablePadding="8dp"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="contact number"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeWidthFocused="2dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editContactInput"
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:background="#FFFF"
+                        android:drawablePadding="8dp"
+                        android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -208,7 +228,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editGuardianNameInput"
                         android:layout_width="300dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="#FFFF"
                         android:textSize="12sp"
@@ -227,7 +247,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editGuardianEmailInput"
                         android:layout_width="300dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="#FFFF"
                         android:textSize="12sp"
@@ -261,7 +281,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editPasswordInput"
                             android:layout_width="300dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:background="#FFFF"
                             android:textSize="12sp"
@@ -281,7 +301,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editConfirmPasswordInput"
                             android:layout_width="300dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:background="#FFFF"
                             android:textSize="12sp"
@@ -414,16 +434,18 @@
                         android:id="@+id/editSaveChangesButton"
                         android:layout_width="145dp"
                         android:layout_height="45dp"
+                        android:layout_marginLeft="5dp"
                         android:backgroundTint="@color/blue"
                         android:text="save changes"
                         android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/yellow"/>
 
                     <Button
                         android:id="@+id/editDeleteAccountButton"
                         android:layout_width="145dp"
                         android:layout_height="45dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
                         android:backgroundTint="@color/red"
                         android:text="delete account"
                         android:textColor="@color/white"

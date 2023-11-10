@@ -10,22 +10,49 @@
     tools:context=".Sidebar">
 
     <ImageView
-        android:layout_width="95dp"
-        android:layout_height="95dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginLeft="25dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/user_pp"/>
 
-    <TextView
-        android:id="@+id/nameTextView"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginBottom="15dp"
-        android:layout_gravity="center_vertical"
-        android:text="Kyle Keiran Amadio"
-        android:textColor="@color/text_grey"
-        android:textSize="24sp"
-        android:textStyle="italic"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/userLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:text="Last"
+            android:textColor="@color/text_grey"
+            android:textSize="24sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_gravity="center_vertical"
+            android:text=", "
+            android:textColor="@color/text_grey"
+            android:textSize="24sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/userFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:text="First"
+            android:textColor="@color/text_grey"
+            android:textSize="24sp"
+            android:textStyle="italic"/>
+    </LinearLayout>
 
 </LinearLayout>

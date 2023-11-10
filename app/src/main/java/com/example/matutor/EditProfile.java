@@ -12,12 +12,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.matutor.databinding.ActivityEditProfileBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,76 +36,54 @@ import java.util.List;
 
 public class EditProfile extends AppCompatActivity {
 
-    Button saveChanges, deleteAccount, addTag, tag1, tag2, tag3, selectProfileImg;
-    Spinner ageSpinner, topic1Spinner, topic2Spinner, topic3Spinner, topic4Spinner, topic5Spinner;
-    EditText editDate;
-    BottomNavigationView bottomNavigationView;
+    private static final int CHOOSE_ID_FRONT = 1;
+    private static final int CHOOSE_ID_BACK = 2;
+    private static final int CHOOSE_SELFIE = 3;
+
+    ActivityEditProfileBinding binding;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_edit_profile);
-
-        //assignment
-        saveChanges = findViewById(R.id.saveChangesButton);
-        deleteAccount = findViewById(R.id.deleteAccountButton);
-        addTag = findViewById(R.id.addTagButton);
-        tag1 = findViewById(R.id.tag1Button);
-        tag2 = findViewById(R.id.tag2Button);
-        tag3 = findViewById(R.id.tag3Button);
-        selectProfileImg = findViewById(R.id.editProfileImgButton);
-        ageSpinner = findViewById(R.id.editAgeSpinner);
-        editDate = findViewById(R.id.editDateText);
-        bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.dashboard); //profile
+        binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Populate the Spinner using a loop
         List<String> items = new ArrayList<>();
-        for (int i = 12; i <= 100; i++) {
+        for (int i = 0; i <= 100; i++) {
             items.add(String.valueOf(i));
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ageSpinner.setAdapter(adapter);
+        binding.editAgeSpinner.setAdapter(adapter);
 
-        editDate.setOnClickListener(new View.OnClickListener() {
+        binding.editDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDatePickerDialog();
             }
         });
 
-        addTag.setOnClickListener(new View.OnClickListener() {
+        binding.addTagButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Topic added!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        tag1.setOnClickListener(new View.OnClickListener() {
+        binding.tagButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Topic removed!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        tag2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Topic removed!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        tag3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Topic removed!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        selectProfileImg.setOnClickListener(new View.OnClickListener() {
+        binding.editProfileImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Select profile image!", Toast.LENGTH_SHORT).show();
@@ -102,7 +91,7 @@ public class EditProfile extends AppCompatActivity {
         });
 
         //save changes button
-        saveChanges.setOnClickListener(new View.OnClickListener() {
+        binding.editSaveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -111,95 +100,105 @@ public class EditProfile extends AppCompatActivity {
         });
 
         //delete account button
-        deleteAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DeleteAccount.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
+        binding.editDeleteAccountButton.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(EditProfile.this);
+            builder.setTitle("Confirm");
+            builder.setMessage("Are you sure you want to delete your account?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    FirebaseUser user = auth.getCurrentUser();
+                    if (user != null) {
+                        firestore.collection("learner")
+                                .document(user.getUid())
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        user.delete()
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Toast.makeText(getApplicationContext(), "Account successfully deleted!", Toast.LENGTH_SHORT).show();
 
-        //navbar navigation
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-
-                if (itemId == R.id.posting) {
-                    startActivity(new Intent(getApplicationContext(), Posting.class));
-                    overridePendingTransition(0, 0);
-                    return true;
+                                                            Intent intent = new Intent(getApplicationContext(), Login.class);
+                                                            startActivity(intent);
+                                                            finishAffinity();
+                                                        } else {
+                                                            Toast.makeText(getApplicationContext(), "Failed to delete account.", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                        builder.show();
+                    }
                 }
-                else if (itemId == R.id.dashboard) {
-                    startActivity(new Intent(getApplicationContext(), Dashboard.class));
-                    overridePendingTransition(0, 0);
-                    return true;
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
                 }
-                else if (itemId == R.id.content) {
-                    startActivity(new Intent(getApplicationContext(), Content.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-                else if (itemId == R.id.create) {
-                    return true;
-                }
-                else if (itemId == R.id.notif) {
-                    startActivity(new Intent(getApplicationContext(), Notification.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-                return false;
-            }
+            });
+            builder.show();
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), Profile.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-        finish();
-    }
+        @Override
+        public void onBackPressed () {
+            Intent intent = new Intent(getApplicationContext(), Profile.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+            finish();
+        }
 
-    //confirmation dialogues
-    private void saveConfirmation() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirm");
-        builder.setMessage("Save changes?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getApplicationContext(), Profile.class));
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finishAffinity();
-                System.exit(0);
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.show();
-    }
+        //confirmation dialogues
+        private void saveConfirmation() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Confirm");
+            builder.setMessage("Save changes?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //save changes
 
-    private void showDatePickerDialog() {
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
+                    startActivity(new Intent(getApplicationContext(), Profile.class));
+                    overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
+                    finishAffinity();
+                    System.exit(0);
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.show();
+        }
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                (view, yearSelected, monthOfYear, dayOfMonth) -> {
-                    String selectedDate = (monthOfYear + 1) + "/" + dayOfMonth + "/" + yearSelected;
-                    editDate.setText(selectedDate);
-                },
-                year, month, day);
+        private void showDatePickerDialog() {
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
 
-        datePickerDialog.show();
-    }
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    this,
+                    (view, yearSelected, monthOfYear, dayOfMonth) -> {
+                        String selectedDate = (monthOfYear + 1) + "/" + dayOfMonth + "/" + yearSelected;
+                        binding.editDateText.setText(selectedDate);
+                    },
+                    year, month, day);
+
+            datePickerDialog.show();
+        }
 }

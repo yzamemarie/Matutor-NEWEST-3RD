@@ -12,20 +12,22 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.matutor.databinding.ActivityProfileBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     ActivityProfileBinding binding;
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +47,76 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         toggle.syncState();
         binding.navView.setNavigationItemSelectedListener(this);
 
-        //switch profile type
-        binding.switchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ProfileTutor.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
+        //fetch and display user's info
+        String uid = auth.getCurrentUser().getUid();
+        if (!uid.isEmpty()) {
+            firestore.collection("learner")
+                    .document(uid)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) {
+                                Picasso picasso = new Picasso.Builder(getApplicationContext()).build();
+                                if (documentSnapshot.contains("learnerProfilePicture")) {
+                                    String profilePicUrl = documentSnapshot.getString("learnerProfilePicture");
+                                    if (!profilePicUrl.isEmpty() && profilePicUrl != null) {
+                                        picasso.load(profilePicUrl)
+                                                .into(binding.userProfilePic);
+                                    }
+                                }
+
+                                String lastname = documentSnapshot.getString("learnerLastname");
+                                if (!lastname.isEmpty()) {
+                                    binding.lastnameTextView.setText(lastname);
+                                }
+
+                                String firstname = documentSnapshot.getString("learnerFirstname");
+                                if (!firstname.isEmpty()) {
+                                    binding.firstnameTextView.setText(firstname);
+                                }
+
+                                String email = documentSnapshot.getString("learnerEmail");
+                                if (!email.isEmpty()) {
+                                    binding.emailDetails.setText(email);
+                                }
+
+                                String bdate = documentSnapshot.getString("learnerBdate");
+                                if (!bdate.isEmpty()) {
+                                    binding.birthdateDetails.setText(bdate);
+                                }
+
+                                String age = documentSnapshot.getString("learnerAge");
+                                if (!age.isEmpty()) {
+                                    binding.ageDetails.setText(age);
+                                }
+
+                                String address = documentSnapshot.getString("learnerAddress");
+                                if (!address.isEmpty()) {
+                                    binding.addressDetails.setText(address);
+                                }
+
+                                String contact = documentSnapshot.getString("learnerContact");
+                                if (!contact.isEmpty()) {
+                                    binding.contactDetails.setText(contact);
+                                }
+
+                                String guardianName = documentSnapshot.getString("learnerGuardianName");
+                                if (!guardianName.isEmpty() && guardianName != null) {
+                                    binding.guardianNameDetails.setText(guardianName);
+                                }
+
+                                String guardianEmail = documentSnapshot.getString("learnerGuardianEmail");
+                                if (!guardianEmail.isEmpty() && guardianEmail != null) {
+                                    binding.guardianEmailDetails.setText(guardianEmail);
+                                }
+                            }
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        }
 
         //click to edit user profile
         binding.editProfileButton.setOnClickListener(new View.OnClickListener() {

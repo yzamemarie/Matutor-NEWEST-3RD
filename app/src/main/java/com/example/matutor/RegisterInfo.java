@@ -95,7 +95,7 @@ public class RegisterInfo extends AppCompatActivity {
             }
         });
 
-        //click register button to proceed to dashboard
+        //click register button to proceed to login
         binding.registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,7 +157,7 @@ public class RegisterInfo extends AppCompatActivity {
                                         learnerMap.put("learnerGuardianEmail", learnerGuardianEmail);
 
                                         firestore.collection("learner")
-                                                .document(learnerEmail)
+                                                .document(uid)
                                                 .set(learnerMap)
                                                 .addOnSuccessListener(aVoid -> {
                                                     binding.regFirstnameInput.getText().clear();

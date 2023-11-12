@@ -33,6 +33,7 @@ public class NotificationTutor extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.notif);
 
+        /*
         // Create a ClickableSpan to handle the link click
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
@@ -50,7 +51,7 @@ public class NotificationTutor extends AppCompatActivity {
 
         // Apply the modified SpannableString to the TextView
         viewPostLink.setText(spannableString);
-        viewPostLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+        viewPostLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance()); */
 
         //switch profile type
         learnerSwitch.setOnClickListener(new View.OnClickListener() {

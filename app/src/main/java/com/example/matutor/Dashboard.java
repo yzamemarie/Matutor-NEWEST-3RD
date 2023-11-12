@@ -52,26 +52,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        binding.seeMoreButtonDash1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TutorProfilePreview3.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                finish();
-            }
-        });
-
-        binding.seeMoreButtonDash2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TutorProfilePreview2.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                finish();
-            }
-        });
-
 
         binding.bottomNavigator.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

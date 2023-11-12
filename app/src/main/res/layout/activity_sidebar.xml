@@ -10,6 +10,7 @@
     tools:context=".Sidebar">
 
     <ImageView
+        android:id="@+id/userProfilePic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="25dp"

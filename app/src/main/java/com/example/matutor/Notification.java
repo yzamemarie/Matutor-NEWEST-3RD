@@ -42,6 +42,7 @@ public class Notification extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         binding.navView.setNavigationItemSelectedListener(this);
 
+        /*
         // Create a ClickableSpan to handle the link click
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
@@ -59,7 +60,7 @@ public class Notification extends AppCompatActivity implements NavigationView.On
 
         // Apply the modified SpannableString to the TextView
         binding.viewPostTextLink.setText(spannableString);
-        binding.viewPostTextLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+        binding.viewPostTextLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance()); */
 
         binding.switchButton.setOnClickListener(new View.OnClickListener() {
             @Override

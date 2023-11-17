@@ -50,7 +50,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         //fetch and display user's info
         String uid = auth.getCurrentUser().getUid();
         if (!uid.isEmpty()) {
-            firestore.collection("learner")
+            firestore.collection("user_learner")
                     .document(uid)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

@@ -3,11 +3,19 @@ package com.example.matutor;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,6 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -36,14 +45,13 @@ import java.util.List;
 
 public class EditProfile extends AppCompatActivity {
 
-    private static final int CHOOSE_ID_FRONT = 1;
-    private static final int CHOOSE_ID_BACK = 2;
-    private static final int CHOOSE_SELFIE = 3;
+    private static final int CHOOSE_PIC = 1;
 
     ActivityEditProfileBinding binding;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +80,7 @@ public class EditProfile extends AppCompatActivity {
         binding.addTagButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Topic added!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Topic added!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -86,7 +94,7 @@ public class EditProfile extends AppCompatActivity {
         binding.editProfileImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Select profile image!", Toast.LENGTH_SHORT).show();
+                //open camera or gallery
             }
         });
 
@@ -94,8 +102,7 @@ public class EditProfile extends AppCompatActivity {
         binding.editSaveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                saveConfirmation();
+                //saveConfirmation();
             }
         });
 

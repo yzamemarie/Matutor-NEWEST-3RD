@@ -1,13 +1,21 @@
 package com.example.matutor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -21,6 +29,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.lang.annotation.Native;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -29,12 +39,20 @@ import java.util.Map;
 
 public class RegisterInfo extends AppCompatActivity {
 
+    //private static final int PERMISSION_CAMERA = 1;
+    //private static final int PERMISSION_GALLERY = 2;
+    private static final int SELECT_ID_FRONT = 3;
+    private static final int SELECT_ID_BACK = 4;
+    private static final int SELECT_SELFIE = 5;
+
     ActivityRegisterInfoBinding binding;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    String idFrontFileName, idBackFileName, selfieFileName;
+    Intent imageData = null;
 
-    private static final int PICK_IMAGE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,21 +95,21 @@ public class RegisterInfo extends AppCompatActivity {
         binding.regIdFrontButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Select ID front image.", Toast.LENGTH_SHORT).show();
+                openPickerDialog(SELECT_ID_FRONT);
             }
         });
 
         binding.regIdBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Select ID back image.", Toast.LENGTH_SHORT).show();
+                openPickerDialog(SELECT_ID_BACK);
             }
         });
 
         binding.regSelfieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Select selfie image.", Toast.LENGTH_SHORT).show();
+                openPickerDialog(SELECT_SELFIE);
             }
         });
 
@@ -111,6 +129,12 @@ public class RegisterInfo extends AppCompatActivity {
                 String learnerContact = binding.regContactInput.getText().toString().trim();
                 String learnerGuardianName = binding.regGuardianNameInput.getText().toString().trim();
                 String learnerGuardianEmail = binding.regGuardianEmailInput.getText().toString().trim();
+
+                //checks if front and back ID images and selfie are selected
+                if (imageData == null || imageData.getParcelableExtra("data") == null) {
+                    Toast.makeText(getApplicationContext(), "No image has been selected.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 //checks if text fields are empty and displays toast prompt if true
                 if (learnerFirstname.isEmpty()) {
@@ -145,6 +169,7 @@ public class RegisterInfo extends AppCompatActivity {
                                     if (uid != null) {
                                         //create user document for firestore
                                         Map<String, Object> learnerMap = new HashMap<>();
+                                        learnerMap.put("learnerUid", uid);
                                         learnerMap.put("learnerFirstname", learnerFirstname);
                                         learnerMap.put("learnerLastname", learnerLastname);
                                         learnerMap.put("learnerEmail", learnerEmail);
@@ -156,8 +181,8 @@ public class RegisterInfo extends AppCompatActivity {
                                         learnerMap.put("learnerGuardianName", learnerGuardianName);
                                         learnerMap.put("learnerGuardianEmail", learnerGuardianEmail);
 
-                                        firestore.collection("learner")
-                                                .document(uid)
+                                        firestore.collection("user_learner")
+                                                .document(learnerEmail)  // Use learnerEmail as the document ID
                                                 .set(learnerMap)
                                                 .addOnSuccessListener(aVoid -> {
                                                     binding.regFirstnameInput.getText().clear();
@@ -171,7 +196,12 @@ public class RegisterInfo extends AppCompatActivity {
                                                     binding.regGuardianNameInput.getText().clear();
                                                     binding.regGuardianEmailInput.getText().clear();
 
-                                                    uploadDefaultProfile(uid, firestore);
+                                                    // Upload images to Firestore Storage
+                                                    uploadDefaultProfile(learnerEmail, firestore);
+                                                    uploadDefaultProfile(learnerEmail, firestore);
+                                                    uploadImageToFirestore(learnerEmail, SELECT_ID_FRONT, imageData, idFrontFileName);
+                                                    uploadImageToFirestore(learnerEmail, SELECT_ID_BACK, imageData, idBackFileName);
+                                                    uploadImageToFirestore(learnerEmail, SELECT_SELFIE, imageData, selfieFileName);
 
                                                     Toast.makeText(getApplicationContext(), "Learner has successfully registered!", Toast.LENGTH_SHORT).show();
                                                 })
@@ -190,6 +220,7 @@ public class RegisterInfo extends AppCompatActivity {
 
                             });
 
+                    //add code that stores user info for admin approval
                 }
             }
         });
@@ -245,31 +276,167 @@ public class RegisterInfo extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void uploadDefaultProfile(String uid, FirebaseFirestore firestore) {
+    private void uploadDefaultProfile(String learnerEmail, FirebaseFirestore firestore) {
         int defaultProfilePictureResourceId = R.drawable.user_pp;
         Uri defaultProfilePictureUri = Uri.parse("android.resource://" + getPackageName() + "/" + defaultProfilePictureResourceId);
-        StorageReference storageRef = storage.getReference().child("profile_pictures/" + uid + "/user_pp.png");
+        StorageReference storageRef = storage.getReference().child("profile_pictures/" + learnerEmail + "/user_pp.png");
         UploadTask uploadTask = storageRef.putFile(defaultProfilePictureUri);
 
-        uploadTask.addOnSuccessListener(taskSnapshot -> updateProfilePictureInFirestore(uid, firestore))
+        uploadTask.addOnSuccessListener(taskSnapshot -> updateProfilePictureInFirestore(learnerEmail, firestore))
                 .addOnFailureListener(e -> {
-                    // Handle an unsuccessful upload.
+                    Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
-    private void updateProfilePictureInFirestore(String uid, FirebaseFirestore firestore) {
-        StorageReference storageRef = storage.getReference().child("profile_pictures/" + uid + "/user_pp.png");
+    private void updateProfilePictureInFirestore(String learnerEmail, FirebaseFirestore firestore) {
+        StorageReference storageRef = storage.getReference().child("profile_pictures/" + learnerEmail + "/user_pp.png");
         storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
             String downloadUrl = uri.toString();
-            DocumentReference userRef = firestore.collection("learner").document(uid);
+            DocumentReference userRef = firestore.collection("learner").document(learnerEmail);
             userRef.update("learnerProfilePicture", downloadUrl)
                     .addOnSuccessListener(aVoid -> {
-                        // Profile picture URL updated successfully in Firestore
+                        Toast.makeText(getApplicationContext(), "Successfully updated to Firestore ", Toast.LENGTH_SHORT).show();
                     })
                     .addOnFailureListener(e -> {
-                        // Handle the case where the profile picture URL update fails
+                        Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         });
+    }
+
+    private void openPickerDialog(int perm) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Source");
+        builder.setItems(new CharSequence[]{"Camera", "Gallery"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int choice) {
+                switch (choice) {
+                    case 0:
+                        openCamera(perm);
+                        break;
+                    case 1:
+                        openGallery(perm);
+                        break;
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void openCamera(int perm) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, perm);
+        }
+    }
+
+    private void openGallery(int perm) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, perm);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_ID_FRONT || requestCode == SELECT_ID_BACK || requestCode == SELECT_SELFIE) {
+                // Save the data for later use
+                imageData = data;
+
+                // Get the file name and update the corresponding EditText
+                String fileName = getImageFileName(requestCode);
+                if (fileName != null && !fileName.isEmpty()) {
+                    displayImageFileName(requestCode, fileName);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error: Unable to get the file name.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    private void displayImageFileName(int perm, String fileName) {
+        switch (perm) {
+            case SELECT_ID_FRONT:
+                idFrontFileName = fileName;
+                binding.idFrontPathTextView.setText(fileName);
+                break;
+            case SELECT_ID_BACK:
+                idBackFileName = fileName;
+                binding.idBackPathTextView.setText(fileName);
+                break;
+            case SELECT_SELFIE:
+                selfieFileName = fileName;
+                binding.selfiePathTextView.setText(fileName);
+                break;
+        }
+    }
+
+    private void uploadImageToFirestore(String learnerEmail, int perm, Intent data, String fileName) {
+        StorageReference storageRef = storage.getReference().child("approval_id");
+        UploadTask uploadTask = storageRef.putFile(getImageUri(perm, data, fileName));
+
+        uploadTask.addOnSuccessListener(taskSnapshot -> {
+            storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                String imageUri = uri.toString();
+
+                String updateFieldImageUri;
+                switch (perm) {
+                    case SELECT_ID_FRONT:
+                        updateFieldImageUri = "learnerIdFrontImage";
+                        break;
+                    case SELECT_ID_BACK:
+                        updateFieldImageUri = "learnerIdBackImage";
+                        break;
+                    case SELECT_SELFIE:
+                        updateFieldImageUri = "learnerSelfieImage";
+                        break;
+                    default:
+                        updateFieldImageUri = "";
+                }
+
+                if (!updateFieldImageUri.isEmpty()) {
+                    DocumentReference userRef = firestore.collection("user_learner").document(learnerEmail);
+                    userRef.update(updateFieldImageUri, imageUri)
+                            .addOnSuccessListener(aVoid -> {
+                                // Image URL updated successfully in Firestore
+                            })
+                            .addOnFailureListener(e -> {
+                                // Handle the case where the image URL update fails
+                            });
+                }
+            });
+        }).addOnFailureListener(e -> {
+            Toast.makeText(getApplicationContext(), "Error uploading image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private Uri getImageUri(int perm, Intent data, String fileName) {
+        if (perm == SELECT_ID_FRONT || perm == SELECT_ID_BACK || perm == SELECT_SELFIE) {
+            if (data != null && data.getData() != null) {
+                // Return the URI of the selected image
+                return data.getData();
+            } else if (data != null && data.getExtras() != null && data.getExtras().get("data") != null) {
+                // If the image is captured with the camera, return the URI of the captured image
+                Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String path = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), imageBitmap, fileName, null);
+                return Uri.parse(path);
+            }
+        }
+        return null; // Return null if URI retrieval fails or if perm is not recognized
+    }
+
+    private String getImageFileName(int perm) {
+        switch (perm) {
+            case SELECT_ID_FRONT:
+                return "id_front";
+            case SELECT_ID_BACK:
+                return "id_back";
+            case SELECT_SELFIE:
+                return "selfie";
+            default:
+                return "";
+        }
     }
 
 }

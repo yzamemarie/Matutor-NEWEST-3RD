@@ -1,21 +1,18 @@
 package com.example.matutor;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -30,11 +27,16 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.lang.annotation.Native;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class RegisterInfo extends AppCompatActivity {
@@ -131,9 +133,12 @@ public class RegisterInfo extends AppCompatActivity {
                 String learnerGuardianEmail = binding.regGuardianEmailInput.getText().toString().trim();
 
                 //checks if front and back ID images and selfie are selected
-                if (imageData == null || imageData.getParcelableExtra("data") == null) {
-                    Toast.makeText(getApplicationContext(), "No image has been selected.", Toast.LENGTH_SHORT).show();
-                    return;
+                if (binding.idFrontPathTextView.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Select image of your ID (front).", Toast.LENGTH_SHORT).show();
+                } else if (binding.idBackPathTextView.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Select image of your ID (back).", Toast.LENGTH_SHORT).show();
+                } else if (binding.selfiePathTextView.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Select selfie.", Toast.LENGTH_SHORT).show();
                 }
 
                 //checks if text fields are empty and displays toast prompt if true
@@ -197,7 +202,6 @@ public class RegisterInfo extends AppCompatActivity {
                                                     binding.regGuardianEmailInput.getText().clear();
 
                                                     // Upload images to Firestore Storage
-                                                    uploadDefaultProfile(learnerEmail, firestore);
                                                     uploadDefaultProfile(learnerEmail, firestore);
                                                     uploadImageToFirestore(learnerEmail, SELECT_ID_FRONT, imageData, idFrontFileName);
                                                     uploadImageToFirestore(learnerEmail, SELECT_ID_BACK, imageData, idBackFileName);
@@ -334,25 +338,6 @@ public class RegisterInfo extends AppCompatActivity {
         startActivityForResult(intent, perm);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_ID_FRONT || requestCode == SELECT_ID_BACK || requestCode == SELECT_SELFIE) {
-                // Save the data for later use
-                imageData = data;
-
-                // Get the file name and update the corresponding EditText
-                String fileName = getImageFileName(requestCode);
-                if (fileName != null && !fileName.isEmpty()) {
-                    displayImageFileName(requestCode, fileName);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Error: Unable to get the file name.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
-
     private void displayImageFileName(int perm, String fileName) {
         switch (perm) {
             case SELECT_ID_FRONT:
@@ -370,8 +355,61 @@ public class RegisterInfo extends AppCompatActivity {
         }
     }
 
+    private boolean isImageSelected(int perm, String fileName) {
+        boolean isSelected = !fileName.isEmpty();
+
+        if (!isSelected) {
+            // Display a toast or handle the case where no image is selected
+            Toast.makeText(getApplicationContext(), "Please select an image. (isImageSelected)", Toast.LENGTH_SHORT).show();
+        }
+
+        return isSelected;
+    }
+
+    private String getImageFileName(int perm, Intent data) {
+        String fileName = null;
+        if (data != null && data.getData() != null) {
+            // Get file name from the content URI
+            fileName = getFileNameFromUri(data.getData());
+        } else if (data != null && data.getExtras() != null && data.getExtras().get("data") != null) {
+            // If the image is captured with the camera, create a file and use its path as the file name
+            fileName = createFileNameFromBitmap((Bitmap) data.getExtras().get("data"), "image_" + System.currentTimeMillis());
+        }
+        return fileName;
+    }
+
+    private String getFileNameFromUri(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        if (cursor != null) {
+            int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            cursor.moveToFirst();
+            String fileName = cursor.getString(nameIndex);
+            cursor.close();
+            return fileName;
+        }
+        return "";
+    }
+
+    private String createFileNameFromBitmap(Bitmap bitmap, String fileName) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        fileName = "IMG_" + timeStamp + ".jpg";
+
+        // Save the bitmap to a file
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            return file.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ""; // Return an empty string if file creation fails
+        }
+    }
+
     private void uploadImageToFirestore(String learnerEmail, int perm, Intent data, String fileName) {
-        StorageReference storageRef = storage.getReference().child("approval_id");
+        StorageReference storageRef = storage.getReference().child("approval_id" + learnerEmail);
         UploadTask uploadTask = storageRef.putFile(getImageUri(perm, data, fileName));
 
         uploadTask.addOnSuccessListener(taskSnapshot -> {
@@ -405,7 +443,7 @@ public class RegisterInfo extends AppCompatActivity {
                 }
             });
         }).addOnFailureListener(e -> {
-            Toast.makeText(getApplicationContext(), "Error uploading image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Error uploading image: (uploadImageToFirestore)" + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -425,18 +463,62 @@ public class RegisterInfo extends AppCompatActivity {
         }
         return null; // Return null if URI retrieval fails or if perm is not recognized
     }
-
-    private String getImageFileName(int perm) {
-        switch (perm) {
-            case SELECT_ID_FRONT:
-                return "id_front";
-            case SELECT_ID_BACK:
-                return "id_back";
-            case SELECT_SELFIE:
-                return "selfie";
-            default:
-                return "";
+    private void displayImagePreview(int perm, Intent data) {
+        if (data != null && data.getData() != null) {
+            // Display the selected image in the corresponding ImageView
+            switch (perm) {
+                case SELECT_ID_FRONT:
+                    binding.idFrontPreview.setImageURI(data.getData());
+                    break;
+                case SELECT_ID_BACK:
+                    binding.idBackPreview.setImageURI(data.getData());
+                    break;
+                case SELECT_SELFIE:
+                    binding.selfiePreview.setImageURI(data.getData());
+                    break;
+            }
+        } else if (data != null && data.getExtras() != null && data.getExtras().get("data") != null) {
+            //If the image is captured with the camera, display the captured image
+            Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+            switch (perm) {
+                case SELECT_ID_FRONT:
+                    binding.idFrontPreview.setImageBitmap(imageBitmap);
+                    break;
+                case SELECT_ID_BACK:
+                    binding.idBackPreview.setImageBitmap(imageBitmap);
+                    break;
+                case SELECT_SELFIE:
+                    binding.selfiePreview.setImageBitmap(imageBitmap);
+                    break;
+            }
         }
     }
 
+    protected void onActivityResult(int perm, int result, Intent data) {
+        super.onActivityResult(perm, result, data);
+
+        if (result == RESULT_OK) {
+            if (perm == SELECT_ID_FRONT || perm == SELECT_ID_BACK || perm == SELECT_SELFIE) {
+                // Save the data for later use
+                imageData = data;
+
+                // Get the file name and update the corresponding EditText
+                String fileName = getImageFileName(perm, imageData);
+                if (!fileName.isEmpty()) {
+                    displayImageFileName(perm, fileName);
+
+                    // Check if an image is selected
+                    if (isImageSelected(perm, fileName)) {
+                        // Display the selected image in the preview ImageView
+                        displayImagePreview(perm, imageData);
+                    } else {
+                        // Handle the case where the image is not selected
+                        Toast.makeText(getApplicationContext(), "Please select an image. (onActivityResult)", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error: Unable to get the file name. (onActivityResult)", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
 }

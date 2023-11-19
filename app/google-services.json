@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "65458218474",
+    "project_id": "matutor-db-9424d",
+    "storage_bucket": "matutor-db-9424d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65458218474:android:610b2d93865e78a189fe93",
+        "android_client_info": {
+          "package_name": "com.example.matutor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYVUFeBZAMU-64vEuiHn5rZtdWquXzyHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

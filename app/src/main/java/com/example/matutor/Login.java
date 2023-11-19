@@ -56,7 +56,7 @@ public class Login extends AppCompatActivity {
 
                 if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     if (!password.isEmpty()) {
-                        firestore.collection("learner")
+                        firestore.collection("user_learner")
                                 .whereEqualTo("learnerEmail", email)
                                 .get()
                                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

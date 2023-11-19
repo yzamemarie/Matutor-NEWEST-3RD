@@ -409,11 +409,11 @@ public class RegisterInfo extends AppCompatActivity {
     }
 
     private void uploadImageToFirestore(String learnerEmail, int perm, Intent data, String fileName) {
-        StorageReference storageRef = storage.getReference().child("approval_id" + learnerEmail);
+        StorageReference storageRef = storage.getReference().child(learnerEmail);
         UploadTask uploadTask = storageRef.putFile(getImageUri(perm, data, fileName));
 
         uploadTask.addOnSuccessListener(taskSnapshot -> {
-            storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            storageRef.child(fileName).getDownloadUrl().addOnSuccessListener(uri -> {
                 String imageUri = uri.toString();
 
                 String updateFieldImageUri;

@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -47,76 +49,84 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         toggle.syncState();
         binding.navView.setNavigationItemSelectedListener(this);
 
-        //fetch and display user's info
-        String uid = auth.getCurrentUser().getUid();
-        if (!uid.isEmpty()) {
-            firestore.collection("user_learner")
-                    .document(uid)
-                    .get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+        // Fetch and display user's info
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            String learnerEmail = currentUser.getEmail();
+            if (!TextUtils.isEmpty(learnerEmail)) {
+                firestore.collection("user_learner")
+                        .document(learnerEmail)
+                        .get()
+                        .addOnSuccessListener(documentSnapshot -> {
                             if (documentSnapshot.exists()) {
                                 Picasso picasso = new Picasso.Builder(getApplicationContext()).build();
                                 if (documentSnapshot.contains("learnerProfilePicture")) {
                                     String profilePicUrl = documentSnapshot.getString("learnerProfilePicture");
-                                    if (!profilePicUrl.isEmpty() && profilePicUrl != null) {
+                                    if (!TextUtils.isEmpty(profilePicUrl)) {
                                         picasso.load(profilePicUrl)
                                                 .into(binding.userProfilePic);
                                     }
                                 }
 
                                 String lastname = documentSnapshot.getString("learnerLastname");
-                                if (!lastname.isEmpty()) {
+                                if (!TextUtils.isEmpty(lastname)) {
                                     binding.lastnameTextView.setText(lastname);
                                 }
 
                                 String firstname = documentSnapshot.getString("learnerFirstname");
-                                if (!firstname.isEmpty()) {
+                                if (!TextUtils.isEmpty(firstname)) {
                                     binding.firstnameTextView.setText(firstname);
                                 }
 
                                 String email = documentSnapshot.getString("learnerEmail");
-                                if (!email.isEmpty()) {
+                                if (!TextUtils.isEmpty(email)) {
                                     binding.emailDetails.setText(email);
                                 }
 
                                 String bdate = documentSnapshot.getString("learnerBdate");
-                                if (!bdate.isEmpty()) {
+                                if (!TextUtils.isEmpty(bdate)) {
                                     binding.birthdateDetails.setText(bdate);
                                 }
 
                                 String age = documentSnapshot.getString("learnerAge");
-                                if (!age.isEmpty()) {
+                                if (!TextUtils.isEmpty(age)) {
                                     binding.ageDetails.setText(age);
                                 }
 
                                 String address = documentSnapshot.getString("learnerAddress");
-                                if (!address.isEmpty()) {
+                                if (!TextUtils.isEmpty(address)) {
                                     binding.addressDetails.setText(address);
                                 }
 
                                 String contact = documentSnapshot.getString("learnerContact");
-                                if (!contact.isEmpty()) {
+                                if (!TextUtils.isEmpty(contact)) {
                                     binding.contactDetails.setText(contact);
                                 }
 
                                 String guardianName = documentSnapshot.getString("learnerGuardianName");
-                                if (!guardianName.isEmpty() && guardianName != null) {
+                                if (!TextUtils.isEmpty(guardianName)) {
                                     binding.guardianNameDetails.setText(guardianName);
                                 }
 
                                 String guardianEmail = documentSnapshot.getString("learnerGuardianEmail");
-                                if (!guardianEmail.isEmpty() && guardianEmail != null) {
+                                if (!TextUtils.isEmpty(guardianEmail)) {
                                     binding.guardianEmailDetails.setText(guardianEmail);
                                 }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Document does not exist for learnerEmail: " + learnerEmail, Toast.LENGTH_SHORT).show();
                             }
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getApplicationContext(), "Error fetching data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                Toast.makeText(getApplicationContext(), "Learner email is empty", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "User not authenticated", Toast.LENGTH_SHORT).show();
         }
+
+
 
         //click to edit user profile
         binding.editProfileButton.setOnClickListener(new View.OnClickListener() {

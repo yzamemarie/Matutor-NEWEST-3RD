@@ -448,23 +448,12 @@
                     android:layout_width="145dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="30dp"
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/blue"
                     android:text="edit information"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="75dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="   "/>
-                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>

@@ -114,15 +114,16 @@ public class EditProfile extends AppCompatActivity {
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    FirebaseUser user = auth.getCurrentUser();
-                    if (user != null) {
+                    FirebaseUser currentUser = auth.getCurrentUser();
+                    if (currentUser != null) {
+                        String learnerEmail = currentUser.getEmail();
                         firestore.collection("learner")
-                                .document(user.getUid())
+                                .document(learnerEmail)
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
-                                        user.delete()
+                                        currentUser.delete()
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {

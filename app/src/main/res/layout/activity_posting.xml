@@ -22,6 +22,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Find Posting"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Find Tutor"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Find Tutoring Center"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/tabViewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tabLayout"
+            android:layout_above="@id/bottom_navigator"/>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,11 +77,11 @@
                 android:layout_marginRight="20dp">
 
                 <TextView
-                    android:id="@+id/typeTextView"
+                    android:id="@+id/pageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="29dp"
+                    android:layout_alignParentEnd="true"
                     android:text="Postings"
                     android:textSize="34sp"
                     android:textStyle="bold"
@@ -60,85 +90,6 @@
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
-
-        <!-- CHANGE TO RECYCLER VIEW
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="10dp">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:queryHint="Search here"
-                android:iconifiedByDefault="false"
-                android:background="@color/white"
-                android:layout_gravity="center_horizontal"/>
-
-        </FrameLayout> -->
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/nameFilterButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:backgroundTint="@color/white"
-                    android:text="NAME"
-                    android:textStyle="italic"
-                    android:textColor="@color/text_grey"
-                    android:textSize="12sp"/>
-
-                <Button
-                    android:id="@+id/titleFilterButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:backgroundTint="@color/white"
-                    android:text="TITLE"
-                    android:textStyle="italic"
-                    android:textColor="@color/text_grey"
-                    android:textSize="12sp"/>
-
-                <Button
-                    android:id="@+id/topicFilterButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:backgroundTint="@color/white"
-                    android:text="TOPIC"
-                    android:textStyle="italic"
-                    android:textColor="@color/text_grey"
-                    android:textSize="12sp"/>
-
-                <Button
-                    android:id="@+id/locationFilterButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="5dp"
-                    android:backgroundTint="@color/white"
-                    android:text="LOCATION"
-                    android:textStyle="italic"
-                    android:textColor="@color/text_grey"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-        </FrameLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/postingRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="190dp"/>
 
     </RelativeLayout>
 

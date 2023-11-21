@@ -5,24 +5,25 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.ClickableSpan;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
 
 import com.example.matutor.databinding.ActivityNotificationBinding;
+import com.example.matutor.adapters.viewPagerAdapter_notif;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Notification extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    ActivityNotificationBinding binding;
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    ActivityNotificationBinding binding;
+    viewPagerAdapter_notif viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,35 @@ public class Notification extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         binding.navView.setNavigationItemSelectedListener(this);
 
+        viewPagerAdapter = new viewPagerAdapter_notif(this);
+        binding.tabViewPager2.setAdapter(viewPagerAdapter);
+
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                binding.tabViewPager2.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+
+        });
+
+        binding.tabViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                binding.tabLayout.getTabAt(position).select();
+            }
+        });
+
         /*
         // Create a ClickableSpan to handle the link click
         ClickableSpan clickableSpan = new ClickableSpan() {
@@ -60,7 +90,7 @@ public class Notification extends AppCompatActivity implements NavigationView.On
 
         // Apply the modified SpannableString to the TextView
         binding.viewPostTextLink.setText(spannableString);
-        binding.viewPostTextLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance()); */
+        binding.viewPostTextLink.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 
         binding.switchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +110,7 @@ public class Notification extends AppCompatActivity implements NavigationView.On
                 overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                 finish();
             }
-        });
+        }); */
 
         binding.bottomNavigator.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -1,193 +1,77 @@
 package com.example.matutor;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.Toast;
 
+import com.example.matutor.databinding.ActivityPostingBinding;
+import com.example.matutor.adapters.viewPagerAdapter_posting;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class Posting extends AppCompatActivity {
+public class Posting extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button tutorSwitch, seeMore, nameFilter, titleFilter, topicFilter, locationFilter;
-    SearchView searchBar;
-    ExtendedFloatingActionButton menuFabBtn;
-    FloatingActionButton viewAllPosts, createPost, viewCreatedPost, viewAllUsers;
-    Boolean allFabVisible; //checks for visibility of sub fabs
-    BottomNavigationView bottomNavigationView;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    ActivityPostingBinding binding;
+    viewPagerAdapter_posting viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // removes status bar
-        setContentView(R.layout.activity_posting);
+        binding = ActivityPostingBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        //assignment
-        searchBar = findViewById(R.id.searchView);
-        tutorSwitch = findViewById(R.id.switchButton);
-        seeMore = findViewById(R.id.postingSeeMoreButton1);
-        nameFilter = findViewById(R.id.nameFilterButton);
-        titleFilter = findViewById(R.id.titleFilterButton);
-        topicFilter = findViewById(R.id.topicFilterButton);
-        locationFilter = findViewById(R.id.locationFilterButton);
-        menuFabBtn = findViewById(R.id.menuFab);
-        viewAllPosts = findViewById(R.id.viewAllFab);
-        createPost = findViewById(R.id.createPostFab);
-        viewCreatedPost =findViewById(R.id.viewCreatedPostFab);
-        viewAllUsers = findViewById(R.id.viewAllUsersFab);
-        bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.posting);
+        //FOR DRAWER SIDE MENU
+        setSupportActionBar(binding.toolbar);
+        //NAV MENU
+        binding.navView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.drawer_open, R.string.drawer_close);
+        binding.drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        binding.navView.setNavigationItemSelectedListener(this);
 
-        viewAllPosts.setVisibility(View.GONE);
-        createPost.setVisibility(View.GONE);
-        viewCreatedPost.setVisibility(View.GONE);
-        viewAllUsers.setVisibility(View.GONE);
 
-        //search bar
-        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        viewPagerAdapter = new viewPagerAdapter_posting(this);
+        binding.tabViewPager2.setAdapter(viewPagerAdapter);
+
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                // Handle search query submission
-                performSearch(query);
-                return true;
+            public void onTabSelected(TabLayout.Tab tab) {
+                binding.tabViewPager2.setCurrentItem(tab.getPosition());
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                // Handle search query text change
-                performSearch(newText);
-                return true;
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+
+        });
+
+        binding.tabViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                binding.tabLayout.getTabAt(position).select();
             }
         });
 
-        //filter buttons testing
-        nameFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Search by user's name", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        titleFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Search by posting's title", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        topicFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Search by posting's topic", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        locationFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Search by posting's location", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //set boolean variable as false
-        allFabVisible = false;
-
-        //shrink extended fab + click listener
-        menuFabBtn.shrink();
-        menuFabBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!allFabVisible) {
-                    //extend extended fab and set sub fab as visible
-                    menuFabBtn.extend();
-                    viewAllPosts.show();
-                    createPost.show();
-                    viewCreatedPost.show();
-                    viewAllUsers.show();
-                    allFabVisible = true;
-
-                } else {
-                    //hid sub fabs
-                    menuFabBtn.shrink();
-                    viewAllPosts.hide();
-                    createPost.hide();
-                    viewCreatedPost.hide();
-                    viewAllUsers.hide();
-                    allFabVisible = false;
-                }
-            }
-        });
-
-        //sub fab click listeners
-        viewAllPosts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Current page!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        createPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreatePosting.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        viewCreatedPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewCreatedPosts.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        viewAllUsers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewAllTutors.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        //switch profile type
-        tutorSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), PostingsTutor.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
-                finish();
-            }
-        });
-
-        //see more button
-        seeMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SelectPosting.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
-                finish();
-            }
-        });
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        binding.bottomNavigator.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
@@ -219,15 +103,72 @@ public class Posting extends AppCompatActivity {
             }
         });
     }
-    private void performSearch(String query) {
-        // Here, you can implement your search logic
-        // Update the UI or perform any actions based on the search query
+
+
+    //sidemenu
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.side_dashboard) {
+            startActivity(new Intent(getApplicationContext(), Dashboard.class));
+            return true;
+        }
+        else if (itemId == R.id.side_profile) {
+            startActivity(new Intent(getApplicationContext(), Profile.class));
+            return true;
+        }
+        else if (itemId == R.id.side_progReports) {
+            startActivity(new Intent(getApplicationContext(), ViewProgressReportsLearner.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourPostings) {
+            startActivity(new Intent(getApplicationContext(), ViewCreatedPosts.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourBookings) {
+            startActivity(new Intent(getApplicationContext(), Bookings.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourReviews) {
+            startActivity(new Intent(getApplicationContext(), ReviewsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_yourHistory) {
+            startActivity(new Intent(getApplicationContext(), BookingsHistory.class));
+            return true;
+        }
+        else if (itemId == R.id.side_help) {
+            //create help smth
+            return true;
+        }
+        else if (itemId == R.id.side_logout) {
+            logoutConfirmation();
+            return true;
+        }
+        return false;
     }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), Dashboard.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
         finish();
+    }
+
+    private void logoutConfirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout Session");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            auth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+        builder.setNegativeButton("No", null);
+        builder.show();
     }
 }

@@ -8,11 +8,11 @@
     android:background="@color/grey"
     tools:context=".fragments.NotificationFragment">
 
-    <TextView
+    <ListView
+        android:id="@+id/notificationList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="NOTIFICATIONS"
         android:textSize="40sp"/>
 
 </RelativeLayout>
